@@ -36,15 +36,18 @@ div{
   align-items: flex-end;
   padding: 16px;
 }
-
+/*
 .greenContainer .name{
    font-size: 20px;
   font-weight: bold;
   color: #ffffff;
 } 
+*/
 .greenContainer .modify{
-  margin-left: auto;
+  /*margin-left: auto;*/
+  float : right;
 }
+
 
 /* 단골상점 , 상품후기 , 적립금 박스 */
 .summaryContainer{
