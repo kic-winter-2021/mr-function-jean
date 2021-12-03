@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- /WEB-INF/decorators.xml -->
+<!-- 레이아웃 jsp, 꾸밀 페이지들, 제외할 페이지들 -->
+<decorators defaultdir="/layout">
+	<decorator name="main" page="/resources/layout/main.jsp">
+		<pattern>/</pattern>
+	</decorator>
+	<excludes>
+		<pattern>/login/*</pattern>
+	</excludes>
+</decorators>
