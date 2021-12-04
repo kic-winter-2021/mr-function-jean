@@ -33,7 +33,7 @@
             </li>
          </ul>
          <p>
-            <span>Products: <strong>8</strong></span> <span>Total: <strong>&#8361;145,000</strong></span>
+            <span>총갯수: <strong>4</strong></span> <span>총구매액: <strong>&#8361;145,000</strong></span>
          </p>
          <a class="checkout" href="javascript:void(0);">구매하기</a>
       </details>

@@ -5,21 +5,24 @@
 <head>
     <meta charset="UTF-8">
     <title>우편번호 찾기</title>
+    <link rel="stylesheet" href="resources/css/addrSearch.css" type="text/css">
 </head>
 <body>
+<form>
 
-<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+<div>
 신 우편번호 : <input type="text" id="zip_code" placeholder="우편번호"><br>
-구 우편번호 : <input type="text" id="old_zip_code" placeholder="우편번호"><br>
 도로명 주소 : <input type="text" id="roadAddress" placeholder="도로명주소" size="70"><br>
 도로명 주소 분리형 : <input type="text" id="sido" placeholder="도로명주소" size="20"><input type="text" id="sigungu"  size="20"><input type="text" id="remain_road_addr"  size="30"><br>
 지번 주소 : <input type="text" id="jibunAddress" placeholder="지번주소" size="70"><br>
 지번 주소 분리형 : <input type="text" id="sido2" placeholder="도로명주소" size="20"><input type="text" id="sigungu2"  size="20"><input type="text" id="remain_jibun_addr"  size="30"><br>
 사용자가 선택한 주소의 타입(R(도로명), J(지번)) : <input type="text" id="user_selected_type" name="user_selected_type" /><br>
-
+<input type="button" id="btn" onclick="execDaumPostcode()" value="우편번호 찾기">
+<input type="button" id="btn" onclick="execDaumPostcode()" value="주소등록">
+</div>
 
 <span id="guide" style="color:#999"></span>
-
+</form>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function execDaumPostcode() {
@@ -51,7 +54,6 @@
 
                 
                 document.getElementById('zip_code').value = data.zonecode;
-                document.getElementById('old_zip_code').value = data.postcode;
                 document.getElementById('roadAddress').value = fullRoadAddr;
                 document.getElementById('jibunAddress').value = data.jibunAddress;
                 document.getElementById('user_selected_type').value = data.userSelectedType;
