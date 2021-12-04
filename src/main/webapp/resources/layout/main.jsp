@@ -53,7 +53,10 @@ and is wrapped around the whole page content, except for the footer in this exam
 
   <!-- Grid -->
   <div class="w3-row w3-padding w3-border">
-	<decorator:body />
+  	<div>
+  		<decorator:body />
+  	</div>
+	
    
 
     

@@ -102,7 +102,7 @@
   </div>
    
   <div class="listContainer">
-    <a href="#" class="item">
+    <a href="coupon.jsp" target="_blank" class="item">
         <div class="icon"><img src="resources/img/mustache.png" width="20px" height="20px"></div>
         <div class="text">
           <span>쿠폰함</span>
