@@ -12,6 +12,6 @@
 		<pattern>/user/idsearch*</pattern>
 		<pattern>/user/pwsearch*</pattern>
 		<pattern>/board/imgupload*</pattern>
-		<pattern>/ajax/*</pattern>	
+		<pattern>/ajax/*</pattern>
 	</excludes>
 </decorators>
