@@ -37,13 +37,13 @@ and is wrapped around the whole page content, except for the footer in this exam
 
   <!-- Header -->
   <header class="w3-container w3-center w3-padding-48 w3-white">
-    <h1 class="w3-xxxlarge"><img src="resources/img/logo-1.png" alt="" /></h1>
+    <h1 class="w3-xxxlarge"><img src="../resources/img/logo-1.png" alt="" /></h1>
     <h6>Welcome to the blog of <span class="w3-tag">Mr.Function</span></h6>
   </header>
 
   <!-- Image header -->
   <header class="w3-display-container w3-wide" id="home">
-    <img class="w3-image" src="resources/w3images/jane.jpg" alt="Fashion Blog" width="1600" height="1060">
+    <img class="w3-image" src="../resources/w3images/jeans.jpg" alt="Fashion Blog" width="1600" height="1060">
     <div class="w3-display-left w3-padding-large">
       <h1 class="w3-text-white">Jane's</h1>
       <h1 class="w3-jumbo w3-text-white w3-hide-small"><b>FASHION BLOG</b></h1>
@@ -95,12 +95,12 @@ and is wrapped around the whole page content, except for the footer in this exam
         </div>
         <div class="w3-row-padding w3-white">
           <div class="w3-col s6">
-            <p><img src="resources/w3images/jeans.jpg" alt="Jeans" style="width:100%"></p>
-            <p><img src="resources/w3images/team1.jpg" alt="Jeans" style="width:100%"></p>
+            <p><img src="../resources/w3images/jeans.jpg" alt="Jeans" style="width:100%"></p>
+            <p><img src="../resources/w3images/Jeans-Woman-13.jpg" alt="Jeans" style="width:100%"></p>
           </div>
           <div class="w3-col s6">
-            <p><img src="resources/w3images/avatar_hat.jpg" alt="Men in Hats" style="width:100%" class="w3-grayscale"></p>
-            <p><img src="resources/w3images/team4.jpg" alt="Jeans" style="width:100%"></p>
+            <p><img src="../resources/w3images/avatar_hat.jpg" alt="Men in Hats" style="width:100%" class="w3-grayscale"></p>
+            <p><img src="../resources/w3images/team4.jpg" alt="Jeans" style="width:100%"></p>
          </div>
         </div>
       </div>
@@ -140,7 +140,7 @@ and is wrapped around the whole page content, except for the footer in this exam
   </div>
 
 <!-- END w3-content -->
-</div>
+
 
 <!-- Subscribe Modal -->
 <div id="subscribe" class="w3-modal w3-animate-opacity">
@@ -160,24 +160,5 @@ and is wrapped around the whole page content, except for the footer in this exam
   <a href="#" class="w3-button w3-black w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
-
-<script>
-// Toggle between hiding and showing blog replies/comments
-document.getElementById("myBtn").click();
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-
-function likeFunction(x) {
-  x.style.fontWeight = "bold";
-  x.innerHTML = "✓ Liked";
-}
-</script>
-
 </body>
 </html>
