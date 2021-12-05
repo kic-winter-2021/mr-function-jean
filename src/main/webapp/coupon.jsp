@@ -26,7 +26,7 @@
         <div>
             <table border="1">
                 <th><input type="checkbox"></th>
-                <th>쿠폰이름</ㅋth>
+                <th>쿠폰이름</th>
                     <th>쿠폰번호</th>
                     <tr>
                         <td><input type="checkbox"></td>
