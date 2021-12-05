@@ -1,0 +1,175 @@
+/* component */
+.rating-container {
+	list-style-type: none;
+	display: flex;
+	flex-direction: row-reverse;
+	text-align: center;
+	justify-content: space-around;
+	font-size: 1.5em;
+	width: 5em;
+	/* border:solid 1px #ccc;*/
+	padding-left: 0;
+}
+
+.rating-container input {
+	display: none;
+}
+
+.rating-container label {
+	color: #ccc;
+	cursor: pointer;
+}
+
+.rating-container :checked ~ label {
+	color: rgb(255, 230, 0);
+}
+
+.rating-container label:hover, .rating-container label:hover ~ label {
+	color: #fc0;
+}
+
+#review-container {
+	background-color: aliceblue;
+	padding: 40px;
+}
+
+#review-content {
+	width: 90%;
+	padding: 10px;
+	box-sizing: border-box;
+	border: 2px solid transparent;
+	line-height: 1.5;
+	box-shadow: 0.1px 0.1px 0.1px #999;
+	border-radius: 5px;
+	resize: none;
+}
+
+#review-buttons {
+	display: flex;
+	justify-content: center;
+}
+
+#review-buttons>a {
+	margin-right: 20px;
+	text-decoration: none;
+	color: white;
+	background-color: rgb(52, 147, 224);
+	padding: 5px;
+	border-radius: 4px;
+}
+
+#review-buttons>a:hover {
+	background-color: rgb(52, 169, 224);
+}
+
+.star-rating3 {
+	width: 274px;
+	height: 55px;
+}
+
+.star-percent {
+	height: inherit;
+	background-color: rgb(255, 218, 6);
+}
+
+.star-rating3 img {
+	height: inherit;
+	position: relative;
+	left: -1px;
+	z-index: 0;
+}
+/* review grid */
+.review-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 10px;
+	grid-auto-rows: minmax(50px, auto);
+}
+
+#review-bar {
+	grid-column: 1/3;
+	background-color: rgb(32, 32, 32);
+}
+
+.img_list {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.img_list>li>img {
+	width: 200px;
+	height: 200px;
+}
+
+#review-best, #review-worst {
+	margin: 0;
+	padding: 20px 25px;
+	box-sizing: border-box;
+}
+
+#review-best {
+	grid-column: 1;
+	grid-row: 2;
+}
+
+#review-worst {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+h4 {
+	margin: 0;
+	padding-bottom: 10px;
+}
+
+.review-board {
+	grid-column: 1/3;
+	grid-row: 3;
+}
+
+article.review {
+	border: 1px solid blue;
+}
+/* modal review-rule */
+.hidden {
+	display: none;
+}
+
+#review-rule>h2 {
+	display: inline-block;
+}
+
+/* review-modal */
+.modal__close {
+	all: unset;
+	position: relative;
+	left: 580px;
+	cursor: pointer;
+}
+
+#review-rule-container {
+	display: flex;
+	justify-content: center;
+	z-index: 1;
+}
+
+.modal__overlay {
+	z-index: 1;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.6);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.modal__content {
+	z-index: 1;
+	width: 800px;
+	margin: 0 auto;
+	top: 100px;
+	background-color: white;
+	position: fixed;
+	left: 50%;
+    transform: translate(-50%, 0);
+}

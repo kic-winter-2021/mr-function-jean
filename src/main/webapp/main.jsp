@@ -20,10 +20,10 @@
         <li><i class="fas fa-chevron-left"></i></li>
         <li>
           <ul class="ul_vertical">
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
           </ul>
         </li>
         <li><i class="fas fa-chevron-right"></i></li>
@@ -34,10 +34,10 @@
         <li><i class="fas fa-chevron-left"></i></li>
         <li>
           <ul class="ul_vertical">
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
           </ul>
         </li>
         <li><i class="fas fa-chevron-right"></i></li>
@@ -48,10 +48,10 @@
         <li><i class="fas fa-chevron-left"></i></li>
         <li>
           <ul class="ul_vertical">
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
-            <li><div class="item_wrapper"><img src="/resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
+            <li><div class="item_wrapper"><img src="resources/img/unnamed.jpg" alt=""></div></li>
           </ul>
         </li>
         <li><i class="fas fa-chevron-right"></i></li>
