@@ -11,4 +11,9 @@ public class SaleController {
 	public String userCart() {
 		return "sale/userCart";
 	}
+	
+	@RequestMapping("nonUserCart")
+	public String nonUserCart() {
+		return "sale/nonUserCart";
+	}
 }

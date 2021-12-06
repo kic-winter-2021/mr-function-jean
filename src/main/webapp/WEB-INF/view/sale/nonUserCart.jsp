@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!-- 작성자 : 박이삭
-	 작성일자 : 2021-12-6
-	 -->
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <title>장바구니</title>
-    <script src="../resources/js/userCart.js"></script>
-    <link rel="stylesheet" href="../resources/css/userCart.css">
+    <script src="../resources/js/nonUserCart.js"></script>
+    <link rel="stylesheet" href="../resources/css/nonUserCart.css">
 </head>
 
 <body>
+    <h1>로그인 해주세요~!</h1>
     <form action="#">
         <table class="tab">
             <thead>
