@@ -1,24 +1,29 @@
-.list-table {
-    margin-top: 40px;
-    position: relative;
+table.tab {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    margin: 20px 10px;
 }
 
-.list-table thead th {
-    height: 40px;
-    border-top: 2px solid #09C;
-    border-bottom: 1px solid #CCC;
+table.tab thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background: #e7708d;
+}
+
+table.type07 thead th {
+    padding: 10px;
     font-weight: bold;
-    font-size: 17px;
+    vertical-align: top;
+    color: #fff;
 }
 
-.list-table tbody td {
-    text-align: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #CCC;
-    height: 20px;
-    font-size: 14px
-}
-
-.bak_item {
-    margin-top: 20px;
+table.type07 tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fcf1f4;
 }

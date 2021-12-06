@@ -21,7 +21,7 @@
 	<mvc:resources mapping="/img/**" location="/resources/img/" />
 	
 	<context:component-scan	base-package="controller,logic,dao,aop" />
-	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+	<!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" /> -->
 	<mvc:annotation-driven />
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
