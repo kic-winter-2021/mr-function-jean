@@ -21,7 +21,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>shop-dispatcher</servlet-name>
-		<url-pattern>/function/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<filter>
 		<filter-name>CharacterEncoding</filter-name>
@@ -33,10 +33,9 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>CharacterEncoding</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</filter-mapping>
 	<!-- sitemesh 설정 -->
-	<!--
 	<filter>
 		<filter-name>sitemesh</filter-name>
 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -44,5 +43,5 @@
 	<filter-mapping>
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>	-->
+	</filter-mapping>
 </web-app>
