@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- 작성자 : 박이삭
+	 작성일자 : 2021-12-4
+	 -->
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -28,20 +31,20 @@
                         <td>
                             <a href="#">
                                 <figcaption>디젤청바지 샵</figcaption>
-                                <img src="resources/img/1.jpg" width="50%">
+                                <img src="../resources/img/1.jpg" width="50%">
                             </a>
 
                         </td>
                         <td>
                             <a href="#">
                                 <figcaption>뱅뱅청바지 샵</figcaption>
-                                <img src="resources/img/2.jpg" width="50%">
+                                <img src="../resources/img/2.jpg" width="50%">
                             </a>
                         </td>
                         <td>
                             <a href="#">
                                 <figcaption>ck청바지 샵</figcaption>
-                                <img src="resources/img/3.jpg" width="50%">
+                                <img src="../resources/img/3.jpg" width="50%">
                             </a>
                         </td>
                     </tr>
@@ -52,40 +55,40 @@
             <div>좋아요</div>
             <div>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
                 <a href="#">
-                    <img src="resources/img/1.jpg" width="15%">
+                    <img src="../resources/img/1.jpg" width="15%">
                 </a>
             </div>
         </div>

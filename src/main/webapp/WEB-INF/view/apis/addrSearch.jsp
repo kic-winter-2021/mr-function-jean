@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>우편번호 찾기</title>
     <link rel="stylesheet" href="resources/css/addrSearch.css" type="text/css">
+=======
+    <!-- 작성자 : 박이삭
+    	 작성날짜 : 12/4
+     -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>우편번호 찾기</title>
+    <link rel="stylesheet" href="../resources/css/addrSearch.css" type="text/css">
+>>>>>>> refs/heads/front-1.1
 </head>
 <body>
 <form>

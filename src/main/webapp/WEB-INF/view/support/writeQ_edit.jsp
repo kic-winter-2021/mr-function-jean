@@ -39,10 +39,10 @@
             <input class="write" type="text" placeholder="휴대전화 ">
         </div>
         <div class="text">
-            <input class="write" " type="email " placeholder="이메일 ">
+            <input class="write" type="email" placeholder="이메일 ">
         </div>
         <div class="text ">
-            <input class="write "" type="text" placeholder="문의내용 ">
+            <input class="write" type="text" placeholder="문의내용 ">
         </div>
         <input type="submit" class="btn" value="수정하기 " />
     </form>
