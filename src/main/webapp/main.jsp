@@ -65,7 +65,7 @@
 								<img src="img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
 								<img src="img/unnamed.jpg" alt="">
