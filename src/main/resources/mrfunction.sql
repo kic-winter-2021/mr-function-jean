@@ -39,7 +39,7 @@ CREATE TABLE adpost
 	num int unsigned NOT NULL AUTO_INCREMENT COMMENT 'num',
 	sellerid varchar(30) NOT NULL COMMENT '사업자명 : 아이디',
 	rank tinyint unsigned NOT NULL COMMENT '홍보등급',
-	itemid int unsigned NOT NULL COMMENT '상품번호',
+	itemid varchar(30) NOT NULL COMMENT 'itemid',
 	contract text NOT NULL COMMENT '계약정보',
 	PRIMARY KEY (num),
 	UNIQUE (num)
@@ -63,9 +63,11 @@ CREATE TABLE board
 0-기본글
 1-답글',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
-	updated_at timestamp DEFAULT current_timestamp
+	updated_at timestamp
+		DEFAULT current_timestamp
 		ON UPDATE current_timestamp
-	NOT NULL COMMENT '수정일시',
+		NOT NULL COMMENT '수정일시',
+	views int unsigned DEFAULT 0 NOT NULL COMMENT '조회수',
 	PRIMARY KEY (num),
 	UNIQUE (num),
 	UNIQUE (qa)
@@ -107,9 +109,14 @@ CREATE TABLE customer
 	personalfile varchar(200) COMMENT '주민등록',
 	companyfile varchar(200) COMMENT '사업자등록증',
 	location varchar(200) COMMENT '매장 위치 : 오프라인의 경우 매장 위치',
-	created_at timestamp DEFAULT current_timestamp COMMENT '가입일시',
-	updated_at timestamp DEFAULT current_timestamp
+	created_at timestamp
+		DEFAULT current_timestamp
+		NOT NULL
+		COMMENT '가입일시',
+	updated_at timestamp 
+		DEFAULT current_timestamp
 		ON UPDATE current_timestamp
+		NOT NULL
 		COMMENT '수정일시',
 	PRIMARY KEY (id),
 	UNIQUE (id),
@@ -182,8 +189,10 @@ CREATE TABLE itemreview
 	content text COMMENT '내용',
 	img varchar(100) COMMENT 'img',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
-	updated_at timestamp DEFAULT current_timestamp
+	updated_at timestamp
+		DEFAULT current_timestamp
 		ON UPDATE current_timestamp
+		NOT NULL
 		COMMENT '수정일시',
 	PRIMARY KEY (num)
 ) COMMENT = '리뷰';
@@ -233,6 +242,9 @@ CREATE TABLE survey
 CREATE TABLE transaction
 (
 	transaction_num int unsigned NOT NULL AUTO_INCREMENT COMMENT '거래번호',
+	type tinyint unsigned NOT NULL COMMENT 'type : 입출고구분
+1-입고
+2-출고',
 	saleid varchar(30) COMMENT 'saleid',
 	itemId varchar(30) NOT NULL COMMENT 'itemId',
 	datetime timestamp DEFAULT current_timestamp NOT NULL COMMENT '거래일',
@@ -326,6 +338,14 @@ ALTER TABLE sale
 
 
 ALTER TABLE adboard
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemId)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE adpost
 	ADD FOREIGN KEY (itemid)
 	REFERENCES item (itemId)
 	ON UPDATE RESTRICT
