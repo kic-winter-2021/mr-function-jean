@@ -5,6 +5,7 @@
     border: 1px solid #ddd;
     padding: 10px;
 }
+
 .box {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -13,6 +14,7 @@
     font-size: 14px;
     width: 100%;
 }
+
 .field {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -29,5 +31,10 @@
     color: #ffffff;
     border-radius: 4px;
     padding: 2px 8px;
+    font-size: 18px;
+}
+.b {
+	float : right;
+    border: 1px solid #323f6b;
     font-size: 18px;
 }

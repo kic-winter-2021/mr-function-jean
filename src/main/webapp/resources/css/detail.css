@@ -1,81 +1,33 @@
-:root {
-  --btn-color: rgb(0, 174, 255);
-}
-a {
-  text-decoration: none;
-  color: black;
-}
-li {
-  list-style-type: none;
-}
-.item_class {
-  display: flex;
-  padding-left: 0;
-}
-.item_class li {
-  padding-left: 10px;
-  list-style: none;
-}
-.item_class > li:first-child {
-  font-weight: bolder;
+@charset "UTF-8";
+/* 작성자 : 오근영
+   작성일자 : 21.12.06
+*/
+/* 사진 부분 */
+
+/* 본문 내용 */
+.form {
+	background-color: #ffffff;
+	margin: 10px;
+	border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 10px;
 }
 
-.container {
-  width: 1060px;
-  height: 100%;
-  margin: 0 auto;
-  background-color: azure;
-}
-#item_detail {
-  display: flex;
-}
-#img_list {
-  width: 500px;
-  height: 500px;
-}
-#buying > ul {
-  display: flex;
-  justify-content: space-around;
-}
-.btn_big {
-  padding: 14px;
-  background-color: var(--btn-color);
-  font-weight: 480;
-  color: white;
-}
-#item_info {
-  width: 400px;
-  text-align: left;
-}
-#quantity, #quantity>option {
-  padding: 14px;
-}
-/* heart */
-.like {
-  float: right;
-}
-#empty_heart {
-  display: block;
+.box {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 3px 0;
+    font-size: 14px;
+    width: 100%;
 }
 
-.detail-tab {
-  position: relative;
-  width: 100%;
-  padding: 0;
-  text-align: center;
-  font-size: 20px;
-}
-.tab__items {
-  padding: 0;
-  display: flex;
-  background-color: white;
-}
-.detail-tab li{
-  width: 25%;
-  padding: 5px;
-  border: 0.5px solid black;
-}
-.detail-tab a {
-  display: inline-block;
-  padding: 20px 40px 20px 40px;
+.field {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 3px 0;
+    font-size: 14px;
+    width: 100%;
+    height: 160px;
 }
