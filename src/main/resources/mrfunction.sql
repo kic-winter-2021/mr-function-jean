@@ -29,7 +29,7 @@ CREATE TABLE adboard
 	content text NOT NULL COMMENT '내용',
 	itemid varchar(30) COMMENT '상품번호',
 	views int unsigned DEFAULT 0 NOT NULL COMMENT '조회수',
-	created_at datetime DEFAULT current_timestamp COMMENT '등록일시',
+	created_at timestamp DEFAULT current_timestamp COMMENT '등록일시',
 	PRIMARY KEY (num)
 ) COMMENT = '광고보드';
 
@@ -58,12 +58,14 @@ CREATE TABLE board
 	customerid varchar(30) NOT NULL COMMENT '작성자 : 아이디',
 	itemId varchar(30) COMMENT 'itemId',
 	content text NOT NULL COMMENT '내용',
-	created_at datetime DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
 	ref int unsigned COMMENT '참조번호',
 	qa bit(1) COMMENT 'qa : question/answer
 0-기본글
 1-답글',
-	updated_at datetime NOT NULL COMMENT '수정일시',
+	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
+	updated_at timestamp DEFAULT current_timestamp
+		ON UPDATE current_timestamp
+	NOT NULL COMMENT '수정일시',
 	PRIMARY KEY (num),
 	UNIQUE (num),
 	UNIQUE (qa)
@@ -105,6 +107,10 @@ CREATE TABLE customer
 	personalfile varchar(200) COMMENT '주민등록',
 	companyfile varchar(200) COMMENT '사업자등록증',
 	location varchar(200) COMMENT '매장 위치 : 오프라인의 경우 매장 위치',
+	created_at timestamp DEFAULT current_timestamp COMMENT '가입일시',
+	updated_at timestamp DEFAULT current_timestamp
+		ON UPDATE current_timestamp
+		COMMENT '수정일시',
 	PRIMARY KEY (id),
 	UNIQUE (id),
 	UNIQUE (nickname),
@@ -142,7 +148,6 @@ CREATE TABLE item
 	price int unsigned NOT NULL COMMENT '가격',
 	brandcode varchar(20) NOT NULL COMMENT 'brandcode',
 	content text COMMENT '상세내용',
-	regdate datetime DEFAULT current_timestamp NOT NULL COMMENT '등록일시 : 상품 등록 일자',
 	color varchar(20) NOT NULL COMMENT '색상',
 	fit varchar(30) NOT NULL COMMENT '핏 : 스트레이트
 와이드
@@ -150,6 +155,11 @@ CREATE TABLE item
 스키니
 ...',
 	style varchar(20) COMMENT '스타일',
+	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시 : 상품 등록 일자',
+	updated_at timestamp
+		DEFAULT current_timestamp
+		ON UPDATE current_timestamp
+		COMMENT '수정일시',
 	PRIMARY KEY (itemId)
 ) COMMENT = '아이템';
 
@@ -171,7 +181,10 @@ CREATE TABLE itemreview
 	score tinyint NOT NULL COMMENT '평점 : 1~10',
 	content text COMMENT '내용',
 	img varchar(100) COMMENT 'img',
-	regdate date NOT NULL COMMENT '등록일자',
+	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
+	updated_at timestamp DEFAULT current_timestamp
+		ON UPDATE current_timestamp
+		COMMENT '수정일시',
 	PRIMARY KEY (num)
 ) COMMENT = '리뷰';
 
@@ -192,8 +205,8 @@ CREATE TABLE sale
 	buyerid varchar(30) NOT NULL COMMENT '구매자 : 아이디',
 	destination varchar(200) NOT NULL COMMENT '배송지',
 	receiver varchar(20) COMMENT '받는사람',
-	saledate date NOT NULL COMMENT '주문일자',
 	invoice varchar(20) COMMENT '운송장번호',
+	saledate timestamp NOT NULL COMMENT '주문일자',
 	PRIMARY KEY (saleid)
 ) COMMENT = '주문';
 
@@ -222,7 +235,7 @@ CREATE TABLE transaction
 	transaction_num int unsigned NOT NULL AUTO_INCREMENT COMMENT '거래번호',
 	saleid varchar(30) COMMENT 'saleid',
 	itemId varchar(30) NOT NULL COMMENT 'itemId',
-	datetime datetime DEFAULT current_timestamp NOT NULL COMMENT '거래일',
+	datetime timestamp DEFAULT current_timestamp NOT NULL COMMENT '거래일',
 	quantity smallint unsigned NOT NULL COMMENT '거래량',
 	PRIMARY KEY (transaction_num),
 	UNIQUE (transaction_num)
