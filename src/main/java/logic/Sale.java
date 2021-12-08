@@ -2,8 +2,11 @@ package logic;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+
 /*
  */
+@Repository
 public class Sale {
 	private String saleid;
 	private String buyerid;

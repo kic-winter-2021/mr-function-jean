@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>문의하기 - 글 작성페이지</title>
-    <link rel="stylesheet" href="resources/css/writeQ.css" type="text/css">
+    <link rel="stylesheet" href="/css/writeQ.css" type="text/css">
 </head>
 
 <body>

@@ -5,7 +5,7 @@
 <configuration>
 	<properties resource="mapper/mybatis.properties" />
 	<typeAliases>
-		<typeAlias type="mr.function.User" alias="User" />
+		<typeAlias type="mr.function.Customer" alias="Customer" />
 		<typeAlias type="mr.function.Item" alias="Item" />
 		<typeAlias type="mr.function.Cart" alias="Cart" />
 	</typeAliases>
