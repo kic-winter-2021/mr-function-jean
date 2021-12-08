@@ -1,2 +1,4 @@
 /target/
 mybatis.properties
+.settings/*
+.project
