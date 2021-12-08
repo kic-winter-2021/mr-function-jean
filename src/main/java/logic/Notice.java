@@ -4,7 +4,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-public class Board {
+public class Notice {
+	public static int TYPE = 2; // 공지사항 타입
 	private int num;
 	@NotNull // input type="hidden"으로 넣어주기
 	private int type;
@@ -12,14 +13,13 @@ public class Board {
 	private String title;
 	@NotNull
 	private String writer;
-	private String itemid;
 	@NotNull(message = "내용을 입력하세요")
 	private String content;
-	private int ref;
-	private int qa;
 	private Date regDate;
 	private Date update;
 	private int views;	// 조회수
+	// 공지사항 type = 2
+	{ type=TYPE; }
 	public int getNum() {
 		return num;
 	}
@@ -50,29 +50,11 @@ public class Board {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getItemid() {
-		return itemid;
-	}
-	public void setItemid(String itemid) {
-		this.itemid = itemid;
-	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public int getRef() {
-		return ref;
-	}
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-	public int getQa() {
-		return qa;
-	}
-	public void setQa(int qa) {
-		this.qa = qa;
 	}
 	public Date getRegDate() {
 		return regDate;
@@ -94,8 +76,8 @@ public class Board {
 	}
 	@Override
 	public String toString() {
-		return "Board [num=" + num + ", type=" + type + ", category=" + category + ", title=" + title + ", writer="
-				+ writer + ", itemid=" + itemid + ", content=" + content + ", ref=" + ref + ", qa=" + qa + ", regDate="
-				+ regDate + ", update=" + update + ", views=" + views + "]";
+		return "Notice [num=" + num + ", type=" + type + ", category=" + category + ", title=" + title + ", writer="
+				+ writer + ", content=" + content + ", regDate=" + regDate + ", update=" + update + ", views=" + views
+				+ "]";
 	}
 }

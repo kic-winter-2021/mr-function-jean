@@ -1,16 +1,22 @@
 package logic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.BoardDao;
 
-/*
- * 통합게시판(일반, 공지사항, FAQ), Ad 관리
- */
 @Service
-public class BoardService {
+public class NoticeService {
 	@Autowired
 	BoardDao boardDao;
-	
+
+	public Object count() {
+		return boardDao.countNotice();
+	}
+
+	public List<Notice> list() {
+		return boardDao.listNotice();
+	}
 }

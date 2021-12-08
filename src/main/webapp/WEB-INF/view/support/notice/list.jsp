@@ -8,16 +8,16 @@
 <title>공지사항</title>
 </head>
 <body>
-	<table class="tb__board">
+	<table class="tb__notice">
 		<caption>
 			Spring 게시판<span>글 수: ${ listcount }</span>
 		</caption>
 		<colgroup>
 			<col class="col__num" />
-			<col class="col__subject" />
-			<col class="col__name" />
-			<col class="col__refdate" />
-			<col class="col__readcnt" />
+			<col class="col__title" />
+			<col class="col__writer" />
+			<col class="col__regDate" />
+			<col class="col__views" />
 		</colgroup>
 		<thead>
 			<tr>
@@ -49,25 +49,18 @@
 				<th>조회수</th>
 			</tr>
 		</thead>
-		<!-- Show Board List -->
+		<!-- Show notice List -->
 		<tbody>
 			<c:if test="${ listcount > 0 }">
-				<c:forEach var="board" items="${ boardlist }">
+				<c:forEach var="notice" items="${ noticelist }">
 					<tr>
-						<td>${ boardno }</td>
-						<c:set var="boardno" value="${ boardno - 1 }" />
-						<td style="text-align: left;"><c:if
-								test="${ !empty board.fileurl }">
-								<a href="file/${ board.fileurl }">@</a>
-							</c:if> <c:if test="${ empty board.fileurl }">&nbsp;&nbsp;&nbsp;</c:if>
-							<c:forEach begin="1" end="${ board.grplevel }">&nbsp;&nbsp;</c:forEach>
-							<c:if test="${ board.grplevel > 0 }">└</c:if> <a
-							href="detail?num=${ board.num }">${ board.subject }</a></td>
-						<td>${ board.name }</td>
-						<%--  <td>${ board.regdate }</td>--%>
-						<td><fmt:formatDate value="${ board.regdate }"
-								pattern="yyyy-MM-dd HH:mm:ss" />
-						<td>${ board.readcnt }</td>
+						<td>${ num }</td>
+						<c:set var="num" value="${ num - 1 }" />
+						<td><a href="detail?num=${ notice.num }">${ notice.title }</a></td>
+						<td>${ notice.writer }</td>
+						<%--  <td>${ notice.regdate }</td>--%>
+						<td><fmt:formatDate value="${ notice.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<td>${ notice.views }</td>
 					</tr>
 				</c:forEach>
 				<!--  paging -->
