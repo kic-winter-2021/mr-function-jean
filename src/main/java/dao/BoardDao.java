@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import logic.Board;
 import logic.Notice;
 import mapper.BoardMapper;
 
@@ -25,6 +28,9 @@ public class BoardDao {
 
 	public List<Notice> listNotice() {
 		return mapper.listNotice();
+	}
+	public void writeNotice(Notice notice) {
+		mapper.writeNotice(notice);
 	}
 
 }

@@ -19,4 +19,9 @@ public class NoticeService {
 	public List<Notice> list() {
 		return boardDao.listNotice();
 	}
+
+	public void write(Notice notice) {
+		System.out.println(notice);
+		boardDao.writeNotice(notice);
+	}
 }

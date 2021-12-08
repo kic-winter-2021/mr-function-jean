@@ -19,7 +19,7 @@ public class Notice {
 	private Date update;
 	private int views;	// 조회수
 	// 공지사항 type = 2
-	{ type=TYPE; }
+	{ type=TYPE; writer="admin"; }// TODO: 관리자 AOP를 추가하고 writer 초기화 문장 제거
 	public int getNum() {
 		return num;
 	}
