@@ -49,7 +49,7 @@ CREATE TABLE adpost
 CREATE TABLE board
 (
 	num int unsigned NOT NULL AUTO_INCREMENT COMMENT '글번호',
-	ariticletype tinyint NOT NULL COMMENT '글타입 : FAQ
+	articletype tinyint NOT NULL COMMENT '글타입 : FAQ
 공지사항
 문의하기
 상품문의',

@@ -8,10 +8,10 @@ import org.apache.ibatis.annotations.Select;
 import logic.Notice;
 
 public interface BoardMapper {
-	@Select("select count(*) from board where ariticletype=2")
+	@Select("select count(*) from board where articletype=2")
 	public int countNotice();
 	
-	@Select("select * from board where ariticletype=2")
+	@Select("select * from board where articletype=2")
 	public List<Notice> listNotice();
 
 	/*
@@ -26,7 +26,7 @@ public interface BoardMapper {
 	 */
 	
 	@Insert("insert into board "
-			+ "(ariticletype, category, title, customerid, content)"
+			+ "(articletype, category, title, customerid, content)"
 			+ "values (#{type}, #{category}, #{title}, #{writer}, #{content})")
 	public void writeNotice(Notice notice);
 }
