@@ -1,4 +1,4 @@
-package logic;
+package logic.dto;
 
 // 광고 계약 정보
 public class AdPost {

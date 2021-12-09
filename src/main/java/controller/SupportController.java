@@ -14,15 +14,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import logic.Board;
-import logic.Notice;
-import logic.NoticeService;
+import logic.dto.Board;
+import logic.dto.Notice;
+import logic.dto.Question;
+import logic.service.NoticeService;
+import logic.service.QuestionService;
 
 @Controller
 @RequestMapping("support")
 public class SupportController {
 	@Autowired
 	private NoticeService noticeService;
+	@Autowired
+	private QuestionService questionService;
 	
 	// notice 공지사항
 	@RequestMapping("notice/list")
@@ -42,13 +46,13 @@ public class SupportController {
 	}
 	// '공지하기' 열기
 	@RequestMapping("notice/write")
-	public String notice(HttpSession session) {
+	public String writeNotice(HttpSession session) {
 		// TODO: 관리자 체크(AOP)
 		return "support/notice/write";
 	}
 	// 'notice form' action
 	@RequestMapping("notice/w")
-	public ModelAndView writeNotice(@Valid Notice notice, BindingResult bresult, HttpSession session) {
+	public ModelAndView writeNoticeForm(@Valid Notice notice, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		// 유효성 검사
@@ -68,4 +72,49 @@ public class SupportController {
 		mav.setViewName("redirect:list");
 		return mav;
 	}
+	/* 문의하기 */
+	/**
+	 * listQuestion 문의 목록 불러오기
+	 * - 문의 내용 가져오기. DB board 중 (article)type=3 불러오기
+	 */
+	@RequestMapping("q/list")
+	public ModelAndView listQuestion() {
+		ModelAndView mav = new ModelAndView();
+		
+		// TODO: 문의하기 페이징
+		List<Question> list;
+		try {
+			mav.addObject("listcount", questionService.count()); // 목적이 글 개수를 찾는 문장
+			
+			list = questionService.list();
+			mav.addObject("questionlist", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return mav;
+	}
+	@RequestMapping("q/write")
+	public ModelAndView writeQuestion(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		// TODO: 회원 체크 AOP
+		return mav;
+	}
+	@RequestMapping("q/w")
+	public ModelAndView writeQuestionForm(@Valid Question question, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(bresult.hasErrors()) {
+			System.out.println("Binding error is occured in questionForm." + mav.getModel());
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		try {
+			questionService.write(question);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:list");
+		return mav;
+	}
+	
 }

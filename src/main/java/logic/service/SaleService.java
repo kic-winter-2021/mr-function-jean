@@ -1,4 +1,4 @@
-package logic;
+package logic.service;
 
 /*
  * Sale, Transaction 관리

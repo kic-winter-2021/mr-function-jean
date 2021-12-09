@@ -1,4 +1,4 @@
-package logic;
+package logic.dto;
 
 import java.util.Date;
 import java.util.List;

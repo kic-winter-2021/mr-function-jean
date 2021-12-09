@@ -5,7 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-import logic.Notice;
+import logic.dto.Notice;
+import logic.dto.Question;
 
 public interface BoardMapper {
 	@Select("select count(*) from board where articletype=2")
@@ -25,8 +26,19 @@ public interface BoardMapper {
 	private String content;
 	 */
 	
-	@Insert("insert into board "
-			+ "(articletype, category, title, customerid, content)"
-			+ "values (#{type}, #{category}, #{title}, #{writer}, #{content})")
+	@Insert("insert into board"
+			+ " (articletype, category, title, customerid, content)"
+			+ " values (#{type}, #{category}, #{title}, #{writer}, #{content})")
 	public void writeNotice(Notice notice);
+	
+	@Select("select count(*) from board where articletype=3")
+	public int countQuestion();
+	
+	@Select("select * from board where articletype=3")
+	public List<Question> listQuestion();
+
+	@Insert("insert into board"
+			+ " (articletype, category, title, customerid, content)"
+			+ " values (#{type}, #{category}, #{title}, #{writer}, #{content})")
+	public void writeQuestion(Question question);
 }
