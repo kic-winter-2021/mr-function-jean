@@ -45,18 +45,18 @@ public class MvcConfig implements WebMvcConfigurer {
 		viewResolver.setSuffix(".jsp");
 		registry.viewResolver(viewResolver);
 	}
-
-	@Override
-	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-		SimpleMappingExceptionResolver seResolver = new SimpleMappingExceptionResolver();
-		//exception to view name mapping
-        Properties p = new Properties();
-        p.setProperty(NullPointerException.class.getName(), "npeView");
-        seResolver.addStatusCode("npeView", 404);
-		//exceptionResolver.set
-		
-		resolvers.add(seResolver);
-	}
+//
+//	@Override
+//	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+//		SimpleMappingExceptionResolver seResolver = new SimpleMappingExceptionResolver();
+//		//exception to view name mapping
+//        Properties p = new Properties();
+//        p.setProperty(NullPointerException.class.getName(), "npeView");
+//        seResolver.addStatusCode("npeView", 404);
+//		//exceptionResolver.set
+//		
+//		resolvers.add(seResolver);
+//	}
 	
 	@Bean
 	public MultipartResolver multipartResolver() {

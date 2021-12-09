@@ -13,32 +13,48 @@
    http://www.springframework.org/schema/aop/spring-aop.xsd
    http://www.springframework.org/schema/mvc
    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-   <!-- xmlns:websocket="http://www.springframework.org/schema/websocket" -->
+	<!-- xmlns:websocket="http://www.springframework.org/schema/websocket" -->
+	<aop:aspectj-autoproxy />
 	<mvc:default-servlet-handler /> <!-- .css, .js 등은 default-servlet에서 처리 -->
-	<context:component-scan	base-package="config,controller,logic,dao,aop" />
+	<context:component-scan base-package="config,controller,logic,dao,aop" />
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-    <mvc:resources mapping="/css/**" location="/resources/css/" />
-    <mvc:resources mapping="/img/**" location="/resources/img/" />
-    <mvc:resources mapping="/js/**" location="/resources/js/" />
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<mvc:resources mapping="/css/**" location="/resources/css/" />
+	<mvc:resources mapping="/img/**" location="/resources/img/" />
+	<mvc:resources mapping="/js/**" location="/resources/js/" />
+
+	<bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	    <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property> 
-	    <property name="url" value="jdbc:mariadb://0.0.0.0:3333/fundb?useSSL=false"></property>
-	    <property name="username" value="root"></property>
-	    <property name="password" value="1234"></property>         
+	<!-- 예외처리 부분 -->
+	<bean id="exceptionHandler"	class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<value>
+				exception.SigninException=exception
+			</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="org.mariadb.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mariadb://0.0.0.0:3333/fundb?useSSL=false"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="1234"></property>
 	</bean>
 	<!-- mybatis 관련 설정 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
 	</bean>
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 </beans>

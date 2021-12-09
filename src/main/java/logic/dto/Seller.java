@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Customer {
+public class Seller {
 	private String id;
 	private int type;
 	private String password;
@@ -23,11 +23,8 @@ public class Customer {
 	private MultipartFile companyFile;
 	private String location;
 	private Date signupDate;
-	private String authKey; // 관리자용
 	private Map<String, String> paymentMap;
 	private List<String> destinationList;
-	
-	public static final int ADMIN = 1;
 	public String getId() {
 		return id;
 	}
@@ -124,12 +121,6 @@ public class Customer {
 	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
 	}
-	public String getAuthKey() {
-		return authKey;
-	}
-	public void setAuthKey(String authKey) {
-		this.authKey = authKey;
-	}
 	public Map<String, String> getPaymentMap() {
 		return paymentMap;
 	}
@@ -144,11 +135,11 @@ public class Customer {
 	}
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", type=" + type + ", password=" + password + ", name=" + name + ", nickname="
+		return "Seller [id=" + id + ", type=" + type + ", password=" + password + ", name=" + name + ", nickname="
 				+ nickname + ", phoneno=" + phoneno + ", email=" + email + ", gender=" + gender + ", birthday="
 				+ birthday + ", companyno=" + companyno + ", personalFilePath=" + personalFilePath
 				+ ", companyFilePath=" + companyFilePath + ", personalFile=" + personalFile + ", companyFile="
-				+ companyFile + ", location=" + location + ", signupDate=" + signupDate + ", authKey=" + authKey
-				+ ", paymentMap=" + paymentMap + ", destinationList=" + destinationList + "]";
+				+ companyFile + ", location=" + location + ", signupDate=" + signupDate + ", paymentMap=" + paymentMap
+				+ ", destinationList=" + destinationList + "]";
 	}
 }
