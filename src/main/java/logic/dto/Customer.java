@@ -45,6 +45,7 @@ public class Customer {
 	private String authKey; // 관리자용
 	private Map<String, String> paymentMap;
 	private List<String> destinationList;
+	private Cart cart;
 	
 	public static final int ADMIN = 1;
 	public static final int PERSONAL = 2;
@@ -162,6 +163,12 @@ public class Customer {
 	public void setDestinationList(List<String> destinationList) {
 		this.destinationList = destinationList;
 	}
+	public Cart getCart() {
+		return cart;
+	}
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", type=" + type + ", password=" + password + ", name=" + name + ", nickname="
@@ -169,6 +176,6 @@ public class Customer {
 				+ birthday + ", companyno=" + companyno + ", personalFilePath=" + personalFilePath
 				+ ", companyFilePath=" + companyFilePath + ", personalFile=" + personalFile + ", companyFile="
 				+ companyFile + ", location=" + location + ", signupDate=" + signupDate + ", authKey=" + authKey
-				+ ", paymentMap=" + paymentMap + ", destinationList=" + destinationList + "]";
+				+ ", paymentMap=" + paymentMap + ", destinationList=" + destinationList + ", cart=" + cart + "]";
 	}
 }

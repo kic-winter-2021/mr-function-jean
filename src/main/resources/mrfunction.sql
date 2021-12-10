@@ -5,6 +5,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS adboard;
 DROP TABLE IF EXISTS adpost;
 DROP TABLE IF EXISTS board;
+DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS img;
 DROP TABLE IF EXISTS itemlike;
 DROP TABLE IF EXISTS survey;
@@ -63,10 +64,7 @@ CREATE TABLE board
 0-기본글
 1-답글',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
-	updated_at timestamp
-		DEFAULT current_timestamp
-		ON UPDATE current_timestamp
-		NOT NULL COMMENT '수정일시',
+	updated_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '수정일시',
 	views int unsigned DEFAULT 0 NOT NULL COMMENT '조회수',
 	PRIMARY KEY (num),
 	UNIQUE (num),
@@ -82,6 +80,16 @@ CREATE TABLE brand
 	PRIMARY KEY (brandcode),
 	UNIQUE (brandname)
 ) COMMENT = '브랜드';
+
+
+CREATE TABLE cart
+(
+	customerid varchar(30) NOT NULL COMMENT 'customerid : 아이디',
+	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	quantity int unsigned DEFAULT 1 NOT NULL COMMENT '개수',
+	PRIMARY KEY (customerid, itemId),
+	UNIQUE (customerid)
+) COMMENT = '장바구니';
 
 
 CREATE TABLE customer
@@ -109,15 +117,8 @@ CREATE TABLE customer
 	personalfile varchar(200) COMMENT '주민등록',
 	companyfile varchar(200) COMMENT '사업자등록증',
 	location varchar(200) COMMENT '매장 위치 : 오프라인의 경우 매장 위치',
-	created_at timestamp
-		DEFAULT current_timestamp
-		NOT NULL
-		COMMENT '가입일시',
-	updated_at timestamp 
-		DEFAULT current_timestamp
-		ON UPDATE current_timestamp
-		NOT NULL
-		COMMENT '수정일시',
+	created_at timestamp DEFAULT current_timestamp COMMENT '가입일시',
+	updated_at timestamp DEFAULT current_timestamp COMMENT '수정일시',
 	PRIMARY KEY (id),
 	UNIQUE (id),
 	UNIQUE (nickname),
@@ -163,10 +164,7 @@ CREATE TABLE item
 ...',
 	style varchar(20) COMMENT '스타일',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시 : 상품 등록 일자',
-	updated_at timestamp
-		DEFAULT current_timestamp
-		ON UPDATE current_timestamp
-		COMMENT '수정일시',
+	updated_at timestamp COMMENT '수정일시',
 	PRIMARY KEY (itemId)
 ) COMMENT = '아이템';
 
@@ -189,11 +187,7 @@ CREATE TABLE itemreview
 	content text COMMENT '내용',
 	img varchar(100) COMMENT 'img',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
-	updated_at timestamp
-		DEFAULT current_timestamp
-		ON UPDATE current_timestamp
-		NOT NULL
-		COMMENT '수정일시',
+	updated_at timestamp DEFAULT current_timestamp COMMENT '수정일시',
 	PRIMARY KEY (num)
 ) COMMENT = '리뷰';
 
@@ -289,6 +283,14 @@ ALTER TABLE board
 ;
 
 
+ALTER TABLE cart
+	ADD FOREIGN KEY (customerid)
+	REFERENCES customer (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
 ALTER TABLE destination
 	ADD FOREIGN KEY (customerid)
 	REFERENCES customer (id)
@@ -354,6 +356,14 @@ ALTER TABLE adpost
 
 
 ALTER TABLE board
+	ADD FOREIGN KEY (itemId)
+	REFERENCES item (itemId)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE cart
 	ADD FOREIGN KEY (itemId)
 	REFERENCES item (itemId)
 	ON UPDATE RESTRICT
