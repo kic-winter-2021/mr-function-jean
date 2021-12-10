@@ -64,7 +64,7 @@ public class AccountController {
 		}
 		// 2. 로그인 (세션에 추가)
 		session.setAttribute("signinCustomer", customer);
-		mav.setViewName("redirect:main");
+		mav.setViewName("redirect:/main.jsp");
 		return mav;
 	}
 	// 사업자 고객 로그인
@@ -83,4 +83,35 @@ public class AccountController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("agree")
+	public ModelAndView agree(String type, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		// 모델에 type값 넣어주기
+		mav.addObject("type", type);
+		return mav;
+	}
+	// TODO: 동일한 아이디 있는지 검사 -> 다른 데에서 처리...아이디 중복 검사
+	// TODO: 비밀번호 확인은 -> 페이지에서 JS로 확인.
+	@RequestMapping("psignup")
+	public ModelAndView psignup(@Valid Customer customer, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		// 유효성 검사
+		if (bresult.hasErrors()) {
+			System.out.println("회원 로그인 실패" + bresult.getModel());
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		// 값을 DB에 insert
+		try {
+			customerService.signup(customer);
+			System.out.println(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// TODO: 이메일로 인증 메일을 보냈습니다.(뷰랑 컨트롤러 만들기)
+		mav.setViewName("redirect:/main.jsp");
+		return mav;
+	}
+	// TODO: 가입이 성공적으로 처리되었습니다.
 }

@@ -22,4 +22,8 @@ public class CustomerDao {
 		return mapper.selectOneCustomer(id);
 	}
 
+	public void insert(Customer customer) {
+		mapper.insert(customer);
+	}
+
 }

@@ -51,7 +51,7 @@
 							<div class="forget">
 								<button class="idbtn">아이디찾기</button>
 								<button class="pwbtn">비밀번호찾기</button>
-								<a href ="selectSignup.jsp" class="signupbtn">회원가입</a>
+								<a href ="selectsignup" class="signupbtn">회원가입</a>
 							</div>
 							<div class="checkwrap">
 								<input type="checkbox" id="save" value="y" onclick="chk()">
@@ -78,8 +78,7 @@
 							<div class="forget">
 								<button class="idbtn">아이디찾기</button>
 								<button class="pwbtn">비밀번호찾기</button>
-								<a href ="selectSignup.jsp">
-								<button class="signupbtn">회원가입</button></a>
+								<a href ="selectsignup" class="signupbtn">회원가입</a>
 							</div>
 							<div class="checkwrap">
 								<input type="checkbox" id="save" value="y" onclick="chk()">

@@ -76,17 +76,17 @@
 	</header>
 	<div class="personalimg">
 	<h3>자신만의 맞는 바지를 <br>찾아보세요!</h3>
-	<a href ="agree.jsp">
-	<img src="../../resources/img/personal.png" id="personal"><br>
-	<button id="personalbtn">개인회원</button>
+	<a href="agree?type=p">
+		<img src="/img/personal.png" id="personal"><br>
+		<span id="personalbtn">개인회원</span>
 	</a>
 	</div>
 	<div class="companyimg">
 	<h3>상품을 등록하고<br>이윤을 남겨보세요!</h3>
-	<a href ="agree.jsp">
-	<img src="../../resources/img/company.png" id="company"><br>
-	<button id="companybtn">사업자</button>
-	</a>
+		<a href ="agree?type=c">
+			<img src="/img/company.png" id="company"><br>
+			<span id="companybtn">사업자</span>
+		</a>
 	</div>
 </body>
 </html>

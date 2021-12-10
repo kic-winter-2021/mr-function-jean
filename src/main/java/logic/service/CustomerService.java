@@ -18,4 +18,8 @@ public class CustomerService {
 		return customerDao.select(id);
 	}
 
+	public void signup(Customer customer) {
+		customerDao.insert(customer);
+	}
+
 }

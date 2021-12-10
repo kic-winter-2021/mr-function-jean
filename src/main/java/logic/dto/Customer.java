@@ -4,17 +4,36 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Customer {
+	@NotNull(message = "아이디를 입력해주세요")
 	private String id;
+	@NotNull
 	private int type;
+	@NotNull(message = "비밀번호를 입력해주세요")
 	private String password;
+	@NotNull(message = "이름을 입력해주세요")
 	private String name;
+	@NotNull(message = "별명을 입력해주세요")
 	private String nickname;
+	@NotNull(message = "전화번호를 입력해주세요")
 	private String phoneno;
+	@NotNull(message = "이메일을 입력해주세요")
+	@Email(message = "이메일을 정확하게 입력해주세요")
 	private String email;
+	@NotNull(message = "성별이 선택되지 않았습니다")
+	@Min(value=0, message = "성별이 선택되지 않았습니다")
 	private int gender;
+	@NotNull(message = "생일을 입력해주세요")
+	@Past
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date birthday;
 	private int companyno;
 	private String personalFilePath;
@@ -28,6 +47,7 @@ public class Customer {
 	private List<String> destinationList;
 	
 	public static final int ADMIN = 1;
+	public static final int PERSONAL = 2;
 	public String getId() {
 		return id;
 	}
