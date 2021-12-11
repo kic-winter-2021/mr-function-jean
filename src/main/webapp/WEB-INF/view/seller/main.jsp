@@ -13,11 +13,10 @@
 		<h2>사업자</h2>
 		<span id="seller-name">${seller.id} 님</span>
 		<ul id="seller-tab">
-			<li><a href="info" class="tab">내 정보</a></li>
-			<li><a href="itemlist" class="tab">내 상품 보기</a></li>
-			<li><a href="enroll" class="tab">상품 등록</a></li>
-			<li><a href="adpost" class="tab">광고문의</a></li>
-			<li><a href="stats" class="tab">통계보기</a></li>
+			<li><a href="myinfo" class="tab">내 정보</a></li>
+			<li><a href="manageitem" class="tab">상품관리</a></li>
+			<li><a href="promotion" class="tab">프로모션</a></li>
+			<li><a href="stats" class="tab">통계</a></li>
 		</ul>
 	</div>
 	<!-- 판매작 전용 페이지 -->

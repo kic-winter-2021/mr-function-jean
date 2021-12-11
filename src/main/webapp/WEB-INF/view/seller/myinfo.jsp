@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보</title>
+<link rel="stylesheet" href="/css/seller.css" />
 </head>
 <body>
 	<div id="info-container">
@@ -13,30 +14,30 @@
 			<table class="infotable">
 				<caption>사용자 정보</caption>
 				<colgroup>
-					<col class="key" />
-					<col class="value" />
+					<col class="infotable__key" />
+					<col class="infotable__value" />
 				</colgroup>
 				<tbody>
 					<tr>
-						<th>아이디 id</th>
-						<td>${ sessionScope.seller.id }</td>
+						<th>ID</th>
+						<td>아이디${ sessionScope.seller.id }</td>
 					</tr>
 					<tr>
-						<th>이름 name</th>
-						<td>${ sessionScope.seller.name }</td>
+						<th>이름</th>
+						<td>이름${ sessionScope.seller.name }</td>
 					</tr>
 					<tr>
-						<th>비밀번호 password</th>
-						<td><button class="btn">비밀번호 변경하기</button></td>
+						<th>비밀번호</th>
+						<td>비밀번호<button class="btn">비밀번호 변경하기</button></td>
 					</tr>
 					<tr>
-						<th>이메일 email</th>
+						<th>이메일</th>
 						<td>${sessionScope.seller.email }</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<%-- 사용자 정보를 변경하기 --%>
-					<tr><td colspan="2"><a href="update">개인정보 변경</a></td></tr>
+					<tr><td colspan="2"><a href="update" class="abtn">개인정보 변경</a></td></tr>
 				</tfoot>
 			</table>
 		</section>
@@ -44,13 +45,13 @@
 			<table class="infotable">
 				<caption>사업자 정보</caption>
 				<colgroup>
-					<col class="key" />
-					<col class="value" />
+					<col class="infotable__key" />
+					<col class="infotable__value" />
 				</colgroup>
 				<tbody>
 					<tr>
 						<th>사업자 등록번호</th>
-						<td>${ sessionScope.seller.}</td>
+						<td>${ sessionScope.seller.id}</td>
 					</tr>
 					<tr>
 						<th>유형</th>
@@ -63,12 +64,12 @@
 					</tr>
 					<tr>
 						<th>사업자 정보</th>
-						<td><button id="">사업자 등록증</button><button class="btn">비밀번호 변경하기</button></td>
+						<td><button id="">사업자 등록증</button><button class="btn">주민등록증</button></td>
 					</tr>
 				</tbody>
 				<tfoot>
-					<%-- 사용자 정보를 변경하기 --%>
-					<tr><td colspan="2"><a href="update">정보 변경</a></td></tr>
+					<%-- 사업자 정보를 변경하기 --%>
+					<tr><td colspan="2"><a href="updateSeller" class="abtn">사업자 정보 갱신</a></td></tr>
 				</tfoot>
 			</table>
 		</section>

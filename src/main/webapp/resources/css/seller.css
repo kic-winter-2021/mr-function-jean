@@ -20,3 +20,37 @@
 .tab:hover {
 	background-color: grey;
 }
+/* */
+#info-container {
+	margin: 0 auto;
+}
+.infotable {
+	text-align: left;
+	padding-left: 8px;
+}
+.infotable > caption {
+	font-size: 1.3em;
+	text-align: left;
+	padding-left: 16px;
+}
+.infotable__key {
+	width: 150px;
+}
+.infotable__value {
+	width: 400px;
+}
+.infotable > tfoot {
+	text-align: center;
+}
+/* 버튼 */
+.abtn {
+	all: unset;
+	background-color: #0080ff;
+	color: white;
+	padding: 5px;
+	cursor: pointer;
+}
+.abtn:hover {
+	background-color: #379bff;
+	box-shadow: 1px 1px 1px #ddd;	
+}
