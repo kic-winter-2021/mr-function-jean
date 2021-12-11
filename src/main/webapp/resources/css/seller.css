@@ -1,0 +1,22 @@
+@charset "UTF-8";
+#seller-tab-container {
+	background-color: black;
+	color: white;
+}
+#seller-tab {
+	font-size: 30px;
+}
+#seller-tab > li {
+	list-style: none;
+	padding-left: 0;
+}
+.tab {
+	padding: 16px 8px;
+	text-decoration: none;
+	width: 80px;
+	height: 40px;
+	color: white; 
+}
+.tab:hover {
+	background-color: grey;
+}
