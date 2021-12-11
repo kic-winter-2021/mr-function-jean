@@ -21,6 +21,7 @@ public class AccountController {
 	@Autowired
 	CustomerService customerService;
 	
+	
 	@GetMapping("*")
 	public ModelAndView getCustomer() {
 		ModelAndView mav = new ModelAndView();
@@ -114,4 +115,15 @@ public class AccountController {
 		return mav;
 	}
 	// TODO: 가입이 성공적으로 처리되었습니다.
+	@RequestMapping("usermypage")
+	public ModelAndView usermapage(HttpSession session) {
+		ModelAndView mav = new ModelAndView();	
+		Customer signin = (Customer)session.getAttribute("signin");
+		
+	    //TODO: 원래는 session을 사용하지만 AOP로 뺄거니 여기에는 안쓴다.
+		mav.addObject("cartcount",customerService.cartcount());
+		mav.addObject("salecount", customerService.salecount());
+		
+		return mav;
+	}
 }

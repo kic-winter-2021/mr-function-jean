@@ -13,4 +13,8 @@ public interface CustomerMapper {
 			+ " (id, type, password, name, nickname, phoneno, birthday, gender, email)"
 			+ " values (#{id}, #{type}, #{password}, #{name}, #{nickname}, #{phoneno}, #{birthday}, #{gender}, #{email})")
 	void insert(Customer customer);
+
+	
+
+	
 }
