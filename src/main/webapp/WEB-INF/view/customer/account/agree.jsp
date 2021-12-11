@@ -8,7 +8,7 @@
 <link href="/css/agree.css" rel="stylesheet">
 <script>
 	function signup() {
-		'${param.type}'=='p'?(location.href="personalsignup"):(location.href="companysignup");
+		'${param.type}'=='p'?(location.href="personalsignup"):(location.href="ssignup");
 	}
 </script>
 </head>

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import logic.dto.Customer;
+import logic.dto.Seller;
 import mapper.CustomerMapper;
 
 @Repository
@@ -26,6 +27,7 @@ public class CustomerDao {
 		mapper.insert(customer);
 	}
 
-	
-
+	public void insertSeller(Seller seller) {
+		mapper.insertSeller(seller);		
+	}
 }

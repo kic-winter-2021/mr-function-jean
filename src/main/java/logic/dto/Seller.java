@@ -1,26 +1,41 @@
 package logic.dto;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Seller {
+	@NotNull(message = "아이디를 입력해주세요")
 	private String id;//0
+	@NotNull
+	@Min(value=3)
 	private int type;//0
+	@NotNull(message = "비밀번호를 입력해주세요")
 	private String password;//0
+	@NotNull(message = "이름을 입력해주세요")
 	private String name;//0
+	@NotNull(message = "상호를 입력해주세요")
 	private String nickname;//0
+	@NotNull(message = "전화번호를 입력해주세요")
 	private String phoneno;//0
+	@NotNull(message = "이메일을 입력해주세요")
+	@Email
 	private String email;//0
 	private int gender;//0
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;//0
+	@NotNull(message = "사업자 번호를 입력해주세요")
 	private int companyno;//0
 	private String personalFilePath;
 	private String companyFilePath;//0
 	private MultipartFile personalFile;//0
 	private MultipartFile companyFile;//0
+	@NotNull(message = "주소를 입력해주세요")
 	private String location;//0
 	private Date signupDate;
 	//private Map<String, String> paymentMap;//구매정보들 db에 기록하기 위해 한것
