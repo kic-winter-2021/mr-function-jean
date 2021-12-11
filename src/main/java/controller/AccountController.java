@@ -4,9 +4,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -139,6 +141,36 @@ public class AccountController {
 		mav.addObject("cartcount",customerService.cartcount(id));
 		mav.addObject("salecount", customerService.salecount(id));
 		
+		return mav;
+	}
+	@PostMapping("{url}search")
+	public ModelAndView search(Customer customer, BindingResult bresult, @PathVariable String url, Object service) {
+		ModelAndView mav = new ModelAndView();
+		String code = "error.id.search";
+		String title = "아이디";
+		
+		//유효성 검사
+		if (customer.getEmail() == null || customer.getEmail().equals("")) {
+			bresult.rejectValue("email","error.required");
+		}
+		if(url.equals("pw")) {
+			title="비밀번호";
+			code = "error.password.search";
+			if(customer.getId() == null || customer.getId().equals("")) {
+				bresult.rejectValue("customerid","error.required");
+			}
+		}
+		String result = null;
+		try {
+			result = service.getSearch(customer,url);
+		}catch(EmptyResultDataAccessException e) {
+			bresult.reject(code);
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		mav.addObject("result",result);
+		mav.addObject("title",title);
+		mav.setViewName("search");
 		return mav;
 	}
 	

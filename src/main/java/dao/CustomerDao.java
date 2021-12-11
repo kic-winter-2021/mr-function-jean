@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import logic.dto.Customer;
@@ -29,5 +31,15 @@ public class CustomerDao {
 
 	public void insertSeller(Seller seller) {
 		mapper.insertSeller(seller);		
+	}
+	public void search(Customer customer, String url) {
+		String sql = null;
+		if(url.equals("id")) {
+			
+		}else if(url.equals("pw")) {
+			
+		}
+		SqlParameterSource param = new BeanPropertySqlParameterSource(customer);
+		return template.queryForObject(sql, param,String.class);
 	}
 }
