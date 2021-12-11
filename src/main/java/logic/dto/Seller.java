@@ -7,24 +7,25 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Seller {
-	private String id;
-	private int type;
-	private String password;
-	private String name;
-	private String nickname;
-	private String phoneno;
-	private String email;
-	private int gender;
-	private Date birthday;
-	private int companyno;
+	private String id;//0
+	private int type;//0
+	private String password;//0
+	private String name;//0
+	private String nickname;//0
+	private String phoneno;//0
+	private String email;//0
+	private int gender;//0
+	private Date birthday;//0
+	private int companyno;//0
 	private String personalFilePath;
-	private String companyFilePath;
-	private MultipartFile personalFile;
-	private MultipartFile companyFile;
-	private String location;
+	private String companyFilePath;//0
+	private MultipartFile personalFile;//0
+	private MultipartFile companyFile;//0
+	private String location;//0
 	private Date signupDate;
-	private Map<String, String> paymentMap;
-	private List<String> destinationList;
+	//private Map<String, String> paymentMap;//구매정보들 db에 기록하기 위해 한것
+	//판매자는 구매 안하니 뺌
+	//private List<String> destinationList;
 	public String getId() {
 		return id;
 	}
@@ -121,7 +122,7 @@ public class Seller {
 	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
 	}
-	public Map<String, String> getPaymentMap() {
+	/*public Map<String, String> getPaymentMap() {
 		return paymentMap;
 	}
 	public void setPaymentMap(Map<String, String> paymentMap) {
@@ -132,14 +133,14 @@ public class Seller {
 	}
 	public void setDestinationList(List<String> destinationList) {
 		this.destinationList = destinationList;
-	}
+	}*/
 	@Override
 	public String toString() {
 		return "Seller [id=" + id + ", type=" + type + ", password=" + password + ", name=" + name + ", nickname="
 				+ nickname + ", phoneno=" + phoneno + ", email=" + email + ", gender=" + gender + ", birthday="
 				+ birthday + ", companyno=" + companyno + ", personalFilePath=" + personalFilePath
 				+ ", companyFilePath=" + companyFilePath + ", personalFile=" + personalFile + ", companyFile="
-				+ companyFile + ", location=" + location + ", signupDate=" + signupDate + ", paymentMap=" + paymentMap
-				+ ", destinationList=" + destinationList + "]";
+				+ companyFile + ", location=" + location + ", signupDate=" + signupDate/* + ", paymentMap=" + paymentMap
+				+ ", destinationList=" + destinationList*/ + "]";
 	}
 }
