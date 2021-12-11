@@ -14,12 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 import logic.dto.Customer;
 import logic.dto.Seller;
 import logic.service.CustomerService;
+import logic.service.SellerService;
 
 @Controller
 @RequestMapping("customer/account")	// customer/account
 public class AccountController {
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	SellerService sellerService;
 	
 	@GetMapping("*")
 	public ModelAndView getCustomer() {
@@ -93,19 +96,27 @@ public class AccountController {
 	}
 	// TODO: 동일한 아이디 있는지 검사 -> 다른 데에서 처리...아이디 중복 검사
 	// TODO: 비밀번호 확인은 -> 페이지에서 JS로 확인.
-	@RequestMapping("psignup")
-	public ModelAndView psignup(@Valid Customer customer, BindingResult bresult, HttpSession session) {
+	@GetMapping("ssignup")
+	public ModelAndView getSeller(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		// 세션은 로그인 여부만 확인
+		mav.addObject("seller", new Seller());
+		mav.setViewName("/customer/account/companysignup");
+		return mav;
+	}
+	@PostMapping("ssignup")
+	public ModelAndView psignup(@Valid Seller seller, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 유효성 검사
 		if (bresult.hasErrors()) {
 			System.out.println("회원 로그인 실패" + bresult.getModel());
 			mav.getModel().putAll(bresult.getModel());
-			return mav;
+			return mav; 
 		}
 		// 값을 DB에 insert
 		try {
-			customerService.signup(customer);
-			System.out.println(customer);
+			sellerService.signup(seller);
+			System.out.println(seller); // 디버깅용
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,4 +125,21 @@ public class AccountController {
 		return mav;
 	}
 	// TODO: 가입이 성공적으로 처리되었습니다.
+	
+	
+	@RequestMapping("usermypage")
+	public ModelAndView usermapage(HttpSession session) {
+		ModelAndView mav = new ModelAndView();	
+		// 세션 로그인이 되어있는 경우(AOP)
+		Customer signin = (Customer)session.getAttribute("signin");	//로그인 객체를 참조
+		String id = signin.getId();
+			
+		
+	    //TODO: 원래는 session을 사용하지만 AOP로 뺄거니 여기에는 안쓴다.
+		mav.addObject("cartcount",customerService.cartcount(id));
+		mav.addObject("salecount", customerService.salecount(id));
+		
+		return mav;
+	}
+	
 }
