@@ -24,5 +24,4 @@ public class QuestionService {
 	public void write(Question question) {
 		boardDao.writeQuestion(question);
 	}
-
 }

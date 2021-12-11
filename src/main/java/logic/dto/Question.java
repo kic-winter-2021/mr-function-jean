@@ -20,7 +20,7 @@ public class Question {
 	private Date regDate;
 	private Date update;
 	private int views;	// 조회수
-	
+
 	{ type=TYPE; qa=0; } // qa = 0 답변이 달리지 않은 질문
 	public int getNum() {
 		return num;

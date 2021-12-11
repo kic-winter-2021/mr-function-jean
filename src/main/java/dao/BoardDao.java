@@ -4,14 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import logic.dto.Board;
 import logic.dto.Notice;
 import logic.dto.Question;
+import logic.dto.Faq;
 import mapper.BoardMapper;
 
 @Repository
@@ -45,6 +43,19 @@ public class BoardDao {
 
 	public void writeQuestion(Question question) {
 		mapper.writeQuestion(question);
+	}
+
+	public int countFaq() {
+		return mapper.countFaq();
+	}
+
+	public List<Faq> listFaq() {
+		return mapper.listFaq();
+	}
+
+	public void writeFaq(Faq faq) {
+		mapper.writeFaq(faq);
+		
 	}
 
 }

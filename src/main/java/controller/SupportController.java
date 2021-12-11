@@ -14,11 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import logic.dto.Board;
+import logic.dto.Faq;
 import logic.dto.Notice;
 import logic.dto.Question;
 import logic.service.NoticeService;
 import logic.service.QuestionService;
+import logic.service.FaqService;
 
 @Controller
 @RequestMapping("support")
@@ -27,7 +28,9 @@ public class SupportController {
 	private NoticeService noticeService;
 	@Autowired
 	private QuestionService questionService;
-	
+	@Autowired
+	private FaqService faqService; 
+
 	// notice 공지사항
 	@RequestMapping("notice/list")
 	public ModelAndView noticelist(HttpSession session) {
@@ -72,6 +75,7 @@ public class SupportController {
 		mav.setViewName("redirect:list");
 		return mav;
 	}
+
 	/* 문의하기 */
 	/**
 	 * listQuestion 문의 목록 불러오기
@@ -116,5 +120,46 @@ public class SupportController {
 		mav.setViewName("redirect:list");
 		return mav;
 	}
-	
+
+	@RequestMapping("faq/list")
+	public ModelAndView faqlist(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<Faq> list;
+		try {
+			mav.addObject("listcount", faqService.count());
+			list = faqService.list();
+			mav.addObject("faqlist", list) ;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mav;
+	}
+	@RequestMapping("faq/write")
+	public String faq(HttpSession session) {
+		// TODO: 관리자 체크(AOP)
+		return "support/faq/write";
+	}
+	// 'notice form' action
+	@RequestMapping("faq/w")
+	public ModelAndView writefaq(@Valid Faq faq, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		// 유효성 검사
+		if (bresult.hasErrors()) {
+			System.out.println("Binding error is occured in faqForm." + mav.getModel());
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		try {
+			faqService.write(faq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: Exception page 추가 + Handler 추가
+			//throw new BoardException("공지사항 등록에 실패하였습니다.", "write");
+		}
+		mav.setViewName("redirect:list");
+		return mav;
+	}
 }
