@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import dao.CartDao;
 import dao.CustomerDao;
+import dao.SaleDao;
 import logic.dto.Customer;
 
 /*
@@ -16,6 +17,8 @@ public class CustomerService {
 	CustomerDao customerDao;
 	@Autowired
 	CartDao cartDao;
+	@Autowired
+	SaleDao saleDao;
 	
 	public Customer select(String id) {
 		return customerDao.select(id);
@@ -25,12 +28,12 @@ public class CustomerService {
 		customerDao.insert(customer);
 	}
 
-	public Object cartcount() {
-		return cartDao.countCart();
+	public Object cartcount(String id) {
+		return cartDao.countCart(id);
 	}
 
-	public Object salecount() {
-		return null;
+	public Object salecount(String id) {
+		return saleDao.countSale(id);
 	}
 
 }

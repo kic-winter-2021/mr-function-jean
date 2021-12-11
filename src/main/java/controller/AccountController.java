@@ -101,7 +101,7 @@ public class AccountController {
 		if (bresult.hasErrors()) {
 			System.out.println("회원 로그인 실패" + bresult.getModel());
 			mav.getModel().putAll(bresult.getModel());
-			return mav;
+			return mav; 
 		}
 		// 값을 DB에 insert
 		try {
@@ -118,11 +118,14 @@ public class AccountController {
 	@RequestMapping("usermypage")
 	public ModelAndView usermapage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();	
-		Customer signin = (Customer)session.getAttribute("signin");
+		// 세션 로그인이 되어있는 경우(AOP)
+		Customer signin = (Customer)session.getAttribute("signin");	//로그인 객체를 참조
+		String id = signin.getId();
+			
 		
 	    //TODO: 원래는 session을 사용하지만 AOP로 뺄거니 여기에는 안쓴다.
-		mav.addObject("cartcount",customerService.cartcount());
-		mav.addObject("salecount", customerService.salecount());
+		mav.addObject("cartcount",customerService.cartcount(id));
+		mav.addObject("salecount", customerService.salecount(id));
 		
 		return mav;
 	}

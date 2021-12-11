@@ -10,7 +10,7 @@
 <body>
 <div id="wrap" class ="wrapper">
 <header class ="logoheader">
-	<center><img src="../../resources/img/logo-1.png"></center>
+	<center><img src="/resources/img/logo-1.png"></center>
 </header>
 	<!-- 회원가입 타이틀 부분 -->
 	<form name ="login" action="index.html" method="post" class="id">
