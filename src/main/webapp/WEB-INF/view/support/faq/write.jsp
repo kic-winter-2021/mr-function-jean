@@ -15,6 +15,8 @@
 	<div class="form_box">
 		<h1>문의글을 작성해주세요</h1>
 		<form:form modelAttribute="faq" action="w" name="faqForm">
+		<input type="hidden" name="customerid" value="admin">
+		<input type="hidden" name="type" value="1">
 		<!-- 문의글 내용 -->
 		문의유형
 			<select name="category">

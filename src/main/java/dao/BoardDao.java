@@ -39,7 +39,12 @@ public class BoardDao {
 	}
 
 	public List<Faq> listFaq() {
-		mapper.writeFaq();
+		return mapper.listFaq();
+	}
+
+	public void writeFaq(Faq faq) {
+		mapper.writeFaq(faq);
+		
 	}
 
 }

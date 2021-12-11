@@ -14,6 +14,7 @@ import logic.dto.Faq;
 public class FaqService {
 	@Autowired
 	BoardDao boardDao;
+
 	public int count() {
 		return boardDao.countFaq();
 	}
@@ -25,6 +26,5 @@ public class FaqService {
 	public void write(Faq faq) {
 		boardDao.writeFaq(faq);
 	}
-	
-	
+
 }

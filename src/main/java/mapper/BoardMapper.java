@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import logic.Notice;
+import logic.dto.Faq;
 
 public interface BoardMapper {
 	@Select("select count(*) from board where articletype=2")
@@ -30,8 +31,18 @@ public interface BoardMapper {
 			+ "values (#{type}, #{category}, #{title}, #{writer}, #{content})")
 	public void writeNotice(Notice notice);
 	
-	@Select("select * from")
+	/*
+	 * @Select("select * from") public int countFaq();
+	 * 
+	 * public void writeFaq();
+	 */
+	@Select("select count(*) from board where articletype=1")
 	public int countFaq();
-	@Select
-	public void writeFaq();
+	@Select("select * from board where articletype=1")
+	public List<Faq> listFaq();
+
+	@Insert("insert into board "
+			+ "(articletype, category, title, customerid, content)"
+			+ "values (#{type}, #{category}, #{title}, #{customerid}, #{content})")
+	public void writeFaq(Faq faq);
 }

@@ -52,15 +52,15 @@
 		<!-- Show notice List -->
 		<tbody>
 			<c:if test="${ listcount > 0 }">
-				<c:forEach var="notice" items="${ noticelist }">
+				<c:forEach var="faq" items="${ faqlist }">
 					<tr>
-						<td>${ num }</td>
-						<c:set var="num" value="${ num - 1 }" />
-						<td><a href="detail?num=${ notice.num }">${ notice.title }</a></td>
-						<td>${ notice.writer }</td>
-						<%--  <td>${ notice.regdate }</td>--%>
-						<td><fmt:formatDate value="${ notice.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
-						<td>${ notice.views }</td>
+						<td>${ faq.num }</td>
+						<c:set var="num" value="${ num + 1 }" />
+						<td><a href="detail?num=${ faq.num }">${ faq.title }</a></td>
+						<td>${ faq.customerid }</td>
+						<%--  <td>${ faq.regdate }</td>--%>
+						<td><fmt:formatDate value="${ faq.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<td>${ faq.views }</td>
 					</tr>
 				</c:forEach>
 				<!--  paging -->
