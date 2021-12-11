@@ -6,6 +6,12 @@
 <meta charset="UTF-8">
 <title>이용약관 동의</title>
 <link href="/resources/css/agree.css" rel="stylesheet">
+<script>
+	function signup() {
+		'${param.type}'=='p'?(location.href="personalsignup"):(location.href="companysignup")
+	}
+	
+</script>
 </head>
 <body>
 <form action="" id="joinForm">
@@ -67,7 +73,9 @@
             </ul>
             <ul class="footBtwrap clearfix">
                 <li><button class="fpmgBt1">비동의</button></li>
-                <li><button class="fpmgBt2">동의</button></li>
+                <li><a href="javascript:signup();" class=fpmgBt2>동의</a></li>
+                <!-- <li><a href="">${param.type }</a></li> -->
+                <!-- <li><button class="fpmgBt2">동의</button></li> -->
             </ul>
         </form>
 </body>

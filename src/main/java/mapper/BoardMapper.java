@@ -29,4 +29,9 @@ public interface BoardMapper {
 			+ "(articletype, category, title, customerid, content)"
 			+ "values (#{type}, #{category}, #{title}, #{writer}, #{content})")
 	public void writeNotice(Notice notice);
+	
+	@Select("select * from")
+	public int countFaq();
+	@Select
+	public void writeFaq();
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import logic.Board;
 import logic.Notice;
+import logic.dto.Faq;
 import mapper.BoardMapper;
 
 @Repository
@@ -31,6 +32,14 @@ public class BoardDao {
 	}
 	public void writeNotice(Notice notice) {
 		mapper.writeNotice(notice);
+	}
+
+	public int countFaq() {
+		return mapper.countFaq();
+	}
+
+	public List<Faq> listFaq() {
+		mapper.writeFaq();
 	}
 
 }
