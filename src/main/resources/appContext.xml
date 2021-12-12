@@ -33,6 +33,7 @@
 		<property name="exceptionMappings">
 			<value>
 				exception.SigninException=exception
+				exception.UserException=exception
 			</value>
 		</property>
 	</bean>

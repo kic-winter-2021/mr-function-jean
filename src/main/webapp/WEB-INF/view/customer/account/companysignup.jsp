@@ -20,8 +20,7 @@
 	<div class ="idInput">
 	<!-- 아이디입력 -->
 	<h3 class="list">사업자등록 번호</h3>
-	<span class="box_comnum"><input type ="text" id ="companynum" class="int check"
-	maxlength="20"></span>
+	<span class="box_comnum"><input type ="text" id ="companynum" class="int check" maxlength="20"></span>
 	<input type ="button" name ="companyNum" value="사업자번호 조회" id="companyNum" class="id_check">
 	</div>
 	 <div class="nameInput">

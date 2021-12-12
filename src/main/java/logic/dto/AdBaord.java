@@ -7,8 +7,8 @@ public class AdBaord {
 	private int num;
 	private String content;
 	private String itemid;
-	private Date registration;
-	private Date expiration;
+	private Date regDate;
+	private Date expDate;
 	private int views;
 	public int getNum() {
 		return num;
@@ -28,17 +28,17 @@ public class AdBaord {
 	public void setItemid(String itemid) {
 		this.itemid = itemid;
 	}
-	public Date getRegistration() {
-		return registration;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setRegistration(Date registration) {
-		this.registration = registration;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
-	public Date getExpiration() {
-		return expiration;
+	public Date getExpDate() {
+		return expDate;
 	}
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
+	public void setExpDate(Date expDate) {
+		this.expDate = expDate;
 	}
 	public int getViews() {
 		return views;
@@ -48,7 +48,8 @@ public class AdBaord {
 	}
 	@Override
 	public String toString() {
-		return "AdBaord [num=" + num + ", content=" + content + ", itemid=" + itemid + ", registration=" + registration
-				+ ", expiration=" + expiration + ", views=" + views + "]";
+		return "AdBaord [num=" + num + ", content=" + content + ", itemid=" + itemid + ", regDate=" + regDate
+				+ ", expDate=" + expDate + ", views=" + views + "]";
 	}
+	
 }

@@ -21,5 +21,4 @@ public class CustomerService {
 	public void signup(Customer customer) {
 		customerDao.insert(customer);
 	}
-
 }
