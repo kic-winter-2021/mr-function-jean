@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import logic.dto.Customer;
+import logic.dto.Item;
 import logic.dto.Regist;
 import logic.dto.Seller;
 import logic.service.ItemService;
@@ -49,14 +50,15 @@ public class SellerController {
 		return mav;
 	}
 	// TODO: 물품 등록 열기
-	@RequestMapping("*")
-	public ModelAndView Reister(HttpSession session) {
+	@GetMapping("register")
+	public ModelAndView register(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("item", new Item()); // 문자열 (키값/벨류값)
 		return mav;
 	}
 	
-	@RequestMapping("seller/register")
-	public ModelAndView register(@Valid Regist regist,BindingResult bresult,HttpSession session) {
+	@PostMapping("register")// 동일한 요청이 있을시에 POST / GET / 나뉘어서 받음
+	public ModelAndView registerForm(@Valid Item item,BindingResult bresult,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		if(bresult.hasErrors()) {
@@ -65,12 +67,30 @@ public class SellerController {
 			return mav;
 		}
 		try {
-			itemservice.add(regist);
+			itemservice.add(item);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		session.setAttribute("registerRegist", regist);
-		mav.setViewName("redirect:main");
+		mav.setViewName("redirect:registl");
+		return mav;
+	}
+	@RequestMapping("saledetail")
+	public ModelAndView saledetail(@Valid Item item,BindingResult bresult,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			Item dbItem = itemservice.detail(item.getItemid());
+			
+			if (bresult.hasErrors()) {
+				System.out.println("없음" + bresult.getModel());
+				mav.getModel().putAll(bresult.getModel());
+				return mav;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("item",item);
 		return mav;
 	}
 }

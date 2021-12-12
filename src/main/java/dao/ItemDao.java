@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import logic.dto.Item;
 import logic.dto.Regist;
 import mapper.CustomerMapper;
 import mapper.ItemMapper;
@@ -19,8 +20,12 @@ public class ItemDao {
 		mapper = template.getMapper(ItemMapper.class);
 	}
 
-	public void addRegist(Regist register) {
-		mapper.addRegister(register);
+	public void addItem(Item item) {
+		mapper.addItem(item);
 		
+	}
+
+	public Item detail(String itemid) {
+		return mapper.detail(itemid);
 	}
 }
