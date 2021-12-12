@@ -2,6 +2,7 @@ package mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import logic.dto.Customer;
 import logic.dto.Seller;
@@ -21,6 +22,14 @@ public interface CustomerMapper {
 			+ " values (#{id}, #{type}, #{password}, #{name}, #{nickname}, #{phoneno}, #{birthday}, #{gender}, #{email},"
 			+ " #{companyno}, #{location})")
 	void insertSeller(Seller seller);
+
+	@Select("select * from customer where id=#{id}")
+	Customer customerSelectOne(String id);
+
+	@Update("update customer set"
+			+ " name=#{name}, nickname=#{nickname}, birthday=#{birthday}, gender=#{gender}, email=#{email}, phoneno=#{phoneno}"
+			+ " where id=#{id}")
+	void userUpdate(Customer customer);
 
 	
 

@@ -1,5 +1,7 @@
 package logic.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,16 @@ public class CustomerService {
 
 	public Object salecount(String id) {
 		return saleDao.countSale(id);
+	}
+
+	public Customer customerSelectOne(String id) {
+		
+		return customerDao.customerSelectOne(id);
+	}
+
+	public void userUpdate(Customer customer) {
+		customerDao.userUpdate(customer);
+		
 	}
 
 }

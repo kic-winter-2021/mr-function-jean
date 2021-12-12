@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.SigninException;
 import logic.dto.Customer;
 import logic.dto.Seller;
 import logic.service.CustomerService;
@@ -60,6 +62,7 @@ public class AccountController {
 				mav.getModel().putAll(bresult.getModel());
 				return mav;
 			}
+			customer = dbCustomer;
 			// 디버그
 			System.out.println(dbCustomer);
 		} catch (Exception e) {
@@ -67,7 +70,7 @@ public class AccountController {
 		}
 		// 2. 로그인 (세션에 추가)
 		session.setAttribute("signinCustomer", customer);
-		mav.setViewName("redirect:/main.jsp");
+		mav.setViewName("redirect:usermypage");
 		return mav;
 	}
 	// 사업자 고객 로그인
@@ -83,7 +86,6 @@ public class AccountController {
 		
 		// 2. 로그인 (세션에 추가)
 		session.setAttribute("signinSeller", seller);
-		
 		return mav;
 	}
 	
@@ -128,17 +130,57 @@ public class AccountController {
 	
 	
 	@RequestMapping("usermypage")
-	public ModelAndView usermapage(HttpSession session) {
+	public ModelAndView usermypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();	
 		// 세션 로그인이 되어있는 경우(AOP)
-		Customer signin = (Customer)session.getAttribute("signin");	//로그인 객체를 참조
-		String id = signin.getId();
+		Customer signin = (Customer)session.getAttribute("signinCustomer");	//로그인 객체를 참조
+		String id = null;
+		if (signin != null) {
+			id = signin.getId();
+		} else {
+			//id = "admin";
+			throw new SigninException("로그인이 필요한 페이지입니다.", "signin");
+		}
+		 
 			
 		
 	    //TODO: 원래는 session을 사용하지만 AOP로 뺄거니 여기에는 안쓴다.
-		mav.addObject("cartcount",customerService.cartcount(id));
+		mav.addObject("cartcount", customerService.cartcount(id));
 		mav.addObject("salecount", customerService.salecount(id));
 		
+		return mav;
+	}
+	@GetMapping("editinfo")
+	public ModelAndView editInfo(String id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Customer edit = customerService.customerSelectOne(id);
+		mav.addObject("edit", edit);			
+		return mav;
+	}
+	
+	@PostMapping("editinfo")
+	public ModelAndView editInfo(@ModelAttribute("edit") @Valid Customer edit, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		Customer signin = (Customer)session.getAttribute("signinCustomer");
+		System.out.println(signin.getId() + " " + edit.getId());
+		if(!signin.getId().equals(edit.getId())) {
+			throw new SigninException("본인의 경우만 수정 가능합니다.","usermypage");//메세지,url
+		}		
+		if(!signin.getPassword().equals(edit.getPassword())) {
+			throw new SigninException("비밀번호가 틀립니다.","usermypage");//메세지,url
+		}
+		try {
+			customerService.userUpdate(edit);			
+			session.setAttribute("signinCustomer", edit);				
+			mav.setViewName("redirect:usermypage");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	

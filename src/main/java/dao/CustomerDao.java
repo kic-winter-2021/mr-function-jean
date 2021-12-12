@@ -30,4 +30,14 @@ public class CustomerDao {
 	public void insertSeller(Seller seller) {
 		mapper.insertSeller(seller);		
 	}
+
+	public Customer customerSelectOne(String id) {
+		
+		return mapper.customerSelectOne(id);
+	}
+
+	public void userUpdate(Customer customer) {
+		mapper.userUpdate(customer);
+		
+	}
 }

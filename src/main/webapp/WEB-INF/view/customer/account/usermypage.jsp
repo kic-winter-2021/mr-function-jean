@@ -74,7 +74,7 @@
         </div>                
         <div class="right"> > </div>
     </a>
-    <a href="editInfo.jsp" class="item">
+    <a href="editinfo?id=${sessionScope.signinCustomer.id }" class="item">
         <div class="icon"><img src="/resources/img/mustache.png" width="20px" height="20px"></div>
         <div class="text">내정보 관리/수정</div>
         <div class="right"> > </div>
