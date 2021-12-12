@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.hidden {
+	display: none;
+}
 #seller-tab-container {
 	background-color: black;
 	color: white;
@@ -43,7 +46,7 @@
 	text-align: center;
 }
 /* 버튼 */
-.abtn {
+.a-btn {
 	all: unset;
 	background-color: #0080ff;
 	color: white;

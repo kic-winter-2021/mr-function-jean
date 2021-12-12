@@ -51,7 +51,7 @@
 				<th>프로모션 종류</th>
 				<th>시작일</th>
 				<th>만료일</th>
-				<th>&nbsp;</th>
+				<th>조회수</th>
 			</tr>
 		</thead>
 		<!-- Show notice List -->
@@ -72,8 +72,8 @@
 						</td>
 						<%--  <td>${ notice.regdate }</td>--%>
 						<td><fmt:formatDate value="${ promotion.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td><fmt:formatDate value="${ promotion.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td>${ notice.views }</td>
+						<td><fmt:formatDate value="${ promotion.expDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+						<td>${ promotion.views }</td>
 					</tr>
 				</c:forEach>
 				<!--  paging -->

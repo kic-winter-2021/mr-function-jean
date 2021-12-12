@@ -72,6 +72,12 @@ public class AccountController {
 		mav.setViewName("redirect:/main.jsp");
 		return mav;
 	}
+	@GetMapping("ssignin")
+	public ModelAndView ssigninLoader(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("seller", new Seller());
+		return mav;
+	}
 	// 사업자 고객 로그인
 	@PostMapping("ssignin")
 	public ModelAndView ssignin(@Valid Seller seller, BindingResult bresult, HttpSession session) {
@@ -84,8 +90,9 @@ public class AccountController {
 		}
 		
 		// 2. 로그인 (세션에 추가)
-		session.setAttribute("signinSeller", seller);
-		
+		Seller dbSeller = sellerService.select(seller.getId());
+		session.setAttribute("signinSeller", dbSeller);	
+		mav.setViewName("redirect:/seller/main");
 		return mav;
 	}
 	
@@ -173,5 +180,4 @@ public class AccountController {
 		mav.setViewName("search");
 		return mav;
 	}
-	
 }

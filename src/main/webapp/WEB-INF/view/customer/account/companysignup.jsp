@@ -81,16 +81,13 @@
 				<span class="err"><spring:message code="${ error.code }"/></span>
 			</c:forEach>
 		</spring:hasBindErrors>
-		
-	<div id ="container">
-		<div class="row_gorup">		
-		<div class ="idInput">
-		<!-- 아이디입력 -->
-		<h3 class="list">사업자등록 번호</h3>
-		<span class="box_comnum">
-			<form:input type="text" path="companyno" id ="companynum" class="int check" maxlength="20" />
-		</span>
-		<input type ="button" name ="companyNum" value="사업자번호 조회" id="companyNum" class="id_check">
+
+	<div class ="idInput">
+	<!-- 아이디입력 -->
+	<h3 class="list">사업자등록 번호</h3>
+	<span class="box_comnum"><input type ="text" id ="companynum" class="int check" maxlength="20"></span>
+	<input type ="button" name ="companyNum" value="사업자번호 조회" id="companyNum" class="id_check">
+
 	</div>
 	<div class="nameInput">
        <h3 class="list">이름</h3>

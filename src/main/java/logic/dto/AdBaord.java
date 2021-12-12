@@ -8,6 +8,7 @@ public class AdBaord {
 	private String content;
 	private String itemid;
 	private Date regDate;
+	private Date expDate;
 	private int views;
 	public int getNum() {
 		return num;
@@ -33,6 +34,12 @@ public class AdBaord {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	public Date getExpDate() {
+		return expDate;
+	}
+	public void setExpDate(Date expDate) {
+		this.expDate = expDate;
+	}
 	public int getViews() {
 		return views;
 	}
@@ -42,6 +49,7 @@ public class AdBaord {
 	@Override
 	public String toString() {
 		return "AdBaord [num=" + num + ", content=" + content + ", itemid=" + itemid + ", regDate=" + regDate
-				+ ", views=" + views + "]";
+				+ ", expDate=" + expDate + ", views=" + views + "]";
 	}
+	
 }

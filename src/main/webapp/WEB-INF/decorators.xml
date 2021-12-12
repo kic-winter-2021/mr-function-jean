@@ -6,7 +6,6 @@
 		<pattern>/</pattern>
 	</decorator>
 	<excludes>
-		<pattern>/login/*</pattern>
-		<pattern>/upCart*</pattern>
+		<pattern>/customer/account/*</pattern>
 	</excludes>
 </decorators>

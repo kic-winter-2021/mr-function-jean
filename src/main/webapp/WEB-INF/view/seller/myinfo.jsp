@@ -10,34 +10,40 @@
 </head>
 <body>
 	<div id="info-container">
+		<%-- insel 로그인한 사업자 회원 --%>
+		<c:set var="insel" value="${ sessionScope.signinSeller }" />
 		<section id="member-info">
 			<table class="infotable">
-				<caption>사용자 정보</caption>
+				<caption>기본 정보</caption>
 				<colgroup>
 					<col class="infotable__key" />
 					<col class="infotable__value" />
 				</colgroup>
-				<tbody>
+				<tbody>			
 					<tr>
 						<th>ID</th>
-						<td>아이디${ sessionScope.seller.id }</td>
-					</tr>
-					<tr>
-						<th>이름</th>
-						<td>이름${ sessionScope.seller.name }</td>
+						<td>${ insel.id }</td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td>비밀번호<button class="btn">비밀번호 변경하기</button></td>
+						<td>&nbsp;&nbsp;<a href="updatepassword" class="a-btn">비밀번호 변경하기</a></td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td>${ insel.name }</td>
+					</tr>
+					<tr>
+						<th>전화번호</th>
+						<td>${ insel.phoneno }</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td>${sessionScope.seller.email }</td>
+						<td>${ insel.email }</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<%-- 사용자 정보를 변경하기 --%>
-					<tr><td colspan="2"><a href="update" class="abtn">개인정보 변경</a></td></tr>
+					<tr><td colspan="2"><a href="updatebasic" class="a-btn">기본정보 변경</a></td></tr>
 				</tfoot>
 			</table>
 		</section>
@@ -50,13 +56,26 @@
 				</colgroup>
 				<tbody>
 					<tr>
-						<th>사업자 등록번호</th>
-						<td>${ sessionScope.seller.id}</td>
+						<th>상호명</th>
+						<td>${ insel.nickname }</td>
 					</tr>
 					<tr>
-						<th>유형</th>
-						<td></td>
+						<th>사업자 등록번호</th>
+						<td>${ insel.companyno}</td>
 					</tr>
+					<tr>
+						<th>사업 유형</th>
+						<td>
+							<c:if test="${ sessionScope.signinSeller.type == 3 }">온라인사업자</c:if>
+							<c:if test="${ sessionScope.signinSeller.type == 4 }">오프라인사업자</c:if>
+						</td>
+					</tr>
+					<c:if test="${ insel.type == 4}">
+						<tr>
+							<th>매장 위치</th>
+							<td>${ insel.location }</td>
+						</tr>
+					</c:if>
 					<tr>
 						<th>승인</th>
 						<%-- 온라인/오프라인 + 승인여부 --%>
@@ -64,12 +83,12 @@
 					</tr>
 					<tr>
 						<th>사업자 정보</th>
-						<td><button id="">사업자 등록증</button><button class="btn">주민등록증</button></td>
+						<td><button class="btn">사업자 등록증</button><button class="btn">주민등록증</button></td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<%-- 사업자 정보를 변경하기 --%>
-					<tr><td colspan="2"><a href="updateSeller" class="abtn">사업자 정보 갱신</a></td></tr>
+					<tr><td colspan="2"><a href="updatecompany" class="a-btn">사업자 정보 갱신</a></td></tr>
 				</tfoot>
 			</table>
 		</section>

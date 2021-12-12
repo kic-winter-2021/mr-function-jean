@@ -27,7 +27,6 @@ public class CustomerService {
 	public void signup(Customer customer) {
 		customerDao.insert(customer);
 	}
-
 	public Object cartcount(String id) {
 		return cartDao.countCart(id);
 	}
@@ -35,5 +34,4 @@ public class CustomerService {
 	public Object salecount(String id) {
 		return saleDao.countSale(id);
 	}
-
 }
