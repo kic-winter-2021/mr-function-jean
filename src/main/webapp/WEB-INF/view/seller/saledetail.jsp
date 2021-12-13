@@ -23,8 +23,8 @@
 		<!-- 본문 -->
 		<tr><td class="box"> 판매자 : ${ item.sellerid }</td></tr><br>
 		<tr><td class="box"> 상품명 : ${ item.title }</td></tr><br> 
-		<tr><td class="box"> 카테고리 : ${ item.fit }</td></tr><br>
-		<tr><td class="box"> 카테고리 : ${ item.color }</td></tr><br>
+		<tr><td class="box"> Fit : ${ item.fit }</td></tr><br>
+		<tr><td class="box"> Color : ${ item.color }</td></tr><br>
 		<tr><td class="box"> 가격 : ${ item.price }</td></tr><br>
 		<tr><td class="box"> 브랜드 : ${ item.brandname }</td></tr><br>
 		<tr><td class="box"> 브랜드코드 : ${ item.brandcode }</td></tr><br>
@@ -37,7 +37,7 @@
 			placeholder="이메일이 나타나는 창입니다."><br>
 		 -->
 		<!-- 버튼 -->
-		<tr><td><input class="write_button" type="submit" value="수정"> 
+		<tr><td><a href="detailupdate?itemid=${item.itemid}" class="write_button">수정</a></td></tr> 
 		<input class="write_button" type="submit" value="삭제"></td></tr>
 		<tr><td><a href="registl?id=admin" class="write_button"/>목록</a></td></tr>
 	</table>

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.UpdateException;
 import logic.dto.Customer;
 import logic.dto.Item;
 import logic.dto.Regist;
@@ -80,14 +82,35 @@ public class SellerController {
 	//리스트 페이지 선택 -> 상세정보
 	//
 	
-	@GetMapping("saledetail")
+	@GetMapping({"saledetail","detailupdate"})
 	public ModelAndView saledetail(String itemid,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Item dbitem = itemService.detail(itemid);
 		mav.addObject("item",dbitem);
 		return mav;
 	}
-	
+	//등록 상품 내용 수정하기 21.12.13
+	@PostMapping("detailupdate")
+	public ModelAndView detailupdate(@Valid Item item,BindingResult bresult,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		
+		if(!item.equals(item)) {
+			throw new UpdateException("같은 사용자가 아닙니다.","detailupdate?itemid="+itemid);
+		}
+		try {
+			
+			mav.setViewName("redirect:saledetail?itemid="+itemid);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시글 수정을 실패 했습니다.","detailupdate?itemid="+itemid);
+		}
+		
+		return mav;
+	}
 	//registlist 구현
 	/*
 	 * 판매자 아이디에 대해서 등록한 상품 보기
@@ -114,4 +137,6 @@ public class SellerController {
 		
 		return mav;
 	}
+	
+	
 }

@@ -22,25 +22,24 @@
 		판매자 : <form:input class="box" type="hidden" value="admin" path="sellerid" /><br>
 		상품명 : <form:input class="box" type="text" placeholder="상품명을 입력해주세요" path="title" /><br>
 		
-		카테고리 :
+		FIT :
 		
 			<form:select path="fit" id="fit">
 				<form:option value="none" label="선택하세요" />
-				<form:option value="0" label="와이드핏" />
-				<form:option value="1" label="슬림핏" />
-				<form:option value="2" label="레귤러" />
-				<form:option value="3" label="기타" />
-				<form:option value="4" label="..." />
+				<form:option value="와이드핏" label="와이드핏" />
+				<form:option value="슬림핏" label="슬림핏" />
+				<form:option value="레귤러" label="레귤러" />
+				<form:option value="기타" label="기타" />
 			</form:select>
 			
-		카테고리 :
+		Color :
 		
 			<form:select path="color" id="color">
 				<form:option value="none" label="선택하세요" />
-				<form:option value="0" label="군청" />
-				<form:option value="1" label="연청" />
-				<form:option value="2" label="진청" />
-				<form:option value="3" label="..." />
+				<form:option value="중청" label="중청" />
+				<form:option value="연청" label="연청" />
+				<form:option value="진청" label="진청" />
+				<form:option value="흑청" label="흑청" />
 				<form:option value="4" label="기타" />
 			</form:select><br>
 			
@@ -55,7 +54,6 @@
 		
 		첨부파일 : <form:input class="file" type="file" name="file" path="file" /><br>
 		--%><br> 
-		
 		<!-- 문의글 하단 버튼 -->
 		<input type="submit" class="write_button" value="등록" />
 		<input type="reset" class="write_button" value="취소"  />

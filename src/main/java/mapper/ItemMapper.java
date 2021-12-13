@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import logic.dto.Item;
 import logic.dto.Regist;
@@ -24,4 +25,8 @@ public interface ItemMapper {
 	public int countBySellerid(Map<String, Object> param);
 	@Select("select * from item" + " where sellerid=#{sellerid}")
 	public List<Item> listBysellerid(Map<String, Object> param);
+	@Select("select * from item where itemid=#{value}")
+	@Update("update item set title=#{title}, price=#{price}, brandcode=#{brandcode}, color=#{color}, fit=#{fit}, content=#{content}"
+			+ "where itemid=#{itemid}")
+	public Item update(String itemid);
 }
