@@ -36,15 +36,17 @@ public class CustomerDao {
 	public void insertSeller(Seller seller) {
 		mapper.insertSeller(seller);		
 	}
-	public void search(Customer customer, String url) {
-		String sql = null;
-		if(url.equals("id")) {
-			
-		}else if(url.equals("pw")) {
-			
+	public String search(Customer customer, String url) {
+		param.clear();
+		param.put("email", customer.getEmail());
+		param.put("phoneno", customer.getPhoneno());
+		if(url.equals("id")) { // idsearch
+			param.put("column", "id");
+		} else if(url.equals("pw")) { // pwsearch
+			param.put("id", customer.getId());
+			param.put("column", "'**'||substr(password, 3) password");
 		}
-		SqlParameterSource param = new BeanPropertySqlParameterSource(customer);
-		return template.queryForObject(sql, param,String.class);
+		return mapper.search(param);
 	}
 	public Seller selectOneSeller(String sellerid) {
 		return mapper.selectOneSeller(sellerid);

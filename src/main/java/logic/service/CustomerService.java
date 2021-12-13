@@ -34,4 +34,10 @@ public class CustomerService {
 	public Object salecount(String id) {
 		return saleDao.countSale(id);
 	}
+	
+	public String getSearch(Customer customer, String url) {
+		// TODO: 아이디의 경우, 가리고 보여주기?
+		// TODO: 비밀번호의 경우, 임시비밀번호로 변경 후 이메일 발송? 재설정
+		return customerDao.search(customer, url);
+	}
 }

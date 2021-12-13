@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.SigninException;
 import logic.dto.Customer;
 import logic.dto.Seller;
 import logic.service.CustomerService;
@@ -30,6 +31,14 @@ public class AccountController {
 	public ModelAndView getCustomer() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("customer", new Customer());
+		return mav;
+	}
+	@GetMapping("signin")
+	public ModelAndView signinLoader(String t) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("customer", new Customer());
+		mav.addObject("seller", new Seller());
+		if (t != "" && t != null) mav.addObject("type", t);
 		return mav;
 	}
 	// 개인 고객 로그인
@@ -62,13 +71,18 @@ public class AccountController {
 				mav.getModel().putAll(bresult.getModel());
 				return mav;
 			}
-			// 디버그
-			System.out.println(dbCustomer);
+			customer = dbCustomer;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		// 타입 검사
+		if (customer.getType() == 3 || customer.getType() == 4) {
+			throw new SigninException("사업자 회원은 사업자 탭에서 로그인을 진행해주세요", "signin?type=s");
+		}
 		// 2. 로그인 (세션에 추가)
 		session.setAttribute("signinCustomer", customer);
+		// 디버그
+		System.out.println(customer);
 		mav.setViewName("redirect:/main.jsp");
 		return mav;
 	}
@@ -150,34 +164,48 @@ public class AccountController {
 		
 		return mav;
 	}
-	@PostMapping("{url}search")
-	public ModelAndView search(Customer customer, BindingResult bresult, @PathVariable String url, Object service) {
+	@GetMapping("search")
+	public ModelAndView searchLoader(String u) {
 		ModelAndView mav = new ModelAndView();
-		String code = "error.id.search";
-		String title = "아이디";
+		mav.addObject("customer", new Customer());
+		mav.addObject("url", u);
+		return mav;
+	}
+	@PostMapping("{url}search")
+	public ModelAndView search(Customer customer, BindingResult bresult, @PathVariable String url) {
+		ModelAndView mav = new ModelAndView();
+		String code = "";
+		String title = "";
 		
-		//유효성 검사
-		if (customer.getEmail() == null || customer.getEmail().equals("")) {
-			bresult.rejectValue("email","error.required");
-		}
-		if(url.equals("pw")) {
-			title="비밀번호";
+		if (url.equals("id")) {
+			code = "error.userid.search";
+			title = "아이디";
+		} else if (url.equals("pw")) {
 			code = "error.password.search";
+			title = "비밀번호";
+			// 아이디 유효성 검사
 			if(customer.getId() == null || customer.getId().equals("")) {
-				bresult.rejectValue("customerid","error.required");
+				bresult.rejectValue("id","error.required");
 			}
 		}
-		String result = null;
-		try {
-			result = service.getSearch(customer,url);
-		}catch(EmptyResultDataAccessException e) {
+		
+		// 유효성 검사
+		if (customer.getEmail() == null || customer.getEmail().equals("")) bresult.rejectValue("email","error.required");
+		if (customer.getPhoneno() == null || customer.getPhoneno().equals("")) bresult.rejectValue("phoneno", "error.required");
+		if (bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		
+		String result = customerService.getSearch(customer, url);
+		if (result == null) {
 			bresult.reject(code);
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}
-		mav.addObject("result",result);
-		mav.addObject("title",title);
-		mav.setViewName("search");
+		mav.addObject("result", result);
+		mav.addObject("title", title);
+		mav.setViewName("/customer/account/search2");
 		return mav;
 	}
 }

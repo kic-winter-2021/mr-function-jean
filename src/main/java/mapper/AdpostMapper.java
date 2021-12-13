@@ -12,10 +12,12 @@ public interface AdpostMapper {
 
 	@Insert("insert into adpost"
 			+ " (sellerid, rank, status, itemid, contract)"
-			+ " values (#{sellerid, #{rank}, #{status}, #{itemid}, #{contract})")
+			+ " values (#{sellerid}, #{rank}, #{status}, #{itemid}, #{contract})")
 	void insert(AdPost adpost);
 	
-	@Select({"select * from adpost",
-			"<if test='sellerid != null'> where sellerid = #{sellerid} </if>"})
+	@Select({"<script>",
+			"select * from adpost",
+			"<if test='sellerid != null'> where sellerid = #{sellerid} </if>",
+			"</script>"})
 	List<AdPost> select(Map<String, Object> param);
 }

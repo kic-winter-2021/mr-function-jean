@@ -45,4 +45,13 @@ public interface CustomerMapper {
 			+ " companyno, personalfile as personalFilePath, companyfile as companyFilePath, location, created_at as signupDate"
 			+ " from customer where id = #{id}")
 	Seller selectOneSeller(String sellerid);
+	
+	@Select({"<script>",
+			"select ${column}",
+			"from customer",
+			"where email=#{email} and phoneno=#{phoneno}",
+			"<if test='id != null'>",
+			"and id=#{id} </if>",
+		 	"</script>"})
+	String search(Map<String, Object> param);
 }
