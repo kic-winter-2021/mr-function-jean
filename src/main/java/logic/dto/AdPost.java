@@ -12,14 +12,20 @@ public class AdPost {
 	private String sellerid;
 	@NotNull(message = "프로모션을 선택해주세요")
 	private int rank;
+	@NotNull
+	private int status;
 	@NotNull(message = "프로모션할 상품을 선택해주세요")
 	private String itemid;
 	private String contract;
-	
+	// 상수값 등록
 	public static Map<Integer, String> RANK = new HashMap<>();
+	public static Map<Integer, String> STATUS = new HashMap<>();
 	static {
 		RANK.put(1, "브론즈"); RANK.put(2, "실버");
 		RANK.put(3, "골드"); RANK.put(4, "플레티넘");
+		STATUS.put(0, ""); STATUS.put(1, "preparing");
+		STATUS.put(2, "prepared"); STATUS.put(3, "running");
+		STATUS.put(4, "expired");
 	}
 	
 	public int getNum() {
@@ -40,6 +46,12 @@ public class AdPost {
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public String getItemid() {
 		return itemid;
 	}
@@ -54,7 +66,7 @@ public class AdPost {
 	}
 	@Override
 	public String toString() {
-		return "AdPost [num=" + num + ", sellerid=" + sellerid + ", rank=" + rank + ", itemid=" + itemid + ", contract="
-				+ contract + "]";
+		return "AdPost [num=" + num + ", sellerid=" + sellerid + ", rank=" + rank + ", status=" + status + ", itemid="
+				+ itemid + ", contract=" + contract + "]";
 	}
 }

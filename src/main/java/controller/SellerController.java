@@ -141,7 +141,7 @@ public class SellerController {
 		// rank map(static map) 라디오 버튼 생성
 		mav.addObject("RANK", AdPost.RANK);
 		
-		// 판매자 아이템 리스트를 모델에 넣기
+		// 판매자 아이템 리스트를 받아와 모델에 넣기
 		try {
 			String id = ((Seller)session.getAttribute("signinSeller")).getId();
 			List<Item> itemlist =  sellerService.getItemList(id);

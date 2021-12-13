@@ -42,6 +42,12 @@ CREATE TABLE adpost
 	rank tinyint unsigned NOT NULL COMMENT '홍보등급',
 	itemid varchar(30) NOT NULL COMMENT 'itemid',
 	contract text NOT NULL COMMENT '계약정보',
+	status tinyint unsigned DEFAULT 0 NOT NULL COMMENT 'status : 프로모션의 상태를 나타냄
+0: (default) 신청 상태
+1: preparing 준비 중
+2: prepared 대기 중
+3: running 적용 중
+4: expired 프로모션 종료',
 	PRIMARY KEY (num),
 	UNIQUE (num)
 ) COMMENT = '광고등록';
@@ -108,7 +114,7 @@ CREATE TABLE customer
 	nickname varchar(40) NOT NULL COMMENT '별명',
 	phoneno varchar(15) NOT NULL COMMENT '전화번호',
 	email varchar(40) NOT NULL COMMENT 'email',
-	gender tinyint unsigned NOT NULL COMMENT '성별 : 1-남자
+	gender tinyint unsigned COMMENT '성별 : 1-남자
 2-여자
 3-',
 	birthday date COMMENT '생일 : past
