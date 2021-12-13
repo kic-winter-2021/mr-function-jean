@@ -68,15 +68,15 @@
 				<th>조회수</th>
 			</tr>
 		</thead>
-		<!-- Show registl List -->
+		<!-- Show register List -->
 		<tbody>
 			<c:if test="${ listcount > 0 }">
-				<c:forEach var="seller" items="${ registl }">
+				<c:forEach var="item" items="${ registl }">
 					<tr>
 						<td>${ num }</td>
 						<c:set var="num" value="${ num - 1 }" />
-						<td><a href="saledetail?num=${ item.itemid }">${ item.title }</a></td>
-						<td>${ item.writer }</td>
+						<td><a href="detail?num=${ item.itemid }">${ item.title }</a></td>
+						<td>${ item.sellerid }</td>
 						<%--  <td>${ register.regdate }</td>--%>
 						<td><fmt:formatDate value="${ item.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
 						<td>${ item.views }</td>

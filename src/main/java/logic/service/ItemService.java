@@ -28,12 +28,12 @@ public class ItemService {
 		return itemDao.detail(itemid);
 	}
 
-	public Object count() {
-		return itemDao.countItem();
+	public int count(String sellerid) {
+		return itemDao.countBySellerid(sellerid);
 	}
 
-	public List<Item> list(List<Item> sellerid){ 
-		return itemDao.listitem(sellerid);
+	public List<Item> list(String sellerid){ 
+		return itemDao.listBySellerid(sellerid);
 	}
 
 }

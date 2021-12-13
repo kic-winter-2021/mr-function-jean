@@ -18,7 +18,7 @@
 
 		<!-- 게시글 내용 -->
 		<form:form modelAttribute="item" action="register" method="post" >
-		판매자 : <form:input class="box" type="hidden" value="admin" path="itemid" /><br>
+		판매자 : <form:input class="box" type="text" path="itemid" /><br>
 		판매자 : <form:input class="box" type="hidden" value="admin" path="sellerid" /><br>
 		상품명 : <form:input class="box" type="text" placeholder="상품명을 입력해주세요" path="title" /><br>
 		
@@ -59,8 +59,10 @@
 		<!-- 문의글 하단 버튼 -->
 		<input type="submit" class="write_button" value="등록" />
 		<input type="reset" class="write_button" value="취소"  />
-		<input type="submit" a href="registl" class="write_button" value="목록" />
-		</form:form>
+		
+		</form:form><br>
+		<a href="registl?id=admin" class="write_button"/>목록</a>
+		<!-- ${sessionScope.signinSeller.id } 로그인 -->
 	</div>
 </body>
 </html>

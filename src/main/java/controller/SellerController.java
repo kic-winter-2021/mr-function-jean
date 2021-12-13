@@ -73,7 +73,7 @@ public class SellerController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		mav.setViewName("redirect:registl");
+		mav.setViewName("redirect:registl?id=" + "admin");
 		return mav;
 	}
 	//seller/saledetail?itemid=1234
@@ -93,13 +93,24 @@ public class SellerController {
 		return mav;
 	}
 	//registlist 구현
-	@RequestMapping("registl")
-	public ModelAndView registl(HttpSession session) {
+	/*
+	 * 판매자 아이디에 대해서 등록한 상품 보기
+	 * 필요한 입력 :sellerid
+	 * 그럼 어디서? 1. GET요청의 파라미터
+	 * 			2. 어차피 seller로 로그인 되어있으므로 session의 아이디를 받는다.
+	 * 컨트롤러의 매개변수로 id를 받아야해 
+	 * 컨트롤러에서 세션에 접근해서 사용자의 정보만 불러와
+	 * 요청? paramkey=paramvalue 
+	 * @RequestPara("paramkey")
+	 */
+	@GetMapping("registl")
+	public ModelAndView registl(String id,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+	
 		List<Item> list;
 		try{
-			mav.addObject("listcount", itemService.count());
-			list = itemService.list();
+			mav.addObject("listcount", itemService.count(id));
+			list = itemService.list(id);
 			mav.addObject("registl",list);
 		}catch(Exception e) {
 			e.printStackTrace();

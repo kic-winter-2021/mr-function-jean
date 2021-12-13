@@ -19,8 +19,9 @@ public interface ItemMapper {
 
 	@Select("select * from item where itemid=#{value}")
 	public Item detail(String itemid);
+	
 	@Select("select count(*) from item where sellerid=#{sellerid}")
-	public Object countItem();
+	public int countBySellerid(Map<String, Object> param);
 	@Select("select * from item" + " where sellerid=#{sellerid}")
-	public List<Item> listItem(Map<String,Object> param);
+	public List<Item> listBysellerid(Map<String, Object> param);
 }

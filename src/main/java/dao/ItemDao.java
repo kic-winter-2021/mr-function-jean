@@ -30,14 +30,16 @@ public class ItemDao {
 		return mapper.detail(itemid);
 	}
 
-	public Object countItem() {
-		return mapper.countItem();
-	}
-
-	public List<Item> listitem(List<Item> sellerid) {
+	public int countBySellerid(String sellerid) {
 		param.clear();
 		param.put("sellerid",sellerid);
-		return mapper.listItem(param);
+		return mapper.countBySellerid(param);
+	}
+
+	public List<Item> listBySellerid(String sellerid) {
+		param.clear();
+		param.put("sellerid",sellerid);
+		return mapper.listBysellerid(param);
 	}
 
 }
