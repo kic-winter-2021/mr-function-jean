@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.UserException;
+import logic.dto.AdPost;
+import logic.dto.Item;
 import logic.dto.Seller;
 import logic.service.SellerService;
 
@@ -125,6 +128,48 @@ public class SellerController {
 			e.printStackTrace();
 		}
 		mav.setViewName("redirect:myinfo");
+		return mav;
+	}
+	/* promotion */
+	@GetMapping("applyprom")
+	public ModelAndView applypromLoader(Integer rank, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		// 선택한 광고 상품이 있는 경우 해당 상품을 선택한 상태로 이동.
+		AdPost adPost = new AdPost();
+		adPost.setRank(rank);
+		mav.addObject("adPost", adPost);
+		// rank map(static map) 라디오 버튼 생성
+		mav.addObject("RANK", AdPost.RANK);
+		
+		// 판매자 아이템 리스트를 모델에 넣기
+		try {
+			String id = ((Seller)session.getAttribute("signinSeller")).getId();
+			List<Item> itemlist =  sellerService.getItemList(id);
+			mav.addObject("itemlist", itemlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	@RequestMapping("applyprom")
+	public ModelAndView applyprom(@Valid AdPost adPost, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		// 유효성 검사
+		if (bresult.hasErrors()) {
+			System.out.println("프로모션 신청 입력 오류");
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		// 광고 보드 입력
+		try {
+			sellerService.apply(adPost);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// 판매자 페이지로 이동
+		mav.setViewName("redirect:main");
 		return mav;
 	}
 }

@@ -98,13 +98,13 @@
 			<!-- 게시물 없음 -->
 			<c:if test="${ listcount == 0 }">
 				<tr>
-					<td colspan="5">등록된 게시물이 없습니다.</td>
+					<td colspan="5">적용중인 프로모션이 없습니다.</td>
 				</tr>
 			</c:if>
 		</tbody>
 		<!-- 글쓰기 -->
 		<tr>
-			<td colspan="5" align="right"><a href="write">[글쓰기]</a></td>
+			<td colspan="5" align="right"><a href="aboutprom">프로모션 상품 보러가기</a></td>
 		</tr>
 	</table>
 		</section>

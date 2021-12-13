@@ -45,7 +45,7 @@ public class CustomerDao {
 		}
 		SqlParameterSource param = new BeanPropertySqlParameterSource(customer);
 		return template.queryForObject(sql, param,String.class);
-
+	}
 	public Seller selectOneSeller(String sellerid) {
 		return mapper.selectOneSeller(sellerid);
 	}
