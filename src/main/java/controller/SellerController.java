@@ -80,18 +80,14 @@ public class SellerController {
 	//리스트 페이지 선택 -> 상세정보
 	//
 	
-	@RequestMapping("saledetail")
+	@GetMapping("saledetail")
 	public ModelAndView saledetail(String itemid,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		Item dbitem = null;
-		try {
-			dbitem = itemService.detail(itemid);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		Item dbitem = itemService.detail(itemid);
 		mav.addObject("item",dbitem);
 		return mav;
 	}
+	
 	//registlist 구현
 	/*
 	 * 판매자 아이디에 대해서 등록한 상품 보기

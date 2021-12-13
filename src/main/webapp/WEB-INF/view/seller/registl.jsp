@@ -75,9 +75,9 @@
 					<tr>
 						<td>${ num }</td>
 						<c:set var="num" value="${ num - 1 }" />
-						<td><a href="detail?num=${ item.itemid }">${ item.title }</a></td>
+						<td><a href="saledetail?itemid=${ item.itemid }">${ item.title }</a></td>
 						<td>${ item.sellerid }</td>
-						<%--  <td>${ register.regdate }</td>--%>
+						<%--  <td>${ item.regdate }</td>--%>
 						<td><fmt:formatDate value="${ item.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
 						<td>${ item.views }</td>
 					</tr>

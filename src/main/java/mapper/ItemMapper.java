@@ -12,8 +12,8 @@ import logic.dto.Regist;
 public interface ItemMapper {
 	
 	@Insert("insert into item"
-			+ " (itemid, sellerid, title, price, brandcode, color, fit)"
-			+ " values (#{itemid}, #{sellerid}, #{title}, #{price}, #{brandcode}, #{color}, #{fit})")
+			+ " (itemid, sellerid, title, price, brandcode, color, fit, content)"
+			+ " values (#{itemid}, #{sellerid}, #{title}, #{price}, #{brandcode}, #{color}, #{fit}, #{content})")
 	
 	public void addItem(Item item);
 
