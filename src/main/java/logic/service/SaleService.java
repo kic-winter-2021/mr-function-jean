@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.SaleDao;
-import logic.dto.Customer;
 import logic.dto.Sale;
+import logic.dto.Transaction;
 
 /*
  * Sale, Transaction 관리
@@ -19,6 +19,15 @@ public class SaleService {
 
 	public List<Sale> salelist(String id) {
 		return saleDao.salelist(id);
+	}
+
+	public Object count(String id) {		
+		return saleDao.countSale(id);
+		
+	}	
+
+	public Transaction quantity(String id) {
+		return saleDao.quantity(id);
 	}
 	
 

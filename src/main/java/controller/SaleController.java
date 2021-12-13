@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import logic.dto.Customer;
 import logic.dto.Sale;
+import logic.dto.Transaction;
 import logic.service.SaleService;
 
 @Controller
@@ -30,13 +31,15 @@ public class SaleController {
 	}
 	
 	@RequestMapping("buyInfo")
-	public ModelAndView buyInfo(HttpSession session) {
+	public ModelAndView buyInfo(String id, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String id = null;
-		List<Sale> list;
+		List<Sale> list;		
+		Transaction quantity = saleService.quantity(id);
 		try {
+			mav.addObject("salecount", saleService.count(id));
 			list = saleService.salelist(id);
 			mav.addObject("salelist", list);
+			mav.addObject("quantity", quantity);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

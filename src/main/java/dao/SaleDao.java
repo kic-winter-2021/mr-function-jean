@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import logic.dto.Sale;
+import logic.dto.Transaction;
 import mapper.SaleMapper;
 
 @Repository
@@ -24,6 +25,11 @@ public class SaleDao {
 			
 			return mapper.salelist(id);
 		}
+		public Transaction quantity(String id) {
+			
+			return mapper.quantity(id);
+		}
+		
 		
 		
 		
