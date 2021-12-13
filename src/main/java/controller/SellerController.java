@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -25,7 +27,7 @@ public class SellerController {
 	@Autowired
 	SellerService sellerService;
 	@Autowired
-	ItemService itemservice;
+	ItemService itemService;
 	
 	@GetMapping("*")
 	public ModelAndView info(HttpSession session) {
@@ -67,30 +69,42 @@ public class SellerController {
 			return mav;
 		}
 		try {
-			itemservice.add(item);
+			itemService.add(item);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		mav.setViewName("redirect:registl");
 		return mav;
 	}
+	//seller/saledetail?itemid=1234
+	//리스트 페이지 선택 -> 상세정보
+	//
+	
 	@RequestMapping("saledetail")
-	public ModelAndView saledetail(@Valid Item item,BindingResult bresult,HttpSession session) {
+	public ModelAndView saledetail(String itemid,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+		Item dbitem = null;
 		try {
-			Item dbItem = itemservice.detail(item.getItemid());
-			
-			if (bresult.hasErrors()) {
-				System.out.println("없음" + bresult.getModel());
-				mav.getModel().putAll(bresult.getModel());
-				return mav;
-			}
-			
+			dbitem = itemService.detail(itemid);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		mav.addObject("item",item);
+		mav.addObject("item",dbitem);
+		return mav;
+	}
+	//registlist 구현
+	@RequestMapping("registl")
+	public ModelAndView registl(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<Item> list;
+		try{
+			mav.addObject("listcount", itemService.count());
+			list = itemService.list();
+			mav.addObject("registl",list);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return mav;
 	}
 }

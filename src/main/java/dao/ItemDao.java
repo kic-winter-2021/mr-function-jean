@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,4 +29,15 @@ public class ItemDao {
 	public Item detail(String itemid) {
 		return mapper.detail(itemid);
 	}
+
+	public Object countItem() {
+		return mapper.countItem();
+	}
+
+	public List<Item> listitem(List<Item> sellerid) {
+		param.clear();
+		param.put("sellerid",sellerid);
+		return mapper.listItem(param);
+	}
+
 }

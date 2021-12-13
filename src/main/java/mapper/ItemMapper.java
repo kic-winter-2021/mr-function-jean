@@ -1,5 +1,8 @@
 package mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -16,5 +19,8 @@ public interface ItemMapper {
 
 	@Select("select * from item where itemid=#{value}")
 	public Item detail(String itemid);
-
+	@Select("select count(*) from item where sellerid=#{sellerid}")
+	public Object countItem();
+	@Select("select * from item" + " where sellerid=#{sellerid}")
+	public List<Item> listItem(Map<String,Object> param);
 }

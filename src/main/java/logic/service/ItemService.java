@@ -1,5 +1,7 @@
 package logic.service;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +27,13 @@ public class ItemService {
 	public Item detail(String itemid) {
 		return itemDao.detail(itemid);
 	}
+
+	public Object count() {
+		return itemDao.countItem();
+	}
+
+	public List<Item> list(List<Item> sellerid){ 
+		return itemDao.listitem(sellerid);
+	}
+
 }

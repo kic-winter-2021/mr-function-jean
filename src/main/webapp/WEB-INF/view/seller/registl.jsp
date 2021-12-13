@@ -8,7 +8,8 @@
 <title>등록상품리스트.</title>
 <!-- 작성자 : 오근영 -->
 <!-- 작성일자 : 21.12.06 -->
-<!-- 수정일자 : 21.12.12 : 폼 양식 변경 -->
+<!-- 수정일자 : 21.12.12 : 1차 폼 양식 변경 -->
+<!-- 수정일자 : 21.12.13 : 2차 폼 양식 변경  -->
 <!-- CSS파일 -->
 <%--  <link rel="stylesheet" href="regist.css">
 </head>
@@ -67,18 +68,18 @@
 				<th>조회수</th>
 			</tr>
 		</thead>
-		<!-- Show notice List -->
+		<!-- Show registl List -->
 		<tbody>
 			<c:if test="${ listcount > 0 }">
 				<c:forEach var="seller" items="${ registl }">
 					<tr>
 						<td>${ num }</td>
 						<c:set var="num" value="${ num - 1 }" />
-						<td><a href="detail?num=${ seller.num }">${ seller.title }</a></td>
-						<td>${ seller.writer }</td>
+						<td><a href="saledetail?num=${ item.itemid }">${ item.title }</a></td>
+						<td>${ item.writer }</td>
 						<%--  <td>${ register.regdate }</td>--%>
-						<td><fmt:formatDate value="${ seller.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
-						<td>${ seller.views }</td>
+						<td><fmt:formatDate value="${ item.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<td>${ item.views }</td>
 					</tr>
 				</c:forEach>
 				<!--  paging -->
