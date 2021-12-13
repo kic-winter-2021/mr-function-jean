@@ -21,26 +21,29 @@
 		</colgroup>
 		<thead>			
 			<tr>
-				<th>번호</th>
 				<th>구매자</th>
 				<th>상품</th>
 				<th>갯수</th>
 				<th>주문일자</th>
-				<th>조회수</th>
 			</tr>
 		</thead>
 		<!-- Show Sale List -->
 		<tbody>
 			<c:if test="${ salecount > 0 }">
-				<c:forEach var="notice" items="${ salelist }">
+				<c:forEach var="sale" items="${ salelist }">
 					<tr>
 						<td>${ num }</td>
 						<c:set var="num" value="${ num - 1 }" />
-						<td><a href="detail?num=${ sale.num }">${ sale.buyerid }</a></td>
-						<td>${transaction.quantity}</td><td>${ sale.saleid }</td>
+						<td><a href="detail?num=${ sale.saleid }">${ sale.saleid }</a></td>
+						<td>${ sale.buyerid }</td>
+						 <td>
+							<c:forEach var="transaction" items="${sale.tranlist}">
+								${transaction.quantity }개<br>
+							</c:forEach>
+						</td> 
 						<%--  <td>${ notice.regdate }</td>--%>
-						<td><fmt:formatDate value="${ sale.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
-						<td>${ sale.views }</td>
+						<td><fmt:formatDate value="${ sale.saledate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						
 					</tr>
 				</c:forEach>
 				<!--  paging -->

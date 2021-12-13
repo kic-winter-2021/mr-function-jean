@@ -25,10 +25,6 @@ public class SaleDao {
 			
 			return mapper.salelist(id);
 		}
-		public Transaction quantity(String id) {
-			
-			return mapper.quantity(id);
-		}
 		
 		
 		
