@@ -90,25 +90,33 @@ public class SellerController {
 		return mav;
 	}
 	//등록 상품 내용 수정하기 21.12.13
+	
+	//유효성 검사
+	//update
 	@PostMapping("detailupdate")
 	public ModelAndView detailupdate(@Valid Item item,BindingResult bresult,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		String itemid = item.getItemid();
+		//유효성 검사
 		if(bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}
-		
-		if(!item.equals(item)) {
-			throw new UpdateException("같은 사용자가 아닙니다.","detailupdate?itemid="+itemid);
-		}
-		try {
+		//아이디 검사. 세션에 있는 seller랑 item seller 비교
 			
+		// Seller signin = (Seller)session.getAttribute("signinSeller");
+		// hidden으로 받은 seller id
+		if(!item.getSellerid().equals("admin")) { //signin.getId()
+			throw new UpdateException("수정은 상품을 등록한 사업자만 가능합니다","saledetail");
+		}
+		//update
+		try {
+			itemService.update(item);
 			mav.setViewName("redirect:saledetail?itemid="+itemid);
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new UpdateException("게시글 수정을 실패 했습니다.","detailupdate?itemid="+itemid);
 		}
-		
 		return mav;
 	}
 	//registlist 구현

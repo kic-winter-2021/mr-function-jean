@@ -36,13 +36,8 @@ public class ItemService {
 	public List<Item> list(String sellerid){ 
 		return itemDao.listBySellerid(sellerid);
 	}
-
-	public Item update(String itemid,HttpServletRequest request) {
-		//업로드 파일 저장
-		if(itemid != null && !itemid.isEmpty()) {
-			itemDao.update(itemid);
-		}
-		return itemDao.update(itemid);
+	public void update(Item item) {
+		itemDao.update(item);
 	}
 
 }

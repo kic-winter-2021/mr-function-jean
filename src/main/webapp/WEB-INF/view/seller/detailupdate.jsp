@@ -16,8 +16,10 @@
 	<table>
 		<caption> 등록내용 수정 </caption>
 		<!-- 본문 -->
-		<form:form modelAttribute="item" action="post">
+		<form:form modelAttribute="item" action="detailupdate" method="post">
 		<tr><td class="box">판매자 : ${ item.sellerid }</td></tr><br>
+		<form:input type="hidden" value="${ item.sellerid }" path="sellerid" />
+		<form:input type="hidden" value="${ item.itemid }" path="itemid" />
 		<tr><td class="box"> 상품명 : <form:input type="text" value = "${ item.title }" path="title" /></td></tr><br> 
 		<tr><td class="box"> Fit : 
 			<form:select path="fit" id="fit">

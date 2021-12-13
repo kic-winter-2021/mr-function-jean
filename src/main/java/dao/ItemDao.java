@@ -42,8 +42,7 @@ public class ItemDao {
 		return mapper.listBysellerid(param);
 	}
 
-	public Item update(String itemid) {
-		return mapper.update(itemid);
+	public void update(Item item) {
+		mapper.update(item);
 	}
-
 }
