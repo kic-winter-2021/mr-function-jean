@@ -3,9 +3,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<settings>
-		<setting name="jdbcTypeForNull" value="NULL"/>
-	</settings>
 	<mappers><!-- sql 구문 -->
 		<package name="mapper" />
 	</mappers>

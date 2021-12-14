@@ -172,4 +172,5 @@ public class SellerController {
 		mav.setViewName("redirect:main");
 		return mav;
 	}
+
 }

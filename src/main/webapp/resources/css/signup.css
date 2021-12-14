@@ -1,0 +1,33 @@
+@charset "UTF-8";
+body {
+	background-color: #f3f3f3;
+}
+#singup-container {
+	margin: 0 auto;
+	display: grid;
+	grid-template-rows: 100px 600px 100px;
+	grid-template-columns: 1;
+	grid-template-areas:"header" "main" "footer";	
+}
+header { grid-area: header; }
+main { grid-area: main; }
+footer { grid-area: footer; }
+
+.btn-container {
+	display: flex;
+	justify-content: space-between;
+}
+.signup {
+  width: 100%;
+  height:60px;
+  font-size : 20px;
+  background: #2ECCFA;;
+  cursor : pointer;
+  border : none;
+  color : white;
+}
+.signup:hover{
+	background :#81DAF5;
+	color : white;
+	border : none;
+}

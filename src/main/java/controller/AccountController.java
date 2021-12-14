@@ -4,9 +4,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,8 @@ public class AccountController {
 	@PostMapping("psignin")
 	public ModelAndView psignin(@Valid Customer customer, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:signin");
+		
 		// 1. 유효성 검사 (입력했는지, 현재 있는 아이디인지)
 		// 1-1 입력 검사
 		if (bresult.hasErrors()) {
@@ -59,7 +62,7 @@ public class AccountController {
 			// 없어 -> 리턴(에러 메세지 반환) bresult message 추가
 			if (dbCustomer == null) {
 				System.out.println(customer.getId() + "없음");
-				bresult.reject("error.signin.customer"); // TODO: messages.properties
+				bresult.reject("error.input.signin"); // TODO: messages.properties
 				mav.getModel().putAll(bresult.getModel());
 				return mav;
 			}
@@ -94,6 +97,7 @@ public class AccountController {
 		if (bresult.hasErrors()) {
 			System.out.println("Error is occured in seller Signin." + bresult.getModel());
 			mav.getModel().putAll(bresult.getModel());
+			bresult.reject("error.input.signin");
 			return mav;
 		}
 		
@@ -116,7 +120,7 @@ public class AccountController {
 		ModelAndView mav = new ModelAndView();
 		// 세션은 로그인 여부만 확인
 		mav.addObject("customer", new Seller());
-		mav.setViewName("/customer/account/personalsignup");
+		
 		return mav;
 	}
 	@PostMapping("psignup")
@@ -124,7 +128,11 @@ public class AccountController {
 		ModelAndView mav = new ModelAndView();
 		// 유효성 검사
 		if (bresult.hasErrors()) {
+			for (ObjectError e : bresult.getGlobalErrors()) {
+				System.out.println(e);
+			}
 			System.out.println("회원 로그인 실패" + bresult.getModel());
+			bresult.reject("error.input.user");
 			mav.getModel().putAll(bresult.getModel());
 			return mav; 
 		}
@@ -134,6 +142,7 @@ public class AccountController {
 			System.out.println(customer); // 디버깅용
 		} catch (Exception e) {
 			e.printStackTrace();
+			return mav;
 		}
 		// TODO: 이메일로 인증 메일을 보냈습니다.(뷰랑 컨트롤러 만들기)
 		mav.setViewName("redirect:signin?t=p");
@@ -151,7 +160,7 @@ public class AccountController {
 	}
 	@PostMapping("ssignup")
 	public ModelAndView psignup(@Valid Seller seller, BindingResult bresult, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("/customer/account/companysignup");
 		// 유효성 검사
 		if (bresult.hasErrors()) {
 			System.out.println("회원 로그인 실패" + bresult.getModel());
