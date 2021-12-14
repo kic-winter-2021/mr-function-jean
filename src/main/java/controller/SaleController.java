@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.SigninException;
 import logic.dto.Customer;
+import logic.dto.Review;
 import logic.dto.Sale;
-import logic.dto.Transaction;
 import logic.service.SaleService;
 
 @Controller
@@ -46,10 +46,8 @@ public class SaleController {
 			mav.addObject("salelist", list);
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
-		
-		
-		
+		}		
 		return mav;
 	}
+	
 }
