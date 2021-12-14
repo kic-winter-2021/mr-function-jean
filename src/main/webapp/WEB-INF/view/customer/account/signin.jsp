@@ -14,34 +14,7 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" href="/css/account.css" >
-<script src="/js/twintab.js"></script>
-<script>
-	window.onload = () => {
-		const tab1 = document.getElementById("tab1");
-		const tab2 = document.getElementById("tab2");
-		const content1 = document.getElementById("content1");
-		const content2 = document.getElementById("content2");
-		const select1 = () => {
-			tab1.classList.add("active");
-			content1.classList.remove("hidden");
-			tab2.classList.remove("active");
-			content2.classList.add("hidden");
-		}
-		const select2 = () => {
-			tab2.classList.add("active");
-			content2.classList.remove("hidden");
-			tab1.classList.remove("active");
-			content1.classList.add("hidden");
-		}
-		tab1.addEventListener('click', select1);
-		tab2.addEventListener('click', select2);
-		if ('${type}' === 's') select2();
-	}
-	function win_open(page) {
-		var op = "width=700, height=450, left=50,top=150";
-		open(page, "", op);
-	}
-</script>
+<style>.errmsg { color: red; }</style>
 </head>
 <body>
 	<main id="main-container">
@@ -51,14 +24,24 @@
 		</div>
 		<section id="signinform">
 			<div id="content1" class="twinform-container">
-				<form:form modelAttribute="customer" action="psignin" name="psigninForm">
+				<form:form modelAttribute="customer" action="signin" name="psigninForm">
+					<spring:hasBindErrors name="customer">
+						<c:forEach var="error" items="${ errors.globalErrors }">
+							<span class="errmsg"><spring:message code="${ error.code }"/></span>
+						</c:forEach>
+					</spring:hasBindErrors>
 					<form:input type="text" path="id" placeholder="ID" class="inputbox"/>
 					<form:input type="password" path="password" placeholder="비밀번호" class="inputbox"/>
 					<input type="submit" value="로그인" id="signin"/>
 				</form:form>
 			</div>
 			<div id="content2" class="twinform-container hidden">
-				<form:form modelAttribute="seller" action="ssignin" name="ssigninForm">
+				<spring:hasBindErrors name="seller">
+					<c:forEach var="error" items="${ errors.globalErrors }">
+						<span class="err"><spring:message code="${ error.code }"/></span>
+					</c:forEach>
+				</spring:hasBindErrors>
+				<form:form modelAttribute="seller" action="signin" name="ssigninForm">
 					<form:input type="text" path="id" placeholder="ID" class="inputbox"/>
 					<form:input type="password" path="password" placeholder="비밀번호" class="inputbox"/>
 					<input type="submit" value="로그인" id="signin"/>
@@ -80,6 +63,34 @@
 		<div class="copyright-wrap">
 			© Mr.function.<img class="footerlogo" src="/img/logo-1.png">
 		</div>
-	</footer>
+	</footer>	
 </body>
+<script>
+	const tab1 = document.getElementById("tab1");
+	const tab2 = document.getElementById("tab2");
+	const content1 = document.getElementById("content1");
+	const content2 = document.getElementById("content2");
+	const select1 = () => {
+		tab1.classList.add("active");
+		content1.classList.remove("hidden");
+		tab2.classList.remove("active");
+		content2.classList.add("hidden");
+	}
+	const select2 = () => {
+		tab2.classList.add("active");
+		content2.classList.remove("hidden");
+		tab1.classList.remove("active");
+		content1.classList.add("hidden");
+	}
+	tab1.addEventListener('click', select1);
+	tab2.addEventListener('click', select2);
+	if('${type}' == 's' || '${param.t}' == 's') {
+		select2();
+		console.log("${type}")
+	}
+	function win_open(page) {
+		var op = "width=700, height=450, left=50,top=150";
+		open(page, "", op);
+	}
+</script>
 </html>

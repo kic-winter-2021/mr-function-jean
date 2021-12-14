@@ -17,11 +17,32 @@ public class ItemDao {
 	private ItemDao(SqlSessionTemplate template) {
 		mapper = template.getMapper(ItemMapper.class);
 	}
+	
+	public void addItem(Item item) {
+		mapper.addItem(item);
+		
+	}
+	public Item detail(String itemid) {
+		return mapper.detail(itemid);
+	}
+
+	public int countBySellerid(String sellerid) {
+		param.clear();
+		param.put("sellerid",sellerid);
+		return mapper.countBySellerid(param);
+	}
+
 	public List<Item> listBySellerid(String sellerid) {
 		param.clear();
-		param.put("sellerid", sellerid);
-		return mapper.select(param);
+		param.put("sellerid",sellerid);
+		return mapper.listBySellerid(param);
 	}
-	
-	
+
+	public void update(Item item) {
+		mapper.update(item);
+	}
+
+	public void delete(String itemid) {
+		mapper.delete(itemid);
+	}
 }

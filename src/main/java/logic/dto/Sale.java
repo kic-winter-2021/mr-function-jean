@@ -1,6 +1,7 @@
 package logic.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,14 @@ public class Sale {
 	private String receiver;
 	private String invoice;
 	private Date saledate;
+	private List<Transaction> tranlist;
+	
+	public List<Transaction> getTranlist() {
+		return tranlist;
+	}
+	public void setTranlist(List<Transaction> tranlist) {
+		this.tranlist = tranlist;
+	}
 	public String getSaleid() {
 		return saleid;
 	}

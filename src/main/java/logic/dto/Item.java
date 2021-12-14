@@ -4,22 +4,32 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Item {
+	@NotNull
 	private String itemid;
+	@NotNull
 	private String sellerid;
+	@NotNull(message="상품명을 입력하세요")
 	private String title;
 	private String imgPath;
 	private MultipartFile imgFile;
 	private String description;
+	@NotNull(message="가격을 입력하세요")
 	private int price;
+	@NotNull(message="상품코드를 입력하세요")
 	private String brandcode;
 	private String brandname;
 	private String content;
+	@NotNull(message="색상을 입력하세요")
 	private String color;
+	@NotNull(message="핏을 입력하세요")
 	private String fit;
 	private String style;
+	@NotNull(message="등록날짜 입력하세요")
 	private Date regDate;
 	private Date update;
 	private Map<String, String> sizeMap;
