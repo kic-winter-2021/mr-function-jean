@@ -14,6 +14,7 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" href="/css/account.css" >
+<style>.errmsg { color: red; }</style>
 </head>
 <body>
 	<main id="main-container">
@@ -23,10 +24,10 @@
 		</div>
 		<section id="signinform">
 			<div id="content1" class="twinform-container">
-				<form:form modelAttribute="customer" action="psignin" name="psigninForm">
+				<form:form modelAttribute="customer" action="signin" name="psigninForm">
 					<spring:hasBindErrors name="customer">
 						<c:forEach var="error" items="${ errors.globalErrors }">
-							<span class="err"><spring:message code="${ error.code }"/></span>
+							<span class="errmsg"><spring:message code="${ error.code }"/></span>
 						</c:forEach>
 					</spring:hasBindErrors>
 					<form:input type="text" path="id" placeholder="ID" class="inputbox"/>
@@ -40,7 +41,7 @@
 						<span class="err"><spring:message code="${ error.code }"/></span>
 					</c:forEach>
 				</spring:hasBindErrors>
-				<form:form modelAttribute="seller" action="ssignin" name="ssigninForm">
+				<form:form modelAttribute="seller" action="signin" name="ssigninForm">
 					<form:input type="text" path="id" placeholder="ID" class="inputbox"/>
 					<form:input type="password" path="password" placeholder="비밀번호" class="inputbox"/>
 					<input type="submit" value="로그인" id="signin"/>

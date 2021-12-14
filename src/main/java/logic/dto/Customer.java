@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -17,9 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class Customer {
 	@Size(min = 4, max = 30, message = "4~30자의 아이디를 입력해주세요")
 	private String id;
-	@NotEmpty
+	@Min(value=0)
 	private int type;
-	@NotEmpty(message = "비밀번호를 입력해주세요")
+	@Size(min = 8, max = 20, message = "비밀번호는 8 ~ 20자로 입력하여야 합니다")
 	private String password;
 	@NotEmpty(message = "이름을 입력해주세요")
 	private String name;
@@ -51,6 +50,9 @@ public class Customer {
 	
 	public static final int ADMIN = 1;
 	public static final int PERSONAL = 2;
+	public static final int ONLINE = 3;
+	public static final int OFFLINE = 4;
+	
 	public String getId() {
 		return id;
 	}
