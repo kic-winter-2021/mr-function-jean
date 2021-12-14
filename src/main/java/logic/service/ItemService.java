@@ -1,16 +1,11 @@
 package logic.service;
 
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.ItemDao;
 import logic.dto.Item;
-import logic.dto.Regist;
 
 /*
  * Item, Review
@@ -40,4 +35,7 @@ public class ItemService {
 		itemDao.update(item);
 	}
 
+	public void delete(String itemid) {
+		itemDao.delete(itemid);
+	}
 }

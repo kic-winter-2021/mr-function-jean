@@ -1,8 +1,8 @@
 package controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -10,15 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.ItemException;
 import exception.UpdateException;
-import logic.dto.Customer;
 import logic.dto.Item;
-import logic.dto.Regist;
 import logic.dto.Seller;
 import logic.service.ItemService;
 import logic.service.SellerService;
@@ -110,15 +108,43 @@ public class SellerController {
 			throw new UpdateException("수정은 상품을 등록한 사업자만 가능합니다","saledetail");
 		}
 		//update
+		String urlItemid =null;
 		try {
+			 urlItemid = URLEncoder.encode(itemid, "UTF-8");
 			itemService.update(item);
-			mav.setViewName("redirect:saledetail?itemid="+itemid);
+			mav.setViewName("redirect:saledetail?itemid="+urlItemid);
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new UpdateException("게시글 수정을 실패 했습니다.","detailupdate?itemid="+itemid);
+			throw new UpdateException("게시글 수정을 실패 했습니다.","detailupdate?itemid="+urlItemid);
 		}
 		return mav;
 	}
+	// delete 구현
+	
+	@RequestMapping("delete")
+	public ModelAndView delete(String itemid,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		//1. itemid가 있는지 확인한다.
+		Item dbitem = itemService.detail(itemid);
+		if(dbitem == null) {
+			throw new ItemException("게시글 삭제를 실패했습니다.","registl?id=admin"); //우선 admin처리
+		}
+		//2. itemid의 주인과 session의 id랑 같은지
+		
+		//String signin = ((Seller)session.getAttribute("signinSeller"));
+		if (!dbitem.getSellerid().equals("admin")) { //signin.getId()
+			throw new UpdateException("게시글 삭제를 실패 했습니다.","registl?id=admin"); //우선 admin처리
+		}//3. 삭제
+	try {
+		itemService.delete(itemid);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	// 4.목록 이동
+	mav.setViewName("redirect:registl?id=admin"); //signin.getId()
+	return mav;
+	}
+	
 	//registlist 구현
 	/*
 	 * 판매자 아이디에 대해서 등록한 상품 보기

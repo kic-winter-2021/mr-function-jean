@@ -8,8 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import logic.dto.Item;
-import logic.dto.Regist;
-import mapper.CustomerMapper;
 import mapper.ItemMapper;
 
 @Repository
@@ -44,5 +42,9 @@ public class ItemDao {
 
 	public void update(Item item) {
 		mapper.update(item);
+	}
+
+	public void delete(String itemid) {
+		mapper.delete(itemid);
 	}
 }
