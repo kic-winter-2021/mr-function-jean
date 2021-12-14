@@ -19,7 +19,6 @@ public class ItemService {
 		itemDao.addItem(item);
 		
 	}
-
 	public Item detail(String itemid) {
 		return itemDao.detail(itemid);
 	}

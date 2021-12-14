@@ -37,17 +37,17 @@
     
   </div>  
   <div class="listContainer">
-    <a href="#" class="item">
+    <a href="/sale/buyInfo?id=${sessionScope.signinCustomer.id}" class="item">
         <div class="icon"><img src="/resources/img/mustache.png" width="20px" height="20px"></div>
         <div class="text">주문목록<span class="circle"></span></div>
         <div class="right"> > </div>
     </a>
-    <a href="#" class="item">
+    <a href="/item/itemreview?id=${sessionScope.signinCustomer.id}" class="item">
         <div class="icon"><img src="/resources/img/mustache.png" width="20px" height="20px"></div>
         <div class="text">상품후기<span class="circle"></span></div>
         <div class="right"> > </div>
     </a>
-    <a href="#" class="item">
+    <a href="/item/questionlist?id=${sessionScope.signinCustomer.id}" class="item">
         <div class="icon"><img src="/resources/img/mustache.png" width="20px" height="20px"></div>
         <div class="text">상품문의<span class="circle"></span></div>
         <div class="right"> > </div>
@@ -74,7 +74,7 @@
         </div>                
         <div class="right"> > </div>
     </a>
-    <a href="editInfo.jsp" class="item">
+    <a href="editinfo?id=${sessionScope.signinCustomer.id }" class="item">
         <div class="icon"><img src="/resources/img/mustache.png" width="20px" height="20px"></div>
         <div class="text">내정보 관리/수정</div>
         <div class="right"> > </div>

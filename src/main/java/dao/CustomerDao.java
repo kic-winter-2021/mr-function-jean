@@ -21,8 +21,8 @@ public class CustomerDao {
 		mapper = template.getMapper(CustomerMapper.class);
 	}
 
-	public Customer select(String id) {
-		return mapper.selectOneCustomer(id);
+	public Customer selectOne(String id) {
+		return mapper.selectOne(id);
 	}
 
 	public void insert(Customer customer) {
@@ -63,5 +63,8 @@ public class CustomerDao {
 		param.put("id", id);
 		param.put("password", newpw);
 		mapper.updatePassword(param);
+	}
+	public void userUpdate(Customer customer) {
+		mapper.userUpdate(customer);
 	}
 }

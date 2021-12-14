@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>상품후기게시판</title>
 </head>
 <body>
 	<table class="tb__notice">
 		<caption>
-			주문목록<span> 구매갯수: ${ salecount }</span>
+			상품후기<span> 후기: ${ itemreviewcount }</span>
 		</caption>
 		<colgroup>
 			<col class="col__num" />
@@ -21,29 +21,22 @@
 		</colgroup>
 		<thead>			
 			<tr>
-				<th>구매자</th>
 				<th>상품</th>
-				<th>갯수</th>
-				<th>주문일자</th>
+			
+				<th>평점</th>
 			</tr>
 		</thead>
 		<!-- Show Sale List -->
 		<tbody>
-			<c:if test="${ salecount > 0 }">
-				<c:forEach var="sale" items="${ salelist }">
+			<c:if test="${ itemreviewcount > 0 }">
+				<c:forEach var="itemreview" items="${ itemreviewlist }">
 					<tr>
 						<td>${ num }</td>
 						<c:set var="num" value="${ num - 1 }" />
-						<td><a href="detail?num=${ sale.saleid }">${ sale.saleid }</a></td>
-						<td>${ sale.buyerid }</td>
-						 <td>
-							<c:forEach var="transaction" items="${sale.tranlist}">
-								${transaction.quantity }개<br>
-							</c:forEach>
-						</td> 
-						<%--  <td>${ notice.regdate }</td>--%>
-						<td><fmt:formatDate value="${ sale.saledate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<td><a href="detail?num=${ itemreview.itemid }">${ itemreview.itemid }</a></td>
 						
+						<!-- 평점 -->
+						<td>${ itemreview.score }</td>						
 					</tr>
 				</c:forEach>
 				<!--  paging -->
@@ -66,9 +59,9 @@
 			</c:if>
 			<!-- end if (salecount > 0) // -->
 			<!-- 게시물 없음 -->
-			<c:if test="${ salecount == 0 }">
+			<c:if test="${ itemreviewcount == 0 }">
 				<tr>
-					<td colspan="5">구매한 상품이 없습니다.</td>
+					<td colspan="5">리뷰가 없습니다.</td>
 				</tr>
 			</c:if>
 		</tbody>		

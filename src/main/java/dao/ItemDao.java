@@ -46,4 +46,3 @@ public class ItemDao {
 		mapper.delete(itemid);
 	}
 }
-

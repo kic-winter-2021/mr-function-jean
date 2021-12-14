@@ -29,10 +29,19 @@ public interface CustomerMapper {
 			+ " name=#{name}, phoneno=#{phoneno}, email=#{email}"
 			+ " where id=#{id}")
 	void updateSellerBasic(Seller seller);
+	
 	@Update("update customer set"
 			+ " companyno=#{companyno}, type=#{type}, nickname=#{nickname}, location=#{location}, companyfile=#{companyFilePath}, personalfile=#{personalFilePath}"
 			+ " where id=#{id}")
 	void updateCompany(Seller seller);
+	
+	@Select("select * from customer where id=#{id}")
+	Customer selectOne(String id);
+
+	@Update("update customer set"
+			+ " name=#{name}, nickname=#{nickname}, birthday=#{birthday}, gender=#{gender}, email=#{email}, phoneno=#{phoneno}"
+			+ " where id=#{id}")
+	void userUpdate(Customer customer);
 	
 	@Update("update customer set password=#{password} where id=#{id}")
 	void updatePassword(Map <String, Object> param);
