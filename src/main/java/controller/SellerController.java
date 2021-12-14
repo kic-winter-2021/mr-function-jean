@@ -1,8 +1,8 @@
 package controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.UserException;
-import logic.dto.AdPost;
+import exception.ItemException;
+import exception.UpdateException;
+
 import logic.dto.Item;
 import logic.dto.Seller;
+import logic.dto.AdPost;
+import logic.service.ItemService;
 import logic.service.SellerService;
 
 @Controller
@@ -26,6 +30,8 @@ import logic.service.SellerService;
 public class SellerController {
 	@Autowired
 	SellerService sellerService;
+	@Autowired
+	ItemService itemService;
 	
 	@GetMapping("*")	// 
 	public ModelAndView info(HttpSession session) {
@@ -70,6 +76,7 @@ public class SellerController {
 		mav.setViewName("redirect:myinfo");
 		return mav;
 	}
+
 	@PostMapping("upcompany")
 	public ModelAndView updateCompany(@Valid Seller seller, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -173,4 +180,124 @@ public class SellerController {
 		return mav;
 	}
 
+	// TODO: 물품 등록 열기
+	@GetMapping("register")
+	public ModelAndView register(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("item", new Item()); // 문자열 (키값/벨류값)
+		return mav;
+	}
+	
+	@PostMapping("register")// 동일한 요청이 있을시에 POST / GET / 나뉘어서 받음
+	public ModelAndView registerForm(@Valid Item item,BindingResult bresult,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(bresult.hasErrors()) {
+			System.out.println("상품을 등록해주세요" + bresult.getModel());
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		try {
+			itemService.add(item);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:registl?id=" + "admin");
+		return mav;
+	}
+	//seller/saledetail?itemid=1234
+	//리스트 페이지 선택 -> 상세정보
+	//
+	
+	@GetMapping({"saledetail","detailupdate"})
+	public ModelAndView saledetail(String itemid,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Item dbitem = itemService.detail(itemid);
+		mav.addObject("item",dbitem);
+		return mav;
+	}
+	//등록 상품 내용 수정하기 21.12.13
+	
+	//유효성 검사
+	//update
+	@PostMapping("detailupdate")
+	public ModelAndView detailupdate(@Valid Item item,BindingResult bresult,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String itemid = item.getItemid();
+		//유효성 검사
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		//아이디 검사. 세션에 있는 seller랑 item seller 비교
+			
+		// Seller signin = (Seller)session.getAttribute("signinSeller");
+		// hidden으로 받은 seller id
+		if(!item.getSellerid().equals("admin")) { //signin.getId()
+			throw new UpdateException("수정은 상품을 등록한 사업자만 가능합니다","saledetail");
+		}
+		//update
+		String urlItemid =null;
+		try {
+			 urlItemid = URLEncoder.encode(itemid, "UTF-8");
+			itemService.update(item);
+			mav.setViewName("redirect:saledetail?itemid="+urlItemid);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시글 수정을 실패 했습니다.","detailupdate?itemid="+urlItemid);
+		}
+		return mav;
+	}
+	// delete 구현
+	
+	@RequestMapping("delete")
+	public ModelAndView delete(String itemid,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		//1. itemid가 있는지 확인한다.
+		Item dbitem = itemService.detail(itemid);
+		if(dbitem == null) {
+			throw new ItemException("게시글 삭제를 실패했습니다.","registl?id=admin"); //우선 admin처리
+		}
+		//2. itemid의 주인과 session의 id랑 같은지
+		
+		//String signin = ((Seller)session.getAttribute("signinSeller"));
+		if (!dbitem.getSellerid().equals("admin")) { //signin.getId()
+			throw new UpdateException("게시글 삭제를 실패 했습니다.","registl?id=admin"); //우선 admin처리
+		}//3. 삭제
+	try {
+		itemService.delete(itemid);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	// 4.목록 이동
+	mav.setViewName("redirect:registl?id=admin"); //signin.getId()
+	return mav;
+	}
+	
+	//registlist 구현
+	/*
+	 * 판매자 아이디에 대해서 등록한 상품 보기
+	 * 필요한 입력 :sellerid
+	 * 그럼 어디서? 1. GET요청의 파라미터
+	 * 			2. 어차피 seller로 로그인 되어있으므로 session의 아이디를 받는다.
+	 * 컨트롤러의 매개변수로 id를 받아야해 
+	 * 컨트롤러에서 세션에 접근해서 사용자의 정보만 불러와
+	 * 요청? paramkey=paramvalue 
+	 * @RequestPara("paramkey")
+	 */
+	@GetMapping("registl")
+	public ModelAndView registl(String id,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+	
+		List<Item> list;
+		try{
+			mav.addObject("listcount", itemService.count(id));
+			list = itemService.list(id);
+			mav.addObject("registl",list);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mav;
+	}
 }
