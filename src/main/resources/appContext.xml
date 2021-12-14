@@ -31,8 +31,9 @@
 	<bean id="exceptionHandler"	class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<value>
-				exception.SigninException=exception
-				exception.UserException=exception
+				exception.SigninException = exception/alert
+				exception.UserException = exception/alert
+				exception.LogoutException = exception/logout
 			</value>
 		</property>
 	</bean>

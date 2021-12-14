@@ -20,6 +20,12 @@ public class Board {
 	private Date regDate;
 	private Date update;
 	private int views;	// 조회수
+	
+	public static final int FAQ = 1;
+	public static final int NOTICE = 2;
+	public static final int QUESTION = 3;
+	public static final int ITEM = 4;
+	
 	public int getNum() {
 		return num;
 	}

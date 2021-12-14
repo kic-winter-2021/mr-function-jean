@@ -18,12 +18,15 @@ public class SaleDao {
 		private SaleDao (SqlSessionTemplate template) {
 			mapper = template.getMapper(SaleMapper.class);
 		}
-		public Object countSale(String id) {
-			return mapper.countSale(id);
+		public int countByCustomerId(String customerid) {
+			param.clear();
+			param.put("customerid", customerid);
+			return mapper.count(param);
 		}
-		public List<Sale> salelist(String id) {
-			
-			return mapper.salelist(id);
+		public List<Sale> listByCustomerId(String customerid) {
+			param.clear();
+			param.put("customerid", customerid);
+			return mapper.list(param);
 		}
 		
 		

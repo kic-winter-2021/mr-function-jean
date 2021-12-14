@@ -1,4 +1,4 @@
-<%-- /WEB-INF/view/exception.jsp --%>
+<%-- /WEB-INF/view/exception/alert.jsp --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page isErrorPage="true" %>

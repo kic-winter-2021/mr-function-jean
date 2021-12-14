@@ -65,7 +65,7 @@
 		</div>
 		<!-- 추가 정보 -->
 		<section id="addinfo">
-			<jsp:include page="addinfo.jsp" />
+			<jsp:include page="moreinfo.jsp" />
 		</section>
 		<!-- 상품평 -->
 		<section id="review">

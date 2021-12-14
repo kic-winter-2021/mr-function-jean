@@ -51,20 +51,19 @@ public class CustomerDao {
 	public Seller selectOneSeller(String sellerid) {
 		return mapper.selectOneSeller(sellerid);
 	}
-	public void updateSellerBasic(Seller seller) {
-		mapper.updateSellerBasic(seller);
+	public void update(Customer customer) {
+		mapper.update(customer);
 	}
-	public void updateCompany(Seller seller) {
-		mapper.updateCompany(seller);
-	}
-
 	public void updatePassword(String id, String newpw) {
 		param.clear();
 		param.put("id", id);
 		param.put("password", newpw);
 		mapper.updatePassword(param);
 	}
-	public void userUpdate(Customer customer) {
-		mapper.userUpdate(customer);
+	public void updateSellerBasic(Seller seller) {
+		mapper.updateSellerBasic(seller);
+	}
+	public void updateCompany(Seller seller) {
+		mapper.updateCompany(seller);
 	}
 }

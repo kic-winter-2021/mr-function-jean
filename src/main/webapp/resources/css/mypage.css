@@ -1,12 +1,8 @@
 @charset "UTF-8";
-body{
-  padding: 0;
-  margin: 0;
-}
+@charset "UTF-8";
 div{
   box-sizing: border-box;
 }
-
 /* alert badge */
 .circle{
   display: inline-block;
@@ -18,61 +14,42 @@ div{
   top: -5px;
   left: 110%;
 }
-
 /* 녹색 텍스트 */
 .green{
   color: #24855b;
 }
 
-.wrap{
-  background-color: #F8F8F8;  
+.wrap {
+	width: 90%;
+	display: grid;
+	background-color: #F8F8F8;
+	grid-template-columns: 300px 1000px;
+	grid-template-rows: 200px 800px 150px;
+	grid-template-areas:
+  	"menubar header header"
+  	"menubar main sidebar";
 }
-/* 녹색배경 */
-.greenContainer{  
-  height: 132px;
-  background-color: #24855b;    
-  
-  display: flex;
-  align-items: flex-end;
-  padding: 16px;
-}
-/*
-.greenContainer .name{
-   font-size: 20px;
-  font-weight: bold;
-  color: #ffffff;
-} 
-*/
-.greenContainer .modify{
-  /*margin-left: auto;*/
-  float : right;
-}
-.item {
-  cursor: pointer;
-}
+/* grid-area */
+.wrap header { grid-area: header; }
+.wrap .mypage-menubar { grid-area: menubar;}
+.wrap main { grid-area: main; }
+.wrap .sidebar { grid-area: sidebar; }
 
-/* 단골상점 , 상품후기 , 적립금 박스 */
-.summaryContainer{
-  background-color: white;  
-  display: flex;  
-  padding: 21px 16px;  
-  height: 90px;
-  margin-bottom: 10px;
+.mypagemenu > li {
+	list-style: none;
+	padding: 5px;
+	cursor: pointer;
 }
-/* 단골상점 , 상품후기 , 적립금 */
-.summaryContainer .item{
-  flex-grow: 1
+.mypagemenu span {
+	margin-left: 5px;
+	font-size: 18px;
+	padding: 4px;
 }
-/* 녹색 숫자 */
-.summaryContainer .number{
-  font-size: 19px;
-  font-weight: bold;
-  color: #24855b;
+.mypagemenu > li:hover {
+	background-color: #e8e8e8;
 }
-/* 텍스트 */
-.summaryContainer .item > div:nth-child(2){
-  font-size: 13px;
-}
+.mypagemenu img { width: 25x; height: 25px; }
+.rightarrow { float: right; color: #ccc; }
 
 /* ================== 주문/배송조회 박스 시작 ==================== */
 .shippingStatusContainer{

@@ -53,6 +53,10 @@ public class Customer {
 	public static final int ONLINE = 3;
 	public static final int OFFLINE = 4;
 	
+	public boolean isAdmin() { return this.type==ADMIN ? true : false; }
+	public boolean isPersonal() { return this.type==PERSONAL ? true : false; }
+	public boolean isSeller() { return (this.type==ONLINE || this.type == OFFLINE) ? true : false; }
+	
 	public String getId() {
 		return id;
 	}

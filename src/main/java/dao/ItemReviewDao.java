@@ -19,11 +19,14 @@ public class ItemReviewDao {
 		mapper = template.getMapper(ItemReviewMapper.class);
 	}
 	
-	public Object countitem(String id) {		
-		return mapper.countitem(id);
+	public int countByCustomerId(String customerid) {
+		param.clear();
+		param.put("customerid", customerid);
+		return mapper.count(param);
 	}
-
-	public List<Review> itemreviewlist(String id) {		
-		return mapper.itemreviewlist(id);
+	public List<Review> listByCustomerId(String customerid) {
+		param.clear();
+		param.put("customerid", customerid);
+		return mapper.list(param);
 	}
 }

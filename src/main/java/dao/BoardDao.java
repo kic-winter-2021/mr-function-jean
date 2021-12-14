@@ -59,12 +59,15 @@ public class BoardDao {
 		
 	}
 
-	public Object questioncount(String id) {
-		return mapper.questioncount(id);
+	public int countItemQuestionByCustomerId(String customerid) {
+		param.clear();
+		param.put("customerid", customerid);
+		return mapper.countItemQuestion(param);
 	}
-
-	public List<Board> listquestion(String id) {
-		return mapper.listquestion(id);
+	public List<Board> listItemQuestionByCustomerId(String customerid) {
+		param.clear();
+		param.put("customerid", customerid);
+		return mapper.listItemQuestion(param);
 	}
 
 }

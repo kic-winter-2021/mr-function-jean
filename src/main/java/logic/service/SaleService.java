@@ -20,8 +20,8 @@ public class SaleService {
 	@Autowired
 	TransactionDao transactionDao;
 
-	public List<Sale> salelist(String id) {
-		List<Sale> salelist = saleDao.salelist(id);
+	public List<Sale> listByCustomerId(String customerid) {
+		List<Sale> salelist = saleDao.listByCustomerId(customerid);
 		//salelist
 		//saleid...
 		
@@ -35,9 +35,8 @@ public class SaleService {
 		return salelist;
 	}
 
-	public Object count(String id) {		
-		return saleDao.countSale(id);
-		
+	public int count(String customerid) {		
+		return saleDao.countByCustomerId(customerid);
 	}	
 
 

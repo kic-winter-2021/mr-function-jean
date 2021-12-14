@@ -6,6 +6,6 @@
     
 	Included to detail.jsp
 --%>
-<div id="addinfo-container">
+<div id="morenfo-container">
 	<button id="btn__more">더 보기</button>
 </div>
