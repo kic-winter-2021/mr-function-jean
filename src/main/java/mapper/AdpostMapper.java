@@ -21,6 +21,6 @@ public interface AdpostMapper {
 			"</script>"})
 	List<AdPost> select(Map<String, Object> param);
 
-	
+	@Select("select * from AdPost")
 	List<AdPost> listAdPost();
 }

@@ -21,10 +21,10 @@ public class AdminController {
 	@RequestMapping("postlist")
 	public ModelAndView postlist(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+		List<AdPost> list;
 		// adpost 테이블을 읽어서 뷰에 전달  (service
 		try {
-			List<AdPost> list = adminService.postlist();
+			list = adminService.list();
 			mav.addObject("postlist", list);
 		}catch(Exception e){
 			e.printStackTrace();

@@ -32,7 +32,6 @@ public class AdpostDao {
 		mapper.select(param);
 	}
 	public List<AdPost> listAdPost() {
-		
 		return mapper.listAdPost();
 	}
 }
