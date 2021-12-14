@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import logic.dto.Board;
 import logic.dto.Faq;
 import logic.dto.Notice;
 import logic.dto.Question;
@@ -56,4 +57,10 @@ public interface BoardMapper {
 			+ "(articletype, category, title, customerid, content)"
 			+ "values (#{type}, #{category}, #{title}, #{customerid}, #{content})")
 	public void writeFaq(Faq faq);
+
+	@Select("select count(*) from board where articletype=4")
+	public Object questioncount(String id);
+
+	@Select("select * from board where articletype=4")
+	public List<Board> listquestion(String id);
 }

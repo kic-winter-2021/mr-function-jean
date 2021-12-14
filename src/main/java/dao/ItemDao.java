@@ -18,12 +18,5 @@ public class ItemDao {
 		mapper = template.getMapper(ItemMapper.class);
 	}
 	
-	public Object countitem(String id) {		
-		return mapper.countitem(id);
-	}
-
-	public List<Review> itemreviewlist(String id) {		
-		return mapper.itemreviewlist(id);
-	}
 
 }

@@ -15,15 +15,5 @@ import logic.dto.Sale;
 @Service
 public class ItemService {
 
-	@Autowired
-	ItemDao itemDao;
-
-	public Object count(String id) {
-		return itemDao.countitem(id);
-	}
-
-	public List<Review> itemreviewlist(String id) {
-		List<Review> itemreviewlist = itemDao.itemreviewlist(id);
-		return itemreviewlist;
-	}
+	
 }

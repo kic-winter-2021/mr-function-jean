@@ -47,7 +47,7 @@
         <div class="text">상품후기<span class="circle"></span></div>
         <div class="right"> > </div>
     </a>
-    <a href="#" class="item">
+    <a href="/item/questionlist?id=${sessionScope.signinCustomer.id}" class="item">
         <div class="icon"><img src="/resources/img/mustache.png" width="20px" height="20px"></div>
         <div class="text">상품문의<span class="circle"></span></div>
         <div class="right"> > </div>
