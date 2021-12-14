@@ -6,33 +6,80 @@
 <head>
 <meta charset="UTF-8">
 <title>개인용 회원가입 페이지</title>
-<link href="/css/personalsignup.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/personalsignup.css" >
+<style>
+	.errmsg { color: red; }
+</style>
 </head>
 <body>
 	<div id="wrap" class="wrapper">
-		<header class="logoheader">
-			<center>
-				<img src="/img/logo-1.png">
-			</center>
-		</header>
+		<header class="logoheader"><img src="/img/logo-1.png"></header>
 		<!-- 회원가입 타이틀 부분 -->
-		<form:form modelAttribute="customer" action="psignup" method="post">
+		<form:form modelAttribute="customer" action="psignup" method="post" name="signupForm">
 			<!-- error binding -->
 			<spring:hasBindErrors name="user">
 				<c:forEach var="error" items="${ errors.globalErrors }">
 					<span class="err"><spring:message code="${ error.code }"/></span>
 				</c:forEach>
 			</spring:hasBindErrors>
+			<table class="form-table">
+				<tr>
+					<th>아이디</th>
+					<td>
+						<form:input type="text" path="id" id="id" placeholder="아이디 입력" class="int_check" />
+						<input type="button" name="userIdcheck" value="중복확인" class="id_check">
+						<br><span><form:errors path="id" /></span>
+					</td>
+				</tr>
+				<tr>
+					<th>비밀번호</th>
+					<td><form:input type="password" path="password" maxlength="20" />
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+				</tr>
+			</table>
+			
+			
 			<form:input type="hidden" path="type" value="2"/> <!-- 일반 가입 -->
 			<div id="container">
 				<div class="row_group">
 					<div class="idInput">
 						<!-- 아이디입력 -->
 						<h3 class="list">아이디</h3>
-						<span class="box_id"><form:input type="text" path="id" id="id" placeholder="아이디 입력" class="int_check" /></span>
+						<span class="box_id"></span>
 					</div>
-					<input type="button" name="userIdcheck" value="중복확인"
-						class="id_check">
+					
 
 					<!-- 비밀번호 입력 -->
 					<div class="pwInput">

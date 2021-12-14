@@ -86,12 +86,6 @@ public class AccountController {
 		mav.setViewName("redirect:/main.jsp");
 		return mav;
 	}
-	@GetMapping("ssignin")
-	public ModelAndView ssigninLoader(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("seller", new Seller());
-		return mav;
-	}
 	// 사업자 고객 로그인
 	@PostMapping("ssignin")
 	public ModelAndView ssignin(@Valid Seller seller, BindingResult bresult, HttpSession session) {
@@ -111,10 +105,38 @@ public class AccountController {
 	}
 	
 	@RequestMapping("agree")
-	public ModelAndView agree(String type, HttpSession session) {
+	public ModelAndView agree(String t, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 모델에 type값 넣어주기
-		mav.addObject("type", type);
+		mav.addObject("type", t);
+		return mav;
+	}
+	@GetMapping("psignup")
+	public ModelAndView getCustomer(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		// 세션은 로그인 여부만 확인
+		mav.addObject("customer", new Seller());
+		mav.setViewName("/customer/account/personalsignup");
+		return mav;
+	}
+	@PostMapping("psignup")
+	public ModelAndView psignup(@Valid Customer customer, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		// 유효성 검사
+		if (bresult.hasErrors()) {
+			System.out.println("회원 로그인 실패" + bresult.getModel());
+			mav.getModel().putAll(bresult.getModel());
+			return mav; 
+		}
+		// 값을 DB에 insert
+		try {
+			customerService.signup(customer);
+			System.out.println(customer); // 디버깅용
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// TODO: 이메일로 인증 메일을 보냈습니다.(뷰랑 컨트롤러 만들기)
+		mav.setViewName("redirect:signin?t=p");
 		return mav;
 	}
 	// TODO: 동일한 아이디 있는지 검사 -> 다른 데에서 처리...아이디 중복 검사
@@ -144,7 +166,7 @@ public class AccountController {
 			e.printStackTrace();
 		}
 		// TODO: 이메일로 인증 메일을 보냈습니다.(뷰랑 컨트롤러 만들기)
-		mav.setViewName("redirect:/main.jsp");
+		mav.setViewName("redirect:signin?t=s");
 		return mav;
 	}
 	// TODO: 가입이 성공적으로 처리되었습니다.
