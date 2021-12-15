@@ -1,5 +1,7 @@
 package logic.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +41,9 @@ public class CustomerService {
 		// TODO: 아이디의 경우, 가리고 보여주기?
 		// TODO: 비밀번호의 경우, 임시비밀번호로 변경 후 이메일 발송? 재설정
 		return customerDao.search(customer, url);
+	}
+
+	public List<Customer> list() {
+		return customerDao.listUser();
 	}
 }

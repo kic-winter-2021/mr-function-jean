@@ -1,5 +1,6 @@
 package mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
@@ -54,4 +55,8 @@ public interface CustomerMapper {
 			"and id=#{id} </if>",
 		 	"</script>"})
 	String search(Map<String, Object> param);
+
+	@Select("select * from customer")
+	public List<Customer>listUser();
+
 }
