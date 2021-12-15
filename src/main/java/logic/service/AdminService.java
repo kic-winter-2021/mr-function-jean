@@ -33,8 +33,8 @@ public class AdminService {
 		return adboardDao.adbdedail(num);
 	}
 
-	public void adbupdate(Integer num) {
-		adboardDao.adbupdate(num);
+	public void adbupdate(AdBoard adBoard) {
+		adboardDao.adbupdate(adBoard);
 	}
 
 }

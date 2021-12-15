@@ -34,9 +34,9 @@ public class AdboardDao {
 		return mapper.adbdetail(num);
 	}
 
-	public void adbupdate(Integer num) {
-		param.clear();
-		mapper.adbupdate(num);
+	public void adbupdate(AdBoard adBoard) {
+		
+		mapper.adbupdate(adBoard);
 	}
 
 	

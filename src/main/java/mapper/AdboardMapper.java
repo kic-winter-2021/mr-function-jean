@@ -25,6 +25,6 @@ public interface AdboardMapper {
 	public AdBoard adbdetail(Integer num);
 
 	@Update("update adboard set content=#{content} where num=#{num}")
-	public void adbupdate(Integer num);
+	public void adbupdate(AdBoard adBoard);
 
 }

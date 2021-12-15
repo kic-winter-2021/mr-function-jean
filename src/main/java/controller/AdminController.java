@@ -1,8 +1,8 @@
 package controller;
 
-import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import exception.UpdateException;
 import logic.dto.AdBoard;
 import logic.service.AdminService;
 
@@ -71,16 +70,16 @@ public class AdminController {
 	}
 	
 	@PostMapping("adbupdate")
-	public ModelAndView adbupdate(@Valid AdBoard adBoard, BindingResult bresult) {
+	public ModelAndView adbupdate(@Valid AdBoard adBoard, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();	
-		Integer num = adBoard.getNum();
+		
 		if(bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}
 		try {
-			adminService.adbupdate(num);	
-			mav.setViewName("redirect:adbdetail?num="+num);
+			adminService.adbupdate(adBoard);	
+			mav.setViewName("redirect:adbdetail?num="+adBoard);
 		}catch(Exception e) {
 			e.printStackTrace();
 			//throw new UpdateException("광고 수정에 실패 했습니다.","adbupdate");
