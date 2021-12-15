@@ -3,9 +3,11 @@ package controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,8 +65,12 @@ public class AdminController {
 	}
 	//2. update
 	@PostMapping("userupdate")
-	public ModelAndView userupdate(Customer customer,HttpSession session) {
+	public ModelAndView userupdate(@Valid Customer customer,BindingResult bresult,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
 		try {
 			customerService.update(customer);
 			mav.setViewName("redirect:user");

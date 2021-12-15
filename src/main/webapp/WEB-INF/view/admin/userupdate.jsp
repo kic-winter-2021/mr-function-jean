@@ -17,9 +17,9 @@
 		<!-- 본문 -->
 		<form:form modelAttribute="customer" action="userupdate" method="post">
 		<tr><td class="box"> 아이디 : ${customer.id}</td></tr>
-		<input type="hidden" value="${ customer.id}" />
+		<input type="hidden" name="id" value="${ customer.id}" />
 		<tr><td class="box"> 비밀번호 : ${customer.password}</td></tr>
-		<input type="hidden" value="${ customer.password}" />
+		<input type="hidden" name="password" value="${ customer.password}" />
 		<tr><td class="box"> 이름 : <form:input type="text" value="${customer.name}" path="name" /></td></tr>
 		<tr><td class="box"> 닉네임 : <form:input type="text" value="${customer.nickname}" path="nickname" /></td></tr>
 		<tr><td class="box"> 전화번호 : <form:input type="tel" value="${customer.phoneno}" path="phoneno" /></td></tr>
@@ -28,7 +28,7 @@
 		<tr><td class="box"> 생년월일 : ${customer.birthday}</td></tr>
 		<tr><td class="box"> 사업자번호 : <form:input type="number" value="${customer.companyno}" path="companyno" /></td></tr>
 		<tr><td class="box"> 카테고리 : ${customer.type}</td></tr>
-		<input type="hidden" value="${ customer.type}" />
+		<input type="hidden" name="type" value="${ customer.type}" />
 		
 		<!-- 버튼 -->
 		<tr><td><input type="submit" class="write_button" value="수정" /> 
