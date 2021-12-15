@@ -1,35 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspheader.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>등록상품리스트.</title>
-<!-- 작성자 : 오근영 -->
-<!-- 작성일자 : 21.12.06 -->
-<!-- 수정일자 : 21.12.12 : 1차 폼 양식 변경 -->
-<!-- 수정일자 : 21.12.13 : 2차 폼 양식 변경  -->
-<!-- CSS파일 -->
-<%--  <link rel="stylesheet" href="regist.css">
+<title>상품문의글모음</title>
 </head>
 <body>
-	<!-- 1행 이미지 -->
-	<div class="grid-image">
-		<img src="j2.jpg"> <img src="j3.jpg"> <img src="j4.jpg">
-	</div>
-	<!-- 2행 이미지 -->
-	<div class="grid-image">
-		<img src="j3.jpg"> <img src="j6.jpg"> <img src="j4.jpg">
-	</div>
-	<!-- 등록 버튼 -->
-	<button class="add">작성하기</button>
-
-	<!-- 추후 페이징 기능 추가 예정 -->
---%>
-<table class="tb__notice">
+	<table class="tb__notice">
 		<caption>
-			등록상품<span>리스트 : ${ listcount }</span>
+			상품문의<span>문의수: ${ questioncount }</span>
 		</caption>
 		<colgroup>
 			<col class="col__num" />
@@ -39,11 +20,11 @@
 			<col class="col__views" />
 		</colgroup>
 		<thead>
-			<tr>
+			<!-- <tr>
 				<td colspan="5">
 					<div style="display: inline;">
 						<form action="list" method="post" name="searchform">
-							<input type="hidden" name="pageNum" value="1" />
+							<input type="hidden" name="pageNum" value="4" />
 							<select	name="searchtype" id="" style="width: 100px;">
 								<option value="">선택하세요</option>
 								<option value="subject">제목</option>
@@ -55,31 +36,29 @@
 							</script>
 							<input type="text" name="searchcontent" value="${ param.searchcontent }" style="width: 250px;" />
 							<input type="submit" value="검색" />
-							<input type="button" value="전체 게시물보기" onclick="location.href='registl'" />
+							<input type="button" value="전체 게시물보기" onclick="location.href='list'" />
 						</form>
 					</div>
 				</td>
-			</tr>
+			</tr> -->
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>글쓴이</th>
-				<th>날짜</th>
-				<th>조회수</th>
+				<!-- <th>번호</th> -->
+				<th>상품이름</th>
+				<!-- <th>글쓴이</th>
+				<th>날짜</th> -->
 			</tr>
 		</thead>
-		<!-- Show register List -->
+		<!-- Show question List -->
 		<tbody>
-			<c:if test="${ listcount > 0 }">
-				<c:forEach var="item" items="${ registl }">
+			<c:if test="${ questioncount > 0 }">
+				<c:forEach var="listquestion" items="${ listquestion }">
 					<tr>
-						<td>${ num }</td>
-						<c:set var="num" value="${ num - 1 }" />
-						<td><a href="saledetail?itemid=${ item.itemid }">${ item.title }</a></td>
-						<td>${ item.sellerid }</td>
-						<%--  <td>${ item.regdate }</td>--%>
-						<td><fmt:formatDate value="${ item.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
-						<td>${ item.views }</td>
+						<!-- <td>${ num }</td>
+						<c:set var="num" value="${ num - 1 }" />  -->
+						<td><a href="detail?num=${ listquestion.num }">${ listquestion.title }</a></td>
+						<!-- <td>${ listquestion.writer }</td>
+						<%--  <td>${ question.regdate }</td>--%>
+						<td><fmt:formatDate value="${ listquestion.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /> -->
 					</tr>
 				</c:forEach>
 				<!--  paging -->
@@ -102,16 +81,12 @@
 			</c:if>
 			<!-- end if (listcount > 0) // -->
 			<!-- 게시물 없음 -->
-			<c:if test="${ listcount == 0 }">
+			<c:if test="${ questioncount == 0 }">
 				<tr>
-					<td colspan="5">등록된 게시물이 없습니다.</td>
+					<td colspan="5">상품문의 글이 없습니다.</td>
 				</tr>
 			</c:if>
-		</tbody>
-		<!-- 글쓰기 -->
-		<tr>
-			<td colspan="5" align="right"><a href="register">[글쓰기]</a></td>
-		</tr>
+		</tbody>		
 	</table>
 </body>
 </html>

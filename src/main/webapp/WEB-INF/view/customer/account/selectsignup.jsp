@@ -6,103 +6,52 @@
 <meta charset="UTF-8">
 <title>회원가입 선택페이지</title>
 <style>
-#h {
-	font-size: 50px;
-	color: #0404B4;
-	font: "맑은고딕";
-	padding-top: 5%;
-}
-
-#personal {
-	width: 250px;
-	height: auto;
-}
-
-#company {
-	width: 250px;
-	height: auto;
-}
-
-.personalimg {
+.container {
+	width: 800px;
+	margin: 0 auto;
+	background-color: white;
+	display: grid;
+	grid-template-rows: 100px 480px 100px;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-areas:
+		"header header"
+		"left right"
+		"footer footer";
 	text-align: center;
-	margin-top: 300px;
-	margin-left: 15%;
-	position: absolute;
-	top: 50%;
-	height: 240px;
-	margin-top: -200px;
-	right: 53%;
 }
-
-.companyimg {
+header { grid-area: header; }
+footer { grid-area: footer; margin-top: 30px; }
+main { display: flex; }
+#pwrap { grid-area: left; }
+#swrap { grid-area: right; }
+.select {
+	width: 80%;
+	padding: 30px;
+	margin: 10px;
+	background-color: #eee;
+	border-radius: 10px;
 	text-align: center;
-	margin-bottom: 600px;
-	margin-right: 25%;
-	position: absolute;
-	top: 50%;
-	height: 240px;
-	margin-top: -200px;
-	float: right;
-	position: absolute;
-	left: 53%;
-}
-
-#personalbtn {
-	margin-top: 50px;
-	text-align: center;
-	width: 450px;
-	height: 150px;
-	box-shadow: 5px 5px 2.5px #01A9DB;
-	font-size: 50px;
-	background: #58D3F7;
-	border: none;
-	color: white;
 	cursor: pointer;
 }
-
-#personalbtn:hover {
-	background: #A9E2F3;
-	box-shadow: none;
-}
-
-#companybtn {
-	margin-top: 50px;
-	text-align: center;
-	width: 450px;
-	height: 150px;
-	box-shadow: 5px 5px 2.5px #0101DF;
-	font-size: 50px;
-	background: #5858FA;
-	border: none;
-	color: white;
-	cursor: pointer;
-}
-
-#companybtn:hover {
-	background: #A9A9F5;
-	box-shadow: none;
-}
+.select:hover { background-color: #f3f3f3; box-shadow: 5px 5px 28px -5px rgba(0,0,0,0.79); }
+.signupimg { width: inherit; }
+.select div { font-size: 30px; top: 10px; }
 </style>
 </head>
 <body>
-	<header>
-		<h1 id="h">
-			<center>회원가입을 환영합니다.</center>
-		</h1>
-	</header>
-	<div class="personalimg">
-	<h3>자신만의 맞는 바지를 <br>찾아보세요!</h3>
-	<a href="agree?type=p">
-		<img src="/img/personal.png" id="personal"><br>
-		<span id="personalbtn">개인회원</span>
-	</a>
-	</div>
-	<div class="companyimg">
-	<h3>상품을 등록하고<br>이윤을 남겨보세요!</h3>
-		<a href ="agree?type=c">
-			<img src="/img/company.png" id="company"><br>
-			<span id="companybtn">사업자</span>
-		</a>
+	<div class="container">
+		<header><h2>가입 유형 선택</h2></header>
+			<div id="pwrap" class="select" onclick="location.href='agree?t=p'">
+				<h3>자신만의 맞는 바지를 <br>찾아보세요!</h3>
+				<img src="/img/personal.png" class="signupimg">
+				<div>일반</div>
+			</div>
+			<div id="swrap" class="select" onclick="location.href='agree?t=s'">
+				<h3>상품을 등록하고<br>이윤을 남겨보세요!</h3>
+				<img src="/img/company.png" class="signupimg">
+				<div>사업자</div>
+			</div>
+		<footer>Mr.Function</footer>
 	</div>
 </body>
 </html>

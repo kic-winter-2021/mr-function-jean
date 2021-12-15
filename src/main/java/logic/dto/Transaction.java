@@ -6,7 +6,7 @@ public class Transaction {
 	private int num;
 	private int type;       // 입고 출고 구분.
 	private String saleid;
-	private String itemid;
+	private String itemid;//아이템 이름
 	private Date date;
 	private int quantity;
 	public int getNum() {

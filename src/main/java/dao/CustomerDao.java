@@ -20,8 +20,8 @@ public class CustomerDao {
 		mapper = template.getMapper(CustomerMapper.class);
 	}
 
-	public Customer select(String id) {
-		return mapper.selectOneCustomer(id);
+	public Customer selectOne(String id) {
+		return mapper.selectOne(id);
 	}
 
 	public void insert(Customer customer) {
@@ -50,13 +50,9 @@ public class CustomerDao {
 	public Seller selectOneSeller(String sellerid) {
 		return mapper.selectOneSeller(sellerid);
 	}
-	public void updateSellerBasic(Seller seller) {
-		mapper.updateSellerBasic(seller);
+	public void update(Customer customer) {
+		mapper.update(customer);
 	}
-	public void updateCompany(Seller seller) {
-		mapper.updateCompany(seller);
-	}
-
 	public void updatePassword(String id, String newpw) {
 		param.clear();
 		param.put("id", id);
@@ -69,4 +65,10 @@ public class CustomerDao {
 		
 	}
 
+	public void updateSellerBasic(Seller seller) {
+		mapper.updateSellerBasic(seller);
+	}
+	public void updateCompany(Seller seller) {
+		mapper.updateCompany(seller);
+	}
 }

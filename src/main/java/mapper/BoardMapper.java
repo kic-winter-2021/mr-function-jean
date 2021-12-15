@@ -1,10 +1,12 @@
 package mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import logic.dto.Board;
 import logic.dto.Faq;
 import logic.dto.Notice;
 import logic.dto.Question;
@@ -56,4 +58,15 @@ public interface BoardMapper {
 			+ "(articletype, category, title, customerid, content)"
 			+ "values (#{type}, #{category}, #{title}, #{customerid}, #{content})")
 	public void writeFaq(Faq faq);
+
+	@Select({"<script>",
+		"select count(*) from board where articletype = 4",
+		"<if test='customerid != null'>and customerid = #{customerid}</if>",
+		"</script>"})
+	public int countItemQuestion(Map<String, Object> param);
+	@Select({"<script>",
+		"select count(*) from board where articletype = 4",
+		"<if test='customerid != null'>and customerid = #{customerid}</if>",
+		"</script>"})
+	public List<Board> listItemQuestion(Map<String, Object> param);
 }

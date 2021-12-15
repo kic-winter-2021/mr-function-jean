@@ -16,8 +16,10 @@ public class CartDao {
 		mapper = template.getMapper(CartMapper.class);
 	}
 	
-	public Object countCart(String id) {
-		return mapper.countCart(id);
+	public int count(String customerid) {
+		return mapper.count(customerid);
 	}
-	
+	public Map<String, Integer> select(String customerid) {
+		return mapper.select(customerid);
+	}
 }
