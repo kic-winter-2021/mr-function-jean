@@ -39,10 +39,11 @@ public class AdminController {
 	@RequestMapping("user")
 	public ModelAndView userlist(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		List<Customer> list;
 		try {
+			List<Customer> list;
 			list = customerService.list();
 			mav.addObject("userlist",list);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

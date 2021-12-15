@@ -56,7 +56,9 @@ public interface CustomerMapper {
 		 	"</script>"})
 	String search(Map<String, Object> param);
 
-	@Select("select * from customer")
-	public List<Customer>listUser();
+	@Select("select " 
+			+ "id, type, phoneno, email, birthday, gender"
+			+ " from customer")
+	public List<Customer> listUser();
 
 }
