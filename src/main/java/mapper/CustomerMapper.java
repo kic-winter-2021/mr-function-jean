@@ -3,6 +3,7 @@ package mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -73,4 +74,9 @@ public interface CustomerMapper {
 			+ " id=#{id}, password=#{password}, name=#{name}, nickname=#{nickname}, phoneno=#{phoneno}, email=#{email}, gender=#{gender}, birthday=#{birthday}, companyno=#{companyno}, type=#{type}"
 			+ " where id=#{id}")
 	public void userupdate();
+	@Delete("set foreign_key_checks = 0"
+			+ " delete from customer where id=#{value}"
+			+ " set foreign_key_checks = 1")
+	public void delete(String id);
+	
 }

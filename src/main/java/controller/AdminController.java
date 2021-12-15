@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.UserException;
 import logic.dto.AdPost;
 import logic.dto.Customer;
 import logic.service.AdminService;
@@ -55,7 +56,7 @@ public class AdminController {
 	}
 	//관리자용 회원 정보 수정
 	//1. DB회원정보불러오기
-	@GetMapping("userupdate")
+	@GetMapping({"userupdate","userdetail"})
 	public ModelAndView userupdate(String id,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Customer dbcustomer = customerService.selectOne(id);
@@ -79,5 +80,24 @@ public class AdminController {
 		}
 		return mav;
 		
+	}
+	// 회원 강제 탈퇴 
+	@RequestMapping("delete")
+	public ModelAndView delete(String id,HttpSession session) {
+		ModelAndView mav = new ModelAndView(); 
+		//1. 관리자 인지 확인
+		Customer dbcustomer = customerService.selectOne(id);
+		System.out.println("삭제요청");
+		if(!dbcustomer.getId().equals("admin") ) {
+			throw new UserException("관리자만 접근 가능합니다","user?id=admin");
+		}
+		try {
+			customerService.delete(id);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:user?id=admin");
+		return mav;
 	}
 }

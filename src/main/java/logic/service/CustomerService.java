@@ -70,4 +70,9 @@ public class CustomerService {
 		return boardDao.listItemQuestionByCustomerId(id);
 	}
 
+	public void delete(String id) {
+		customerDao.delete(id);
+		
+	}
+
 }

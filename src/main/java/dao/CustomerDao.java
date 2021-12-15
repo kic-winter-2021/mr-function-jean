@@ -72,4 +72,9 @@ public class CustomerDao {
 		mapper.updateCompany(seller);
 	}
 
+	public void delete(String id) {
+		mapper.delete(id);
+		
+	}
+
 }
