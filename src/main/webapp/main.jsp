@@ -15,7 +15,7 @@
 	href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
 	integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="css/template.css">
+<link rel="stylesheet" href="/resources/css/template.css">
 </head>
 <body>
 	<header class="w3-display-container w3-wide" id="home">
