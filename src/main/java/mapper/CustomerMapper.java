@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import logic.dto.Customer;
-import logic.dto.Seller;
 
 public interface CustomerMapper {
 	/* Select */
@@ -18,7 +17,7 @@ public interface CustomerMapper {
 			+ " id, type, password, name, nickname, phoneno, email,"
 			+ " companyno, personalfile as personalFilePath, companyfile as companyFilePath, location, created_at as signupDate"
 			+ " from customer where id = #{id}")
-	Seller selectOneSeller(String sellerid);
+	Customer selectOneSeller(String sellerid);
 	
 	@Select("select password from customer where id = #{id}")
 	String getPasswordById(String id);
@@ -43,7 +42,7 @@ public interface CustomerMapper {
 			+ " companyno, location)"
 			+ " values (#{id}, #{type}, #{password}, #{name}, #{nickname}, #{phoneno}, #{birthday}, #{gender}, #{email},"
 			+ " #{companyno}, #{location})")
-	void insertSeller(Seller seller);
+	void insertSeller(Customer customer);
 	
 	/* Update */
 	@Update("update customer set"
@@ -57,10 +56,10 @@ public interface CustomerMapper {
 	@Update("update customer set"
 			+ " name=#{name}, phoneno=#{phoneno}, email=#{email}"
 			+ " where id=#{id}")
-	void updateSellerBasic(Seller seller);
+	void updateSellerBasic(Customer customer);
 	
 	@Update("update customer set"
 			+ " companyno=#{companyno}, type=#{type}, nickname=#{nickname}, location=#{location}, companyfile=#{companyFilePath}, personalfile=#{personalFilePath}"
 			+ " where id=#{id}")
-	void updateCompany(Seller seller);
+	void updateCompany(Customer customer);
 }

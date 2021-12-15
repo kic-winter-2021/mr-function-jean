@@ -10,8 +10,8 @@
 </head>
 <body>
 	<div id="info-container">
-		<%-- insel 로그인한 사업자 회원 --%>
-		<c:set var="insel" value="${ sessionScope.signinSeller }" />
+		<%-- signin 로그인한 사업자 회원 --%>
+		<c:set var="signin" value="${ sessionScope.signinUser }" />
 		<section id="member-info">
 			<table class="infotable">
 				<caption>기본 정보</caption>
@@ -22,7 +22,7 @@
 				<tbody>			
 					<tr>
 						<th>ID</th>
-						<td>${ insel.id }</td>
+						<td>${ signin.id }</td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
@@ -30,15 +30,15 @@
 					</tr>
 					<tr>
 						<th>이름</th>
-						<td>${ insel.name }</td>
+						<td>${ signin.name }</td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td>${ insel.phoneno }</td>
+						<td>${ signin.phoneno }</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td>${ insel.email }</td>
+						<td>${ signin.email }</td>
 					</tr>
 				</tbody>
 				<tfoot>
@@ -57,23 +57,23 @@
 				<tbody>
 					<tr>
 						<th>상호명</th>
-						<td>${ insel.nickname }</td>
+						<td>${ signin.nickname }</td>
 					</tr>
 					<tr>
 						<th>사업자 등록번호</th>
-						<td>${ insel.companyno}</td>
+						<td>${ signin.companyno}</td>
 					</tr>
 					<tr>
 						<th>사업 유형</th>
 						<td>
-							<c:if test="${ sessionScope.signinSeller.type == 3 }">온라인사업자</c:if>
-							<c:if test="${ sessionScope.signinSeller.type == 4 }">오프라인사업자</c:if>
+							<c:if test="${ signin.type == 3 }">온라인사업자</c:if>
+							<c:if test="${ signin.type == 4 }">오프라인사업자</c:if>
 						</td>
 					</tr>
-					<c:if test="${ insel.type == 4}">
+					<c:if test="${ signin.type == 4}">
 						<tr>
 							<th>매장 위치</th>
-							<td>${ insel.location }</td>
+							<td>${ signin.location }</td>
 						</tr>
 					</c:if>
 					<tr>

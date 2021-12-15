@@ -33,7 +33,9 @@ public class CustomerService {
 	public Customer selectOne(String id) {
 		return customerDao.selectOne(id);
 	}
-
+	public String getPasswordById(String id) {
+		return customerDao.getPasswordById(id);
+	}
 	public void signup(Customer customer) {
 		customerDao.insert(customer);
 	}
@@ -48,8 +50,13 @@ public class CustomerService {
 		// TODO: 비밀번호의 경우, 임시비밀번호로 변경 후 이메일 발송? 재설정
 		return customerDao.search(customer, url);
 	}
+	/* update */
 	public void update(Customer customer) {
 		customerDao.update(customer);
+	}
+	// 비밀번호 변경
+	public void updatePassword(String customerid, String newpw) {
+		customerDao.updatePassword(customerid, newpw);		
 	}
 	/* 상품 리뷰 itemReview */
 	public int countItemReview(String customerid) {

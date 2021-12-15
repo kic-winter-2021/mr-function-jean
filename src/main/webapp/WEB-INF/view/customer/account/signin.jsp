@@ -14,7 +14,8 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" href="/css/account.css" >
-<style>.errmsg { color: red; }</style>
+<style>.errmsg { color: red; display: block; margin-left: 30px; margin-top: 30px; }
+</style>
 </head>
 <body>
 	<main id="main-container">
@@ -23,27 +24,26 @@
 			<button id="tab2" class="tab">사업자 로그인</button>
 		</div>
 		<section id="signinform">
+			<spring:hasBindErrors name="customer">
+				<c:forEach var="error" items="${ errors.globalErrors }">
+					<span class="errmsg"><spring:message code="${ error.code }"/></span>
+				</c:forEach>
+			</spring:hasBindErrors>			
 			<div id="content1" class="twinform-container">
 				<form:form modelAttribute="customer" action="signin" name="psigninForm">
-					<spring:hasBindErrors name="customer">
-						<c:forEach var="error" items="${ errors.globalErrors }">
-							<span class="errmsg"><spring:message code="${ error.code }"/></span>
-						</c:forEach>
-					</spring:hasBindErrors>
 					<form:input type="text" path="id" placeholder="ID" class="inputbox"/>
 					<form:input type="password" path="password" placeholder="비밀번호" class="inputbox"/>
+					<form:input type="hidden" path="type" value="2"/>
+					<%@ include file="hidden.jspf" %>
 					<input type="submit" value="로그인" id="signin"/>
 				</form:form>
 			</div>
 			<div id="content2" class="twinform-container hidden">
-				<spring:hasBindErrors name="seller">
-					<c:forEach var="error" items="${ errors.globalErrors }">
-						<span class="err"><spring:message code="${ error.code }"/></span>
-					</c:forEach>
-				</spring:hasBindErrors>
-				<form:form modelAttribute="seller" action="signin" name="ssigninForm">
+				<form:form modelAttribute="customer" action="signin" name="ssigninForm">
 					<form:input type="text" path="id" placeholder="ID" class="inputbox"/>
 					<form:input type="password" path="password" placeholder="비밀번호" class="inputbox"/>
+					<form:input type="hidden" path="type" value="3"/>
+					<%@ include file="hidden.jspf" %>
 					<input type="submit" value="로그인" id="signin"/>
 				</form:form>
 			</div>
@@ -61,7 +61,7 @@
 	</main>
 	<footer>
 		<div class="copyright-wrap">
-			© Mr.function.<img class="footerlogo" src="/img/logo-1.png">
+			<span>© Mr.function.</span><a href="/main.jsp"><img class="footerlogo" src="/img/logo-1.png"></a>
 		</div>
 	</footer>	
 </body>

@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.UserException;
 import logic.dto.Customer;
-import logic.dto.Seller;
 import logic.service.CustomerService;
 import logic.service.SellerService;
 
@@ -38,121 +37,41 @@ public class AccountController {
 	public ModelAndView signinLoader(String t) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("customer", new Customer());
-		mav.addObject("seller", new Seller());
 		if (t != "" && t != null) mav.addObject("type", t);
 		return mav;
 	}
-	
+	// 로그인
 	@PostMapping("signin")
 	public ModelAndView signin(@Valid Customer customer, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("customer", new Customer());
-		mav.addObject("seller", new Seller());
-		// 유효성 검사
-		if (bresult.hasErrors()) {
-			System.out.println("Error is occured in personal Signin." + bresult.getModel());
-			mav.getModel().putAll(bresult.getModel());
-			return mav;
-		}
-		// 1-2 현재 있는 아이디 검사
-		try {
-			// 입력된 customer의 아이디로 DB의 사용자 정보를 가져와.
-			Customer dbCustomer = customerService.selectOne(customer.getId());
-			// 없어 -> 리턴(에러 메세지 반환) bresult message 추가
-			if (dbCustomer == null) {
-				bresult.reject("error.input.signin"); // TODO: messages.properties
-				mav.getModel().putAll(bresult.getModel());
-				return mav;
-			}
-			// 있어 -> 비밀번호 비교.
-			if (!customer.getPassword().equals(dbCustomer.getPassword())) {
-				// 비밀번호가 다르다면
-				bresult.reject("error.input.signin");
-				mav.getModel().putAll(bresult.getModel());
-				return mav;
-			}
-			customer = dbCustomer;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// 타입 검사
-		if (customer.getType() == 3 || customer.getType() == 4) {
-			throw new UserException("사업자 회원은 사업자 탭에서 로그인을 진행해주세요", "signin?type=s");
-		}
-		// 2. 로그인 (세션에 추가)
-		session.setAttribute("signinCustomer", customer);
-		// 디버그
-		System.out.println(customer);
-		mav.setViewName("redirect:/main.jsp");
-		return mav;
-	}
-	
-	// 개인 고객 로그인
-	@PostMapping("psignin")
-	public ModelAndView psignin(@Valid Customer customer, BindingResult bresult, HttpSession session) {
-		ModelAndView mav = new ModelAndView("/customer/account/signin?t=p");
-		//mav.setViewName();
 		
 		// 1. 유효성 검사 (입력했는지, 현재 있는 아이디인지)
 		// 1-1 입력 검사
 		if (bresult.hasErrors()) {
-			System.out.println("Error is occured in personal Signin." + bresult.getModel());
+			System.err.println("SIGNIN ERROR" + bresult.getModel());
 			mav.getModel().putAll(bresult.getModel());
-			return mav;
-		}
-		// 1-2 현재 있는 아이디 검사
-		try {
-			// 입력된 customer의 아이디로 DB의 사용자 정보를 가져와.
-			Customer dbCustomer = customerService.selectOne(customer.getId());
-			// 없어 -> 리턴(에러 메세지 반환) bresult message 추가
-			if (dbCustomer == null) {
-				System.out.println(customer.getId() + "없음");
-				bresult.reject("error.input.signin"); // TODO: messages.properties
-				mav.getModel().putAll(bresult.getModel());
-				return mav;
-			}
-			// 있어 -> 비밀번호 비교.
-			if (!customer.getPassword().equals(dbCustomer.getPassword())) {
-				System.out.println("비번틀림");
-				// 비밀번호가 다르다면
-				bresult.reject("error.password.customer");
-				mav.getModel().putAll(bresult.getModel());
-				return mav;
-			}
-			customer = dbCustomer;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// 타입 검사
-		if (customer.getType() == 3 || customer.getType() == 4) {
-			throw new UserException("사업자 회원은 사업자 탭에서 로그인을 진행해주세요", "signin?type=s");
-		}
-		// 2. 로그인 (세션에 추가)
-		session.setAttribute("signinCustomer", customer);
-		// 디버그
-		System.out.println(customer);
-		mav.setViewName("redirect:/main.jsp");
-		return mav;
-	}
-	// 사업자 고객 로그인
-	@PostMapping("ssignin")
-	public ModelAndView ssignin(@Valid Seller seller, BindingResult bresult, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		// 1. 유효성 검사 (입력했는지, 현재 있는 아이디인지)
-		if (bresult.hasErrors()) {
-			System.out.println("Error is occured in seller Signin." + bresult.getModel());
-			mav.getModel().putAll(bresult.getModel());
-			bresult.reject("error.input.signin");
 			return mav;
 		}
 		
-		// 2. 로그인 (세션에 추가)
-		Seller dbSeller = sellerService.select(seller.getId());
-		session.setAttribute("signinSeller", dbSeller);	
-		mav.setViewName("redirect:/seller/main");
+		// 1-2 현재 있는 아이디 검사
+		Customer dbCustomer = customerService.selectOne(customer.getId());
+		if (dbCustomer == null ||										// 현재 입력한 아이디와 동일한 계정이 없는 경우
+			!customer.getPassword().equals(dbCustomer.getPassword())) { // 비밀번호가 틀린 경우
+			bresult.reject("error.input.signin");
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}		
+		// 타입 검사
+		if (customer.isSeller() != dbCustomer.isSeller()) { // 입력 타입 오류
+			if (dbCustomer.isSeller()) throw new UserException("사업자 회원은 사업자 탭에서 로그인을 진행해주세요", "signin?type=s");
+			else throw new UserException("일반 회원은 기본 탭에서 로그인을 진행해주세요", "signin?type=p");
+		}
+		session.setAttribute("signinUser", dbCustomer);	
+		System.out.println(dbCustomer);
+		if (customer.isSeller()) mav.setViewName("redirect:/seller/main");
+		else mav.setViewName("redirect:/main.jsp");
 		return mav;
 	}
-	
 	@RequestMapping("agree")
 	public ModelAndView agree(String t, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -164,7 +83,7 @@ public class AccountController {
 	public ModelAndView getCustomer(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 세션은 로그인 여부만 확인
-		mav.addObject("customer", new Seller());
+		mav.addObject("customer", new Customer());
 		
 		return mav;
 	}
@@ -176,8 +95,8 @@ public class AccountController {
 			for (ObjectError e : bresult.getGlobalErrors()) {
 				System.out.println(e);
 			}
-			System.out.println("회원 로그인 실패" + bresult.getModel());
-			bresult.reject("error.input.user");
+			System.out.println("회원가입 실패" + bresult.getModel());
+			bresult.reject("error.input.customer");
 			mav.getModel().putAll(bresult.getModel());
 			return mav; 
 		}
@@ -201,13 +120,13 @@ public class AccountController {
 	public ModelAndView getSeller(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 세션은 로그인 여부만 확인
-		mav.addObject("seller", new Seller());
-		mav.setViewName("/customer/account/companysignup");
+		mav.addObject("customer", new Customer());
+		mav.addObject("sellertypes", Customer.SELLERTYPE);
 		return mav;
 	}
 	@PostMapping("ssignup")
-	public ModelAndView psignup(@Valid Seller seller, BindingResult bresult, HttpSession session) {
-		ModelAndView mav = new ModelAndView("/customer/account/companysignup");
+	public ModelAndView ssignup(@Valid Customer customer, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
 		// 유효성 검사
 		if (bresult.hasErrors()) {
 			System.out.println("회원 로그인 실패" + bresult.getModel());
@@ -216,8 +135,8 @@ public class AccountController {
 		}
 		// 값을 DB에 insert
 		try {
-			sellerService.signup(seller);
-			System.out.println(seller); // 디버깅용
+			customerService.signup(customer);
+			System.out.println(customer); // 디버깅용
 		} catch (DataIntegrityViolationException e) { // DB 무결성 오류
 			e.printStackTrace();
 			bresult.reject("error.duplicate.user");

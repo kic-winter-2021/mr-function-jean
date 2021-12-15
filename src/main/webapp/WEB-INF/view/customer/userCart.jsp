@@ -9,8 +9,8 @@
 <head>
     <meta charset="UTF-8">
     <title>장바구니</title>
-    <script src="../resources/js/userCart.js"></script>
-    <link rel="stylesheet" href="../resources/css/userCart.css">
+    <script src="/resources/js/userCart.js"></script>
+    <link rel="stylesheet" href="/resources/css/userCart.css">
 </head>
 
 <body>

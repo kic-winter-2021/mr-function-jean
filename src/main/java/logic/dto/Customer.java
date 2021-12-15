@@ -1,6 +1,7 @@
 package logic.dto;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class Customer {
 	@Size(min = 4, max = 30, message = "4~30자의 아이디를 입력해주세요")
 	private String id;
-	@Min(value=0)
+	@Min(value=1)
 	private int type;
-	@Size(min = 8, max = 20, message = "비밀번호는 8 ~ 20자로 입력하여야 합니다")
+	@Size(min = 4, max = 20, message = "비밀번호는 4 ~ 20자로 입력하여야 합니다")
 	private String password;
 	@NotEmpty(message = "이름을 입력해주세요")
 	private String name;
@@ -29,10 +30,8 @@ public class Customer {
 	@NotEmpty(message = "이메일을 입력해주세요")
 	@Email(message = "이메일을 정확하게 입력해주세요")
 	private String email;
-	@NotEmpty(message = "성별이 선택되지 않았습니다")
 	@Min(value=0, message = "성별이 선택되지 않았습니다")
 	private int gender;
-	@NotEmpty(message = "생일을 입력해주세요")
 	@Past
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date birthday;
@@ -53,9 +52,18 @@ public class Customer {
 	public static final int ONLINE = 3;
 	public static final int OFFLINE = 4;
 	
+	// 라디오 버튼을 위한 seller map
+	public static Map<Integer, String> SELLERTYPE;
+	
+	static {
+		SELLERTYPE = new HashMap<>();
+		SELLERTYPE.put(3, "온라인"); SELLERTYPE.put(4, "오프라인");
+	}
+	
 	public boolean isAdmin() { return this.type==ADMIN ? true : false; }
 	public boolean isPersonal() { return this.type==PERSONAL ? true : false; }
 	public boolean isSeller() { return (this.type==ONLINE || this.type == OFFLINE) ? true : false; }
+	// TODO: type validator 구현 
 	
 	public String getId() {
 		return id;

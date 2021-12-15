@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspheader.jsp" %>
-<c:set var="id" value="${sessionScope.signinCustomer.id}"/>
+<c:set var="id" value="${sessionScope.signinUser.id}"/>
 <!DOCTYPE html>
 <!-- 작성자 : 박이삭
 	 작성일자 : 2021-12-02
@@ -36,8 +36,11 @@
       </div> 
     </div>
   </header>
+  <!-- 왼쪽 메뉴바 -->
   <div class="mypage-menubar"><%@ include file="menubar.jspf" %></div>
+  <!-- 내용 -->
   <main><div></div></main>
+  <!-- 광고 등 오른쪽 사이드바 -->
   <div class="sidebar"></div>
 </div>
 </body>

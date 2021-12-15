@@ -25,6 +25,11 @@ public class Board {
 	public static final int NOTICE = 2;
 	public static final int QUESTION = 3;
 	public static final int ITEM = 4;
+	// 타입 체크 함수
+	public boolean isFaq() { return this.type == FAQ ? true : false; }
+	public boolean isNotice() { return this.type == NOTICE ? true : false; }
+	public boolean isQuestion() { return this.type == QUESTION ? true : false; }
+	public boolean isItemQuestion() { return this.type == ITEM ? true : false; }
 	
 	public int getNum() {
 		return num;

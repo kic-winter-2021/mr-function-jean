@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import exception.UserException;
 import logic.dto.Customer;
-import logic.dto.Seller;
 
 @Component
 @Aspect
@@ -17,7 +16,7 @@ public class SellerAspect {
 	// Seller
 	@Around("execution(* controller.Seller*.*(..)) && args(.., session)")
 	public Object sellerCheck(ProceedingJoinPoint joinPoint, HttpSession session) throws Throwable {
-		Customer signin = (Customer) session.getAttribute("signinCustomer");
+		Customer signin = (Customer) session.getAttribute("signinUser");
 		if (signin == null) {
 			throw new UserException("로그인이 필요한 페이지입니다.", "/customer/account/signin");
 		} else if (!signin.isSeller()) {

@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import logic.dto.Customer;
-import logic.dto.Seller;
 import mapper.CustomerMapper;
 
 @Repository
@@ -32,10 +31,6 @@ public class CustomerDao {
 	public String getPasswordById(String id) {
 		return mapper.getPasswordById(id);
 	}
-
-	public void insertSeller(Seller seller) {
-		mapper.insertSeller(seller);		
-	}
 	public String search(Customer customer, String url) {
 		param.clear();
 		param.put("email", customer.getEmail());
@@ -48,9 +43,6 @@ public class CustomerDao {
 		}
 		return mapper.search(param);
 	}
-	public Seller selectOneSeller(String sellerid) {
-		return mapper.selectOneSeller(sellerid);
-	}
 	public void update(Customer customer) {
 		mapper.update(customer);
 	}
@@ -60,10 +52,11 @@ public class CustomerDao {
 		param.put("password", newpw);
 		mapper.updatePassword(param);
 	}
-	public void updateSellerBasic(Seller seller) {
-		mapper.updateSellerBasic(seller);
+	public void updateSellerBasic(Customer customer) {
+		mapper.updateSellerBasic(customer);
 	}
-	public void updateCompany(Seller seller) {
-		mapper.updateCompany(seller);
+	public void updateCompany(Customer customer) {
+		mapper.updateCompany(customer);
 	}
+	
 }

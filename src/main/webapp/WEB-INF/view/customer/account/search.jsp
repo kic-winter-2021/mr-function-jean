@@ -16,15 +16,17 @@
 			<button id="tab2" class="tab">비밀번호 찾기</button>
 		</div>
 		<section class="twinform-container">
+			<div class="" id="error-continer">
+				<spring:hasBindErrors name="customer">
+					<span class="err">
+						<c:forEach var="error" items="${ errors.globalErrors }">
+							<spring:message code="${ error.code }" />
+						</c:forEach>
+					</span>
+				</spring:hasBindErrors>
+			</div>
 			<div id="content1">
 				<form:form modelAttribute="customer" action="idsearch" method="post" name="idsearchForm">
-					<spring:hasBindErrors name="customer">
-						<span class="err">
-							<c:forEach var="error" items="${ errors.globalErrors }">
-								<spring:message code="${ error.code }" />
-							</c:forEach>
-						</span>
-					</spring:hasBindErrors>
 					<table>
 						<tr>
 							<th>이메일</th>
@@ -46,13 +48,7 @@
 			</div>
 			<div id="content2" class="hidden">
 				<form:form modelAttribute="customer" action="pwsearch" method="post" name="pwsearchForm">
-					<spring:hasBindErrors name="customer">
-						<span class="err">
-							<c:forEach var="error" items="${ errors.globalErrors }">
-								<spring:message code="${ error.code }" />
-							</c:forEach>
-						</span>
-					</spring:hasBindErrors>
+					
 					<table>
 						<tr>
 							<th>아이디</th>
