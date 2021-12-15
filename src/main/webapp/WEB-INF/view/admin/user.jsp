@@ -16,11 +16,11 @@ function allchkbox(allchk) {
 <body>
 <div class="user">
 	<table>
-		<tr><td colspan="10">회원목록</td></tr>
-		<tr><th>아이디<a href="user?sort=0" class="noline"></a></th><th>전화번호</th><th>이메일</th><th>성별</th><th>생년월일</th><th>카테고리</th><th>&nbsp;</th><td><input type="checkbox" name="idchks" class="idchks" value="${customer.id}"></td></tr>
+		<tr><td colspan="12">회원목록</td></tr>
+		<tr><th>아이디<a href="user?sort=0" class="noline"></a></th><th>비밀번호</th><th>이름</th><th>닉네임</th><th>전화번호</th><th>이메일</th><th>성별</th><th>생년월일</th><th>사업자번호</th><th>카테고리</th><th>&nbsp;</th><td><input type="checkbox" name="idchks" class="idchks" value="${customer.id}"></td></tr>
 		<c:forEach items="${userlist}" var="customer">
-		<tr><td>${customer.id}</td><td>${customer.phoneno}</td><td>${customer.email}</td>
-		<td>${customer.gender}</td><td>${customer.birthday}</td><td>${customer.type}</td><td><a href="">수정</a> <a href="">강제탈퇴</a> <a href="">회원정보</a></td>
+		<tr><td>${customer.id}</td><td>${customer.password}</td><td>${customer.name}</td><td>${customer.nickname}</td><td>${customer.phoneno}</td><td>${customer.email}</td>
+		<td>${customer.gender}</td><td>${customer.birthday}</td><td>${customer.companyno}</td><td>${customer.type}</td><td><a href="userupdate?id=${customer.id}">수정</a> <a href="">강제탈퇴</a> <a href="">회원정보</a></td>
 		<td><input type="checkbox" name="idchks" class="idchks" value="${customer.id}"></td></tr>
 		</c:forEach>
 		<!-- 채팅기능? -->

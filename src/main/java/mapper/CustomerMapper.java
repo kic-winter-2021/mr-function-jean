@@ -61,7 +61,7 @@ public interface CustomerMapper {
 	void updateSellerBasic(Seller seller);
 	
 	@Select("select " 
-			+ "id, type, phoneno, email, birthday, gender"
+			+ "id, type, phoneno, email, birthday, gender, password, name, nickname, companyno"
 			+ " from customer")
 	public List<Customer> listUser();
 
@@ -69,4 +69,8 @@ public interface CustomerMapper {
 			+ " companyno=#{companyno}, type=#{type}, nickname=#{nickname}, location=#{location}, companyfile=#{companyFilePath}, personalfile=#{personalFilePath}"
 			+ " where id=#{id}")
 	void updateCompany(Seller seller);
+	@Update("update customer set"
+			+ " id=#{id}, password=#{password}, name=#{name}, nickname=#{nickname}, phoneno=#{phoneno}, email=#{email}, gender=#{gender}, birthday=#{birthday}, companyno=#{companyno}, type=#{type}"
+			+ " where id=#{id}")
+	public void userupdate();
 }

@@ -69,4 +69,5 @@ public class CustomerService {
 	public List<Board> listItemQuestion(String id) {
 		return boardDao.listItemQuestionByCustomerId(id);
 	}
+
 }

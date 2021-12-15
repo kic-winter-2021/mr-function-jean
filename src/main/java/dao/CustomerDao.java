@@ -71,4 +71,5 @@ public class CustomerDao {
 	public void updateCompany(Seller seller) {
 		mapper.updateCompany(seller);
 	}
+
 }

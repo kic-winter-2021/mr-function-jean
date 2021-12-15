@@ -30,6 +30,7 @@ function del() {
 			등록내용
 		</caption>
 		<!-- 본문 -->
+		<form:form modelAttribute="customer" action="detailupdate" method="post">
 		<tr><td class="box"> 판매자 : ${ item.sellerid }</td></tr>
 		<tr><td class="box"> 상품명 : ${ item.title }</td></tr>
 		<tr><td class="box"> Fit : ${ item.fit }</td></tr>
@@ -45,6 +46,7 @@ function del() {
 		<tr><td><a href="${url}" class="write_button">수정</a> 
 		<input type="button" class="write_button" value="삭제" onclick="del()"></td></tr>
 		<tr><td><a href="registl?id=admin" class="write_button">목록</a></td></tr>
+		</form:form>
 	</table>
 	</div>
 </body>
