@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/resources/css/qlist.css">
 <title>문의하기</title>
 <style>
 .tb__question caption > span {
@@ -44,13 +45,15 @@
 					</div>
 				</td>
 			</tr>
-			<tr>
+			
+			<tr id="d1">
 				<th>번호</th>
 				<th>제목</th>
 				<th>글쓴이</th>
 				<th>날짜</th>
 				<th>조회수</th>
 			</tr>
+			
 		</thead>
 		<!-- Show notice List -->
 		<tbody>
@@ -82,7 +85,7 @@
 	</table>
 	<!-- Pagination -->
 	<div class="w3-center w3-padding-32">
-		<c:if test="${ listcount > 0 }">
+		<c:if test="${ listcount > 1 }">
 			<div class="w3-bar">
 				<!-- 이전 -->
 				<c:if test="${ pageNum > 1 }">

@@ -196,7 +196,4 @@ public class SupportController {
 		mav.setViewName("redirect:list");
 		return mav;
 	}
-
-	
-	
 }

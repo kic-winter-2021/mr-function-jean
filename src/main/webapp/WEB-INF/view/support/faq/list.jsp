@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jspheader.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspheader.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>자주 묻는 질문</title>
+<link rel="stylesheet" href="/resources/css/qlist.css">
 </head>
 <body>
 	<table class="tb__faq">
