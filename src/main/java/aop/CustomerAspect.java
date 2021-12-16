@@ -15,7 +15,9 @@ import logic.dto.Customer;
 @Aspect
 public class CustomerAspect {
 	// 회원 로그인 체크
-	@Around("execution(* controller.Customer*.*(..)) && args(.., session)")
+	@Around("(execution(* controller.Customer*.*(..)) "
+			+ "|| execution(* controller.Support*.writeQuestion*(..)))"
+			+ "&& args(.., session)")
 	public Object signinCheck(ProceedingJoinPoint joinPoint, HttpSession session) throws Throwable {
 		Customer signin = (Customer) session.getAttribute("signinUser");
 		if (signin == null) {

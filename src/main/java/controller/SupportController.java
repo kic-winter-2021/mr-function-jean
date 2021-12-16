@@ -11,35 +11,30 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import logic.dto.Faq;
-import logic.dto.Notice;
-import logic.dto.Question;
-import logic.service.NoticeService;
-import logic.service.QuestionService;
-import logic.service.FaqService;
+import logic.dto.Board;
+import logic.service.BoardService;
 
 @Controller
 @RequestMapping("support")
 public class SupportController {
 	@Autowired
-	private NoticeService noticeService;
-	@Autowired
-	private QuestionService questionService;
-	@Autowired
-	private FaqService faqService; 
-
-	// notice 공지사항
-	@RequestMapping("notice/list")
-	public ModelAndView noticelist(HttpSession session) {
+	BoardService boardService;
+	
+	@RequestMapping("faq/list")
+	public ModelAndView listFaq(String category) {
 		ModelAndView mav = new ModelAndView();
-		List<Notice> list;
+		List<Board> list;
+		if (category == null || category.trim().equals("")) category = null;
 		try {
-			mav.addObject("listcount", noticeService.count());
-			list = noticeService.list();
-			mav.addObject("noticelist", list) ;
+			mav.addObject("listcount", boardService.count(Board.FAQ, category));
+			list = boardService.list(Board.FAQ, category);
+			mav.addObject("faqlist", list) ;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,15 +42,74 @@ public class SupportController {
 		
 		return mav;
 	}
-	// '공지하기' 열기
-	@RequestMapping("notice/write")
-	public String writeNotice(HttpSession session) {
-		// TODO: 관리자 체크(AOP)
-		return "support/notice/write";
+	@GetMapping({"faq/write", "notice/write"})
+	public ModelAndView writeAdmin(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("board", new Board());
+		return mav;
 	}
 	// 'notice form' action
-	@RequestMapping("notice/w")
-	public ModelAndView writeNoticeForm(@Valid Notice notice, BindingResult bresult, HttpSession session) {
+	@PostMapping("faq/write")
+	public ModelAndView writeFaqForm(@Valid Board board, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		// 유효성 검사
+		if (bresult.hasErrors()) {
+			System.out.println("Binding error is occured in faqForm." + mav.getModel());
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		try {
+			boardService.insert(board);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:list");
+		return mav;
+	}
+	// notice 공지사항
+	@RequestMapping("notice/list")
+	public ModelAndView listNotice(Integer pageNum, String category, String searchtype, String searchcontent) {
+		ModelAndView mav = new ModelAndView();
+		List<Board> list = null;
+		// 페이징
+		if (pageNum == null || pageNum.toString().equals("")) {
+			pageNum = 1;
+		}
+		if (category == null || category.trim().equals("")) category = null;
+		if (searchtype == null || searchcontent == null || searchtype.trim().equals("") || searchcontent.trim().equals("")) {
+			searchtype = null;
+			searchcontent = null;
+		}
+		int limit = Board.PAGESIZE;	// 10 한 페이지에 보여질 게시물의 건수
+		int listcount = boardService.count(Board.NOTICE, category, searchtype, searchcontent); // 전체 게시물 등록 건수
+		System.out.println(" 공지사항| 글 수: " + listcount);
+		try {
+			list = boardService.list(Board.NOTICE, pageNum, limit, category, searchtype, searchcontent);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int maxpage = (int)((double)listcount/limit + 0.95); // 최대 필요한 페이지 수
+		int startpage = (int)((pageNum/10.0 + 0.9) - 1 ) * 10 + 1; // 화면에 표시할 페이지의 시작번호
+		int endpage = startpage + 9;
+		if (endpage > maxpage) endpage = maxpage; // 화면에 표시할 페이지의 끝번호
+		
+		int boardno = listcount - (pageNum - 1 ) * limit; // 화면에 표시될 게시물 번호. 의미 없음		
+		
+		// 모델 추가
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listcount", listcount);
+		mav.addObject("noticelist", list);
+		mav.addObject("boardno", boardno);
+		
+		return mav;
+	}
+	// 'notice form' action
+	@PostMapping("notice/write")
+	public ModelAndView writeNoticeForm(@Valid Board board, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		// 유효성 검사
@@ -65,11 +119,10 @@ public class SupportController {
 			return mav;
 		}
 		try {
-			noticeService.write(notice);
+			boardService.insert(board);
+			System.out.println(board);
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: Exception page 추가 + Handler 추가
-			//throw new BoardException("공지사항 등록에 실패하였습니다.", "write");
 		}
 		
 		mav.setViewName("redirect:list");
@@ -82,38 +135,61 @@ public class SupportController {
 	 * - 문의 내용 가져오기. DB board 중 (article)type=3 불러오기
 	 */
 	@RequestMapping("q/list")
-	public ModelAndView listQuestion() {
+	public ModelAndView listQuestion(Integer pageNum, String category, String searchtype, String searchcontent) {
 		ModelAndView mav = new ModelAndView();
-		
-		// TODO: 문의하기 페이징
-		List<Question> list;
+		List<Board> list = null;
+		// 페이징
+		if (pageNum == null || pageNum.toString().equals("")) {
+			pageNum = 1;
+		}
+		if (category == null || category.trim().equals("")) category = null;
+		if (searchtype == null || searchcontent == null || searchtype.trim().equals("") || searchcontent.trim().equals("")) {
+			searchtype = null;
+			searchcontent = null;
+		}
+		int limit = Board.PAGESIZE;	// 10 한 페이지에 보여질 게시물의 건수
+		int listcount = boardService.count(Board.QUESTION, category, searchtype, searchcontent); // 전체 게시물 등록 건수
+		System.out.println(" 문의하기| 글 수: " + listcount);
 		try {
-			mav.addObject("listcount", questionService.count()); // 목적이 글 개수를 찾는 문장
-			
-			list = questionService.list();
-			mav.addObject("questionlist", list);
+			list = boardService.list(Board.QUESTION, pageNum, limit, category, searchtype, searchcontent);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
-		return mav;
-	}
-	@RequestMapping("q/write")
-	public ModelAndView writeQuestion(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		// TODO: 회원 체크 AOP
-		return mav;
-	}
-	@RequestMapping("q/w")
-	public ModelAndView writeQuestionForm(@Valid Question question, BindingResult bresult, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
+		}
 		
+		int maxpage = (int)((double)listcount/limit + 0.95); // 최대 필요한 페이지 수
+		int startpage = (int)((pageNum/10.0 + 0.9) - 1 ) * 10 + 1; // 화면에 표시할 페이지의 시작번호
+		int endpage = startpage + 9;
+		if (endpage > maxpage) endpage = maxpage; // 화면에 표시할 페이지의 끝번호
+		
+		int boardno = listcount - (pageNum - 1 ) * limit; // 화면에 표시될 게시물 번호. 의미 없음		
+		
+		// 모델 추가
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listcount", listcount);
+		mav.addObject("questionlist", list);
+		mav.addObject("boardno", boardno);
+		
+		return mav;
+	}
+	@GetMapping("q/write")
+	public ModelAndView writeQuestion(HttpSession session) { // 회원만 작성 가능
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("board", new Board());
+		return mav;
+	}
+	@PostMapping("q/write")
+	public ModelAndView writeQuestionForm(@Valid Board board, BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(board);
 		if(bresult.hasErrors()) {
-			System.out.println("Binding error is occured in questionForm." + mav.getModel());
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}
 		try {
-			questionService.write(question);
+			boardService.insert(board);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,45 +197,6 @@ public class SupportController {
 		return mav;
 	}
 
-	@RequestMapping("faq/list")
-	public ModelAndView listFaq(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		List<Faq> list;
-		try {
-			mav.addObject("listcount", faqService.count());
-			list = faqService.list();
-			mav.addObject("faqlist", list) ;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return mav;
-	}
-	@RequestMapping("faq/write")
-	public String writeFaq(HttpSession session) {
-		// TODO: 관리자 체크(AOP)
-		return "support/faq/write";
-	}
-	// 'notice form' action
-	@RequestMapping("faq/w")
-	public ModelAndView writeFaqForm(@Valid Faq faq, BindingResult bresult, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		
-		// 유효성 검사
-		if (bresult.hasErrors()) {
-			System.out.println("Binding error is occured in faqForm." + mav.getModel());
-			mav.getModel().putAll(bresult.getModel());
-			return mav;
-		}
-		try {
-			faqService.write(faq);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// TODO: Exception page 추가 + Handler 추가
-			//throw new BoardException("공지사항 등록에 실패하였습니다.", "write");
-		}
-		mav.setViewName("redirect:list");
-		return mav;
-	}
+	
+	
 }

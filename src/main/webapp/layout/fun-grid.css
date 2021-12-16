@@ -1,0 +1,48 @@
+@charset "UTF-8";
+:root {
+		--bar-bgcolor: #fff;
+}
+li { list-style: none; }
+.fun-grid {
+	display: grid;
+	grid-template-columns: minmax(180px, 1fr) minmax(800px, 4fr) minmax(150px, 1fr);
+	grid-template-rows: 300px minmax(600px, auto) minmax(auto, 300px);
+	grid-template-areas:
+		"header header header"
+		"left main right"
+		"footer footer footer";
+}
+.fun-grid > header { grid-area: header; }
+.fun-grid > main { grid-area: main; }
+.fun-grid > .menubar { grid-area: left; background: var(--bar-bgcolor);}
+.fun-grid > .sidebar { grid-area: right; background: var(--bar-bgcolor);}
+.fun-grid footer { grid-area: footer; }
+.menubar > h3, .menubar > span { position: relative; left: 40px; top: 10px; margin-bottom: 10px; }
+.menulist { display:flex; flex-direction: column; margin-top: 50px; }
+.menulist li { margin-left: 0; height: 40px; margin-bottom: 4px; font-size: 16px; color: #777; font-weight: bold; }
+.menulist a { all:unset; display:flex; justify-content: space-between; flex-wrap: nowrap;
+ padding: 5px; cursor: pointer; display: block; width: inherit; background-color: #fff; border-radius: 4px;}
+.menulist a:hover { background-color: #e8e8e8; border-bottom: 1px solid #ddd; box-shadow: 1px 1px 1px #eee;}
+.menulist .rightarrow { color: #fff; }
+.menulist a:hover .rightarrow { color: #777; };
+
+.mypagemenu > li {
+	padding: 5px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+}
+.mypagemenu div {
+	display: inline-block;
+	font-size: 16px;
+	padding: 4px;	
+}
+.mypagemenu span {
+	margin-left: 5px;
+	padding: 4px;
+}
+.mypagemenu > li:hover {
+	background-color: #e8e8e8;
+}
+.mypagemenu img { width: 25x; height: 25px; }
+.rightarrow { float: right; color: #ccc; }

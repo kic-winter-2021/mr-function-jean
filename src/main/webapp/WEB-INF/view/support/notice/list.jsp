@@ -6,10 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
+<style>
+.tb__notice caption > span {
+	float: right;
+}
+</style> 
 </head>
 <body>
 	<table class="tb__notice">
-		<caption>공지사항</caption>
+		<caption>공지사항&nbsp;<span>글 수: ${ listcount }</span></caption>
 		<colgroup>
 			<col class="col__num" />
 			<col class="col__title" />
@@ -25,8 +30,8 @@
 							<input type="hidden" name="pageNum" value="1" />
 							<select	name="searchtype" id="" style="width: 100px;">
 								<option value="">선택하세요</option>
-								<option value="subject">제목</option>
-								<option value="name">작성자</option>
+								<option value="title">제목</option>
+								<option value="customerid">작성자</option>
 								<option value="content">내용</option>
 							</select>
 							<script>
@@ -46,12 +51,11 @@
 			<c:if test="${ listcount > 0 }">
 				<c:forEach var="notice" items="${ noticelist }">
 					<tr>
-						<td>${ num }</td>
-						<c:set var="num" value="${ num - 1 }" />
+						<td>${ boardno }</td>
+						<c:set var="boardno" value="${ boardno - 1 }" />
 						<td><a href="detail?num=${ notice.num }">${ notice.title }</a></td>
-						<td>${ notice.writer }</td>
-						<%--  <td>${ notice.regdate }</td>--%>
-						<td><fmt:formatDate value="${ notice.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<td>${ notice.customerid }</td>
+						<td><fmt:formatDate value="${ notice.created_at }" pattern="yyyy-MM-dd HH:mm:ss" />
 						<td>${ notice.views }</td>
 					</tr>
 				</c:forEach>
@@ -75,7 +79,7 @@
 			<div class="w3-bar">
 				<!-- 이전 -->
 				<c:if test="${ pageNum > 1 }">
-					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum - 1 })">〈</a>
+					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum })">〈</a>
 				</c:if>
 				<c:forEach var="a" begin="${ startpage }" end="${ endpage }">
 					<!-- 현재 페이지 -->

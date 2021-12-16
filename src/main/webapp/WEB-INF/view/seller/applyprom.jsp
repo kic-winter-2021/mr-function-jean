@@ -15,14 +15,13 @@
 <title>프로모션 접수</title>
 <link rel="stylesheet" href="/resources/css/box.css">
 <style>
-	.errmsg {
-		color: red;
-	}
+	.errmsg { color: red; }
+	.apply-form span { display: inline-block; padding: 10px;}
 </style>
 </head>
 <body>
 	<div id="promform-container">
-		<form:form modelAttribute="adPost" action="applyprom" name="applyForm">
+		<form:form modelAttribute="adPost" action="applyprom" name="applyForm" class="apply-form">
 			<spring:hasBindErrors name="adPost">
 			<span class="errmsg"><c:forEach items="${errors.globalErrors}" var="error">
 					<spring:message code="${error.code}" />

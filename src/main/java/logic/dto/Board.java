@@ -2,35 +2,42 @@ package logic.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class Board {
 	private int num;
-	@NotEmpty // input type="hidden"으로 넣어주기
+	@NotNull// input type="hidden"으로 넣어주기
+	@Min(value = 0)
 	private int type;
 	private String category;
 	private String title;
 	@NotEmpty
-	private String writer;
+	private String customerid;
 	private String itemid;
 	@NotEmpty(message = "내용을 입력하세요")
 	private String content;
 	private int ref;
 	private int qa;
-	private Date regDate;
-	private Date update;
+	private Date created_at;
+	private Date updated_at;
 	private int views;	// 조회수
+	// 한 페이지에 보여질 게시물의 건수
+	public static final int PAGESIZE_SMALL = 5; 
+	public static final int PAGESIZE = 10;
 	
 	public static final int FAQ = 1;
 	public static final int NOTICE = 2;
 	public static final int QUESTION = 3;
-	public static final int ITEM = 4;
+	public static final int ITEMQ = 4;
+	public static final int ITEMA = 5;
 	// 타입 체크 함수
 	public boolean isFaq() { return this.type == FAQ ? true : false; }
 	public boolean isNotice() { return this.type == NOTICE ? true : false; }
 	public boolean isQuestion() { return this.type == QUESTION ? true : false; }
-	public boolean isItemQuestion() { return this.type == ITEM ? true : false; }
-	
+	public boolean isItemQuestion() { return this.type == ITEMQ ? true : false; }
+	public boolean isItemAnswer() { return this.type == ITEMA ? true : false; }
 	public int getNum() {
 		return num;
 	}
@@ -55,11 +62,11 @@ public class Board {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
-		return writer;
+	public String getCustomerid() {
+		return customerid;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setCustomerid(String customerid) {
+		this.customerid = customerid;
 	}
 	public String getItemid() {
 		return itemid;
@@ -85,17 +92,17 @@ public class Board {
 	public void setQa(int qa) {
 		this.qa = qa;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public Date getCreated_at() {
+		return created_at;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
-	public Date getUpdate() {
-		return update;
+	public Date getUpdated_at() {
+		return updated_at;
 	}
-	public void setUpdate(Date update) {
-		this.update = update;
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
 	}
 	public int getViews() {
 		return views;
@@ -105,8 +112,8 @@ public class Board {
 	}
 	@Override
 	public String toString() {
-		return "Board [num=" + num + ", type=" + type + ", category=" + category + ", title=" + title + ", writer="
-				+ writer + ", itemid=" + itemid + ", content=" + content + ", ref=" + ref + ", qa=" + qa + ", regDate="
-				+ regDate + ", update=" + update + ", views=" + views + "]";
+		return "Board [num=" + num + ", type=" + type + ", category=" + category + ", title=" + title + ", customerid="
+				+ customerid + ", itemid=" + itemid + ", content=" + content + ", ref=" + ref + ", qa=" + qa
+				+ ", created_at=" + created_at + ", updated_at=" + updated_at + ", views=" + views + "]";
 	}
 }

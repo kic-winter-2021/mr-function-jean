@@ -7,10 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import logic.dto.Notice;
-import logic.dto.Question;
 import logic.dto.Board;
-import logic.dto.Faq;
 import mapper.BoardMapper;
 
 @Repository
@@ -22,43 +19,55 @@ public class BoardDao {
 	private BoardDao(SqlSessionTemplate template) {
 		mapper = template.getMapper(BoardMapper.class);
 	}
-	
-	public Object countNotice() {
-		return mapper.countNotice();
+	public Board selectOne(int boardnum) {
+		return mapper.selectOne(boardnum);
 	}
-
-	public List<Notice> listNotice() {
-		return mapper.listNotice();
+	public int count(int articletype) {
+		param.clear();
+		param.put("articletype", articletype);
+		return mapper.count(param);
+	}	
+	public int count(int articletype, String category, String searchtype, String searchcontent) {
+		param.clear();
+		param.put("articletype", articletype);
+		param.put("category", category);
+		param.put("searchtype", searchtype);
+		param.put("searchcontent", searchcontent);
+		return mapper.count(param);
+	}	
+	public List<Board> list(int articletype) {
+		param.clear();
+		param.put("articletype", articletype);
+		return mapper.list(param);
 	}
-	public void writeNotice(Notice notice) {
-		mapper.writeNotice(notice);
+	// FAQ
+	public List<Board> list(int articletype, String category) {
+		param.clear();
+		param.put("articletype", articletype);
+		param.put("category", category);
+		return mapper.list(param);
 	}
-	
-	public int countQuestion() {
-		return mapper.countQuestion();
-	}
-
-	public List<Question> listQuestion() {
-		return mapper.listQuestion();
-	}
-
-	public void writeQuestion(Question question) {
-		mapper.writeQuestion(question);
-	}
-
-	public int countFaq() {
-		return mapper.countFaq();
-	}
-
-	public List<Faq> listFaq() {
-		return mapper.listFaq();
-	}
-
-	public void writeFaq(Faq faq) {
-		mapper.writeFaq(faq);
+	public List<Board> list(int articletype, int pageNum, int limit, String category, String searchtype, String searchcontent) {
+		param.clear();
+		param.put("articletype", articletype);
+		param.put("category", category);
+		param.put("searchtype", searchtype);
+		param.put("searchcontent", searchcontent);
 		
+		int startrow = (pageNum - 1) * limit;
+		param.put("startrow", startrow);
+		param.put("limit", limit);
+		return mapper.list(param);
 	}
-
+	public void insert(Board board) {
+		mapper.insert(board);		
+	}
+	public void update(Board board) {
+		mapper.update(board);
+	}
+	public void delete(int boardnum) {
+		mapper.delete(boardnum);
+	}
 	public int countItemQuestionByCustomerId(String customerid) {
 		param.clear();
 		param.put("customerid", customerid);
