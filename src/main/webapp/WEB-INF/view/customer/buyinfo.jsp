@@ -6,19 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
+<link rel="stylesheet" href="/resources/css/adboard.css" />
 </head>
 <body>
-	<table class="tb__notice">
-		<caption>
-			주문목록<span> 구매갯수: ${ listcount }</span>
-		</caption>
-		<colgroup>
-			<col class="col__num" />
-			<col class="col__title" />
-			<col class="col__writer" />
-			<col class="col__regDate" />
-			<col class="col__views" />
-		</colgroup>
+	<table class="tb_adblist">
+		<h4 align="center">주문목록<span> 구매갯수: ${ listcount }</span></h4>		
 		<thead>			
 			<tr>
 				<th>구매자</th>
@@ -32,7 +24,6 @@
 			<c:if test="${ listcount > 0 }">
 				<c:forEach var="sale" items="${ salelist }">
 					<tr>
-						<td>${ num }</td>
 						<c:set var="num" value="${ num - 1 }" />
 						<td><a href="detail?num=${ sale.saleid }">${ sale.saleid }</a></td>
 						<td>${ sale.buyerid }</td>
@@ -53,12 +44,11 @@
 					<td colspan="5">구매한 상품이 없습니다.</td>
 				</tr>
 			</c:if>
-		</tbody>		
-	</table>
-	<!-- Pagination -->
-	<div class="w3-center w3-padding-32">
-		<c:if test="${ listcount > 0 }">
-			<div class="w3-bar">
+			
+	<!-- paging -->
+	<tr class="adblist_paging">
+		<td colspan="5">
+			<c:if test="${ listcount > 0 }">			
 				<!-- 이전 -->
 				<c:if test="${ pageNum > 1 }">
 					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum - 1 })">〈</a>
@@ -70,13 +60,11 @@
 					<c:if test="${ a != pageNum }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ a })">${ a }</a></c:if>
 				</c:forEach>
 				<!-- 다음 -->
-				<c:if test="${ pageNum < maxpage }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum +1 })">〉</a></c:if>
-				<%-- <c:if test="${ pageNum >= maxpage }">≫</c:if>--%>
-				<%-- 
-					<a class="w3-button w3-black" href="#">1</a>
-					<a class="w3-button w3-hover-black" href="#">2</a>
-				--%>	</div>
+				<c:if test="${ pageNum < maxpage }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum +1 })">〉</a></c:if>				
 		</c:if>
-	</div>
+		</td>
+	</tr>
+	</tbody>
+	</table>
 </body>
 </html>
