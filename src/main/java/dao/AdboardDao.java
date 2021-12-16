@@ -21,21 +21,21 @@ public class AdboardDao {
 	public int count() {		
 		return mapper.count();
 	}
-	public List<AdBoard> adblist() {
-		return mapper.adblist();
+	public List<AdBoard> list() {
+		param.clear();
+		return mapper.select(param);
 	}
-
-	public void adbwrite(AdBoard adBoard) {
-		mapper.adbwrite(adBoard);
-		
+	public void insert(AdBoard adBoard) {
+		mapper.insert(adBoard);	
 	}
-
-	public AdBoard adbdedail(Integer num) {
-		return mapper.adbdetail(num);
+	public AdBoard selectOneByNum(Integer num) {
+		param.clear();
+		param.put("num", num);
+		List<AdBoard> list = mapper.select(param);
+		if (list.size() > 0) return list.get(0);
+		return null;
 	}
-
-	public void update(AdBoard adBoard) {
-		
+	public void update(AdBoard adBoard) {		
 		mapper.update(adBoard);
 	}
 }

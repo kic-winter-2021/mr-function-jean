@@ -28,13 +28,18 @@ public class AdminController {
 	@Autowired
 	CustomerService customerService;
 	
+	@RequestMapping("main")
+	public String main(HttpSession session) {
+		return null;
+	}
 	@RequestMapping("postlist")
 	public ModelAndView postlist(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		List<AdPost> list;
 		// adpost 테이블을 읽어서 뷰에 전달  (service
 		try {
-			list = adminService.list();
+			mav.addObject("listcount", adminService.countAdPost());
+			list = adminService.listAdPost();
 			mav.addObject("postlist", list);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -47,8 +52,8 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();		
 		List<AdBoard> adblist;
 		try {
-			mav.addObject("listcount", adminService.count());
-			adblist = adminService.adblist();
+			mav.addObject("listcount", adminService.countAdBoard());
+			adblist = adminService.listAdBoard();
 			mav.addObject("adblist", adblist);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -73,7 +78,7 @@ public class AdminController {
 			return mav;
 		}
 		try {
-			adminService.adbwrite(adBoard);
+			adminService.insertAdBoard(adBoard);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
@@ -83,7 +88,7 @@ public class AdminController {
 	@GetMapping({"adbdetail","adbupdate"})
 	public ModelAndView adbdetail(Integer num) {
 		ModelAndView mav = new ModelAndView();
-		AdBoard dbadboard = adminService.adbdetail(num);
+		AdBoard dbadboard = adminService.selectAdBoardByNum(num);
 		mav.addObject("adBoard", dbadboard);
 		return mav;
 	}
@@ -143,7 +148,6 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return mav;
-		
 	}
 	// 회원 강제 탈퇴 
 	@RequestMapping("delete")
@@ -163,5 +167,9 @@ public class AdminController {
 		}
 		mav.setViewName("redirect:user?id=admin");
 		return mav;
+	}
+	@RequestMapping("stats")
+	public String stats(HttpSession session) {
+		return null;
 	}
 }

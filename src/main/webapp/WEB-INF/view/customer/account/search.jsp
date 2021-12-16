@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
-<link rel="stylesheet" href="/css/account.css" >
+<link rel="stylesheet" href="/resources/css/account.css" >
 <style>	.errmsg { color: red; } </style>
 </head>
 <body>

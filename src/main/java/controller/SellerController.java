@@ -119,7 +119,27 @@ public class SellerController {
 		}
 		return mav;
 	}
-	
+	@PostMapping("updatepw")
+	public ModelAndView updatePassword(@RequestParam Map<String, String> req, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		String newpw = req.get("newpw");
+		// 비밀번호 검사
+		Customer signin = (Customer)session.getAttribute("signinUser");
+		
+		try {
+			// 이전 비밀번호 비교 -> js로 처리
+			//String oldpw = req.get("oldpw");
+			customerService.updatePassword(signin.getId(), newpw);
+			// 세션 갱신
+			session.setAttribute("signinUser", signin);
+			System.out.println(signin.getId() + " 비밀번호 변경(" + req.get("oldpw") + " -> " + newpw + ")");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:myinfo");
+		return mav;
+	}
 	/* promotion */
 	@GetMapping("applyprom")
 	public ModelAndView applypromLoader(Integer rank, HttpSession session) {

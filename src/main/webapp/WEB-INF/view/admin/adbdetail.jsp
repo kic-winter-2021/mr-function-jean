@@ -6,14 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>등록광고 상세페이지</title>
-<link rel="stylesheet" href="resources/css/detail.css">
+<link rel="stylesheet" href="/resources/css/detail.css">
 <script>
-function del() {
-		
+	function del() {
 		if(confirm("광고를 삭제하시겠습니까?")) {
-		window.location.href = "delete?num=${param.num}"
+			window.location.href = "delete?num=${param.num}"
 		}
-		}
+	}
 </script>
 </head>
 <body>

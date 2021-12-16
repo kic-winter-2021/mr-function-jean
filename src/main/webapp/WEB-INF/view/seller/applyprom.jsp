@@ -13,7 +13,7 @@
 <meta name="author" content="Sangjun">
 <meta charset="UTF-8">
 <title>프로모션 접수</title>
-<link rel="stylesheet" href="/css/box.css">
+<link rel="stylesheet" href="/resources/css/box.css">
 <style>
 	.errmsg {
 		color: red;

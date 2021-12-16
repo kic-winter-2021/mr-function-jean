@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>사업자용 회원가입 페이지</title>
-<link rel="stylesheet" href="/css/signup.css" />
+<link rel="stylesheet" href="/resources/css/signup.css" />
 </head>
 <body>
 <div id="signup-container">
-	<header class="logoheader"><img src="/img/logo-1.png"></header>
+	<header class="logoheader"><img src="/resources/img/logo-1.png"></header>
 	<!-- 회원가입 타이틀 부분 -->
 	<form:form modelAttribute="customer" action="ssignup" method="post" name="signupForm" class="signupform">
 		<!-- error binding -->

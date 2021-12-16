@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="/css/account.css" >
+<link rel="stylesheet" href="/resources/css/account.css" >
 <style>.errmsg { color: red; display: block; margin-left: 30px; margin-top: 30px; }
 </style>
 </head>
@@ -57,11 +57,11 @@
 			<input type="checkbox" id="saveid" value="y" onclick="chk()">
 			<label for="saveid">아이디 저장</label>
 		</div>
-		<div class="kakao-signin"><img src="/img/kakaosignin.png"></div>
+		<div class="kakao-signin"><img src="/resources/img/kakaosignin.png"></div>
 	</main>
 	<footer>
 		<div class="copyright-wrap">
-			<span>© Mr.function.</span><a href="/main.jsp"><img class="footerlogo" src="/img/logo-1.png"></a>
+			<span>© Mr.function.</span><a href="/main.jsp"><img class="footerlogo" src="/resources/img/logo-1.png"></a>
 		</div>
 	</footer>	
 </body>

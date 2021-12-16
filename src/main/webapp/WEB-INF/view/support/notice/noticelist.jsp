@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>공지사항 리스트</title>
 <!-- css파일 -->
-<link rel="stylesheet" href="notice.css">
+<link rel="stylesheet" href="/resources/css/notice.css">
 
 </head>
 <body>

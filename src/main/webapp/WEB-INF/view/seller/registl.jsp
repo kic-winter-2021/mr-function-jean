@@ -11,7 +11,7 @@
 <!-- 수정일자 : 21.12.12 : 1차 폼 양식 변경 -->
 <!-- 수정일자 : 21.12.13 : 2차 폼 양식 변경  -->
 <!-- CSS파일 -->
-<link rel="stylesheet" href="regist.css">
+<link rel="stylesheet" href="/resources/css/regist.css">
 </head>
 <body><%--  
 	<!-- 1행 이미지 -->

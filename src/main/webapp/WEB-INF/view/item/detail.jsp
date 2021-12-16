@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>아이템 상세보기: 제목</title>
 <%-- <script src="../resources/js/detail.js" defer></script>--%>
-<link rel="stylesheet" href="../resources/css/detail.css">
+<link rel="stylesheet" href="/resources/css/detail.css">
 </head>
 <body>
 	<div class="container">

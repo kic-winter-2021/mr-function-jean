@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>프로모션 상품</title>
-<link rel="stylesheet" href="/css/seller.css" />
+<link rel="stylesheet" href="/resources/css/seller.css" />
 <style>
 
 </style>

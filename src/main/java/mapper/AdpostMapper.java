@@ -15,12 +15,14 @@ public interface AdpostMapper {
 			+ " values (#{sellerid}, #{rank}, #{status}, #{itemid}, #{contract})")
 	void insert(AdPost adpost);
 	
+	@Select("select count(*) from adpost")
+	int count();
+	
 	@Select({"<script>",
 			"select * from adpost",
 			"<if test='sellerid != null'> where sellerid = #{sellerid} </if>",
 			"</script>"})
 	List<AdPost> select(Map<String, Object> param);
-
-	@Select("select * from AdPost")
-	List<AdPost> listAdPost();
+	
+	
 }

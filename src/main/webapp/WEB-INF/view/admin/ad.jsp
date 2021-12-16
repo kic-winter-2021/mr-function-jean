@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>광고문의글</title>
-<link rel="stylesheet" href="resources/css/box.css">
+<link rel="stylesheet" href="/resources/css/box.css">
 </head>
 <body>
 	<!-- 작성자 : 오근영 -->

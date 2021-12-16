@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/upCart.css">
+<link rel="stylesheet" href="/resources/css/upCart.css">
 </head>
 <body>
 <section id="content">

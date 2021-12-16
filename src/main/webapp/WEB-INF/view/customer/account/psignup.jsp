@@ -7,12 +7,12 @@
 <meta charset="UTF-8">
 <title>개인용 회원가입 페이지</title>
 <!--   <link rel="stylesheet" href="/css/signup.css" >-->
-<link rel="stylesheet" href="/css/signup.css" />
+<link rel="stylesheet" href="/resources/css/signup.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<div id="signup-container">
-		<header class="logoheader"><img src="/img/logo-1.png"></header>
+		<header class="logoheader"><img src="/resources/img/logo-1.png"></header>
 		<main>
 			<form:form modelAttribute="customer" action="psignup" method="post" name="signupForm" class="signupform">
 				<!-- error binding -->

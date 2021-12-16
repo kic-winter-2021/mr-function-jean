@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 작성하기</title>
-<link rel="stylesheet" href="/css/box.css">
+<link rel="stylesheet" href="/resources/css/box.css">
 </head>
 <body>
 	<!-- 좌측 부분 레이아웃 -->

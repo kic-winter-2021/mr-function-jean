@@ -17,21 +17,21 @@ public class AdpostDao {
 	private AdpostDao(SqlSessionTemplate template) {
 		mapper = template.getMapper(AdpostMapper.class);
 	}
-	public void insert(AdPost adpost) {
-		mapper.insert(adpost);
-	}
-	// 아이디로 출력하기
-	public void selectById(String sellerid) {
-		param.clear();
-		param.put("sellerid", sellerid);
-		mapper.select(param);
+	public int count() {
+		return mapper.count();
 	}
 	// 관리자가 전체 페이지를 불러올 경우.
-	public void select() {
+	public List<AdPost> list() {
 		param.clear();
-		mapper.select(param);
+		return mapper.select(param);
 	}
-	public List<AdPost> listAdPost() {
-		return mapper.listAdPost();
+	// 아이디로 출력하기
+	public List<AdPost> selectById(String sellerid) {
+		param.clear();
+		param.put("sellerid", sellerid);
+		return mapper.select(param);
 	}
+	public void insert(AdPost adpost) {
+		mapper.insert(adpost);
+	}	
 }
