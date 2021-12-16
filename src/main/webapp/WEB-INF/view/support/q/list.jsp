@@ -9,9 +9,7 @@
 </head>
 <body>
 	<table class="tb__question">
-		<caption>
-			Spring 게시판<span>글 수: ${ listcount }</span>
-		</caption>
+		<caption>문의 게시판<span>글 수: ${ listcount }</span></caption>
 		<colgroup>
 			<col class="col__num" />
 			<col class="col__title" />
@@ -63,23 +61,6 @@
 						<td>${ question.views }</td>
 					</tr>
 				</c:forEach>
-				<!--  paging -->
-				<tr class="paging">
-					<td colspan="5"><c:if test="${ pageNum > 1 }">
-							<!--  <a href="list?pageNum=${ pageNum - 1 }">[이전]</a> -->
-							<a href="javascript:listpage(${ pageNum - 1 })">[이전]</a>
-						</c:if> <c:if test="${pageNum <= 1 }">[이전]</c:if> <c:forEach var="a"
-							begin="${ startpage }" end="${ endpage }">
-							<c:if test="${ a == pageNum }">[${ a }]</c:if>
-							<c:if test="${ a != pageNum }">
-								<!--  <a href="list?pageNum=${ a }">${ a }</a> -->
-								<a href="javascript:listpage(${ a })">${ a }</a>
-							</c:if>
-						</c:forEach> <c:if test="${ pageNum < maxpage }">
-							<!--  <a href="list?pageNum=${ pageNum +1 }">[다음]</a> -->
-							<a href="javascript:listpage(${ pageNum +1 })">[다음]</a>
-						</c:if> <c:if test="${ pageNum >= maxpage }">[다음]</c:if></td>
-				</tr>
 			</c:if>
 			<!-- end if (listcount > 0) // -->
 			<!-- 게시물 없음 -->
@@ -94,5 +75,24 @@
 			<td colspan="5" align="right"><a href="write">[글쓰기]</a></td>
 		</tr>
 	</table>
+	<!-- Pagination -->
+	<div class="w3-center w3-padding-32">
+		<c:if test="${ listcount > 0 }">
+			<div class="w3-bar">
+				<!-- 이전 -->
+				<c:if test="${ pageNum > 1 }">
+					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum - 1 })">〈</a>
+				</c:if>
+				<c:forEach var="a" begin="${ startpage }" end="${ endpage }">
+					<!-- 현재 페이지 -->
+					<c:if test="${ a == pageNum }"><a class="w3-button w3-black" href="#">${ a }</a></c:if>
+					<!-- 다른 페이지 -->
+					<c:if test="${ a != pageNum }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ a })">${ a }</a></c:if>
+				</c:forEach>
+				<!-- 다음 -->
+				<c:if test="${ pageNum < maxpage }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum +1 })">〉</a></c:if>
+			</div>
+		</c:if>
+	</div>
 </body>
 </html>

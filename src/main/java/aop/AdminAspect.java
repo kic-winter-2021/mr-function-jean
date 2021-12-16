@@ -18,7 +18,7 @@ public class AdminAspect {
 			+ " || execution(* controller.Support*.writeFaq*(..)))"
 			+ " && args(.., session))")
 	public Object adminCheckSupport(ProceedingJoinPoint joinPoint, HttpSession session) throws Throwable {
-		Customer signin = (Customer)session.getAttribute("signinCustomer");
+		Customer signin = (Customer)session.getAttribute("signinUser");
 		if (signin == null || !signin.isAdmin()) {
 			throw new UserException("비정상적인 접근입니다.", "/support/faq/list");
 		}

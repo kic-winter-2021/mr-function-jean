@@ -2,18 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspheader.jsp" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>등록상품리스트.</title>
+<title>등록상품리스트</title>
 <!-- 작성자 : 오근영 -->
 <!-- 작성일자 : 21.12.06 -->
 <!-- 수정일자 : 21.12.12 : 1차 폼 양식 변경 -->
 <!-- 수정일자 : 21.12.13 : 2차 폼 양식 변경  -->
 <!-- CSS파일 -->
-<%--  <link rel="stylesheet" href="regist.css">
+<link rel="stylesheet" href="regist.css">
 </head>
-<body>
+<body><%--  
 	<!-- 1행 이미지 -->
 	<div class="grid-image">
 		<img src="j2.jpg"> <img src="j3.jpg"> <img src="j4.jpg">
@@ -27,9 +27,9 @@
 
 	<!-- 추후 페이징 기능 추가 예정 -->
 --%>
-<table class="tb__notice">
+	<table class="tb__item">
 		<caption>
-			등록상품<span>리스트 : ${ listcount }</span>
+			등록상품 리스트<span>상품 수 : ${ listcount }</span>
 		</caption>
 		<colgroup>
 			<col class="col__num" />
@@ -78,34 +78,15 @@
 						<td><a href="saledetail?itemid=${ item.itemid }">${ item.title }</a></td>
 						<td>${ item.sellerid }</td>
 						<%--  <td>${ item.regdate }</td>--%>
-						<td><fmt:formatDate value="${ item.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<td><fmt:formatDate value="${ item.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td>${ item.views }</td>
 					</tr>
 				</c:forEach>
-				<!--  paging -->
-				<tr class="paging">
-					<td colspan="5"><c:if test="${ pageNum > 1 }">
-							<!--  <a href="list?pageNum=${ pageNum - 1 }">[이전]</a> -->
-							<a href="javascript:listpage(${ pageNum - 1 })">[이전]</a>
-						</c:if> <c:if test="${pageNum <= 1 }">[이전]</c:if> <c:forEach var="a"
-							begin="${ startpage }" end="${ endpage }">
-							<c:if test="${ a == pageNum }">[${ a }]</c:if>
-							<c:if test="${ a != pageNum }">
-								<!--  <a href="list?pageNum=${ a }">${ a }</a> -->
-								<a href="javascript:listpage(${ a })">${ a }</a>
-							</c:if>
-						</c:forEach> <c:if test="${ pageNum < maxpage }">
-							<!--  <a href="list?pageNum=${ pageNum +1 }">[다음]</a> -->
-							<a href="javascript:listpage(${ pageNum +1 })">[다음]</a>
-						</c:if> <c:if test="${ pageNum >= maxpage }">[다음]</c:if></td>
-				</tr>
 			</c:if>
 			<!-- end if (listcount > 0) // -->
 			<!-- 게시물 없음 -->
 			<c:if test="${ listcount == 0 }">
-				<tr>
-					<td colspan="5">등록된 게시물이 없습니다.</td>
-				</tr>
+				<tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
 			</c:if>
 		</tbody>
 		<!-- 글쓰기 -->
@@ -113,5 +94,29 @@
 			<td colspan="5" align="right"><a href="register">[글쓰기]</a></td>
 		</tr>
 	</table>
+	<!-- Pagination -->
+	<div class="w3-center w3-padding-32">
+		<c:if test="${ listcount > 0 }">
+			<div class="w3-bar">
+				<!-- 이전 -->
+				<c:if test="${ pageNum > 1 }">
+					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum - 1 })">〈</a>
+				</c:if>
+				<c:forEach var="a" begin="${ startpage }" end="${ endpage }">
+					<!-- 현재 페이지 -->
+					<c:if test="${ a == pageNum }"><a class="w3-button w3-black" href="#">${ a }</a></c:if>
+					<!-- 다른 페이지 -->
+					<c:if test="${ a != pageNum }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ a })">${ a }</a></c:if>
+				</c:forEach>
+				<!-- 다음 -->
+				<c:if test="${ pageNum < maxpage }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum +1 })">〉</a></c:if>
+				<%-- <c:if test="${ pageNum >= maxpage }">≫</c:if>--%>
+				<%-- 
+					<a class="w3-button w3-black" href="#">1</a>
+					<a class="w3-button w3-hover-black" href="#">2</a>
+				--%>
+			</div>
+		</c:if>
+	</div>
 </body>
 </html>

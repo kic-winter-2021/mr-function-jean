@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 등록 페이지</title>
+<title>상품 등록</title>
 <link rel="stylesheet" href="/css/box.css">
 </head>
 <body>
@@ -18,7 +18,9 @@
 
 		<!-- 게시글 내용 -->
 		<form:form modelAttribute="item" action="register" method="post" >
-		판매자 : <form:input class="box" type="text" path="itemid" /><br>
+		<!--  itemid generator, 한글 입력시 인코딩 필요(UrlEncoder) -->
+		상품아이디(나중 삭제) : <form:input class="box" type="text" path="itemid" /><br>
+		<!--  판매자 변경하기 지금 admin, sessionScope -->
 		판매자 : <form:input class="box" type="hidden" value="admin" path="sellerid" /><br>
 		상품명 : <form:input class="box" type="text" placeholder="상품명을 입력해주세요" path="title" /><br>
 		

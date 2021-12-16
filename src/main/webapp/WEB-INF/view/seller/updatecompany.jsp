@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspheader.jsp" %>
 <!DOCTYPE html>
+<!-- 작성자: 정상준 -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,15 +11,14 @@
 </head>
 <body>
 	<div id="basicform-container">
-		<%-- insel 로그인한 사업자 회원 --%>
-		<c:set var="insel" value="${ sessionScope.signinSeller }" />
-		<form:form modelAttribute="seller" action="upcompany" enctype="multipart/form-data" name="companyForm">
+		<c:set var="signin" value="${ sessionScope.signinUser }" />
+		<form:form modelAttribute="customer" action="upcompany" enctype="multipart/form-data" name="companyForm">
 			<!-- hidden -->
-			<form:hidden path="id" value="${ insel.id }"/>
-			<form:hidden path="name" value="${ insel.name }"/>
-			<form:hidden path="password" value="${ insel.password }"/>
-			<form:hidden path="phoneno" value="${ insel.phoneno }" />
-			<form:hidden path="email" value="${ insel.email }"/>
+			<form:hidden path="id" value="${ signin.id }"/>
+			<form:hidden path="name" value="${ signin.name }"/>
+			<form:hidden path="password" value="${ signin.password }"/>
+			<form:hidden path="phoneno" value="${ signin.phoneno }" />
+			<form:hidden path="email" value="${ signin.email }"/>
 			<!--  -->
 			<table class="infotable">
 				<caption>사업자 정보</caption>
@@ -39,25 +39,25 @@
 				<tbody>
 					<tr>
 						<th>상호명</th>
-						<td><form:input type="text" path="nickname" value="${ insel.nickname }"/></td>
+						<td><form:input type="text" path="nickname" value="${ signin.nickname }"/></td>
 					</tr>
 					<tr>
 						<th>사업자 등록번호</th>
-						<td><form:input type="text" path="companyno" value="${ insel.companyno }"/></td>
+						<td><form:input type="text" path="companyno" value="${ signin.companyno }"/></td>
 					</tr>
 					<tr>
 						<th>사업 유형</th>
 						<td>
-							<form:select id="sellertype" path="type" value="${ insel.type }">
+							<form:select id="sellertype" path="type" value="${ signin.type }">
 								<form:option value="3" label="온라인" />
-								<c:if test="${insel.type == '4' }"> <form:option value="4" label="오프라인" selected="selected" /> </c:if>
-								<c:if test="${insel.type != '4' }"> <form:option value="4" label="오프라인"/> </c:if>
+								<c:if test="${signin.type == '4' }"> <form:option value="4" label="오프라인" selected="selected" /> </c:if>
+								<c:if test="${signin.type != '4' }"> <form:option value="4" label="오프라인"/> </c:if>
 							</form:select>	
 						<td>
 					</tr>
 					<tr>
 						<th>매장 위치</th>
-						<td><form:input id="location" type="text" path="location" value="${ insel.location }"/></td>
+						<td><form:input id="location" type="text" path="location" value="${ signin.location }"/></td>
 					</tr>
 					<tr>
 						<th>사업자 등록 정보</th>

@@ -20,14 +20,17 @@ import exception.ItemException;
 import exception.UpdateException;
 
 import logic.dto.Item;
-import logic.dto.Seller;
 import logic.dto.AdPost;
+import logic.dto.Customer;
+import logic.service.CustomerService;
 import logic.service.ItemService;
 import logic.service.SellerService;
 
 @Controller
 @RequestMapping("seller")
 public class SellerController {
+	@Autowired
+	CustomerService customerService;
 	@Autowired
 	SellerService sellerService;
 	@Autowired
@@ -36,16 +39,17 @@ public class SellerController {
 	@GetMapping("*")	// 
 	public ModelAndView info(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject(new Seller());
+		mav.addObject("customer", new Customer());
 		return mav;
 	}
 	@GetMapping({"upbasic", "upseller"})
 	public ModelAndView updateLoader(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			String id = ((Seller)session.getAttribute("signinSeller")).getId();
-			session.setAttribute("signinSeller", sellerService.select(id));
-			mav.addObject("seller", sellerService.select(id));
+			String signinId = ((Customer)session.getAttribute("signinUser")).getId();
+			Customer dbCustomer = customerService.selectOne(signinId);
+			session.setAttribute("signinUser", dbCustomer);
+			mav.addObject("customer", dbCustomer);
 		} catch (NullPointerException e) {
 			System.out.println("로그인 세션 종료");
 			throw new UserException("로그아웃 상태입니다", "/customer/account/signin?t=s");
@@ -56,7 +60,7 @@ public class SellerController {
 	}
 	// TODO: 사용자 정보 변경
 	@PostMapping("upbasic")
-	public ModelAndView updateBasic(@Valid Seller seller, BindingResult bresult, HttpSession session) {
+	public ModelAndView updateBasic(@Valid Customer customer, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 1) 유효성 검사
 		if (bresult.hasErrors()) {
@@ -66,9 +70,9 @@ public class SellerController {
 		}
 		// 2) 세션 정보로 DB 불러오기
 		try {
-			sellerService.updateBasic(seller);
-			Seller dbSeller = sellerService.select(seller.getId());
-			session.setAttribute("signinSeller", dbSeller); // 세션 갱신
+			customerService.update(customer); // TODO: 업데이트 기능 점검
+			Customer dbSeller = customerService.selectOne(customer.getId());
+			session.setAttribute("signinUser", dbSeller); // 세션 갱신
 			System.out.println("개인정보 업데이트 성공\n"  + dbSeller);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,7 +82,7 @@ public class SellerController {
 	}
 
 	@PostMapping("upcompany")
-	public ModelAndView updateCompany(@Valid Seller seller, BindingResult bresult, HttpSession session) {
+	public ModelAndView updateCompany(@Valid Customer customer, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 1) 유효성 검사
 		if (bresult.hasErrors()) {
@@ -88,9 +92,9 @@ public class SellerController {
 		}
 		try {
 			// 업데이트
-			sellerService.updateCompany(seller);
-			Seller dbSeller = sellerService.select(seller.getId());
-			session.setAttribute("signinSeller", dbSeller); // 세션 갱신
+			sellerService.updateCompany(customer);
+			Customer dbSeller = customerService.selectOne(customer.getId());
+			session.setAttribute("signinUser", dbSeller); // 세션 갱신
 			System.out.println("사업자 업데이트 성공\n"  + dbSeller);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,38 +109,17 @@ public class SellerController {
 		ModelAndView mav = new ModelAndView();
 		String id = null;
 		try {
-			id = ((Seller)session.getAttribute("signinSeller")).getId();
-			mav.addObject(sellerService.getPasswordById(id));
+			id = ((Customer)session.getAttribute("signinUser")).getId();
+			mav.addObject(customerService.getPasswordById(id));
 		} catch (NullPointerException e) {
 			System.out.println("로그인 세션 종료");
-			throw new UserException("로그아웃 상태입니다", "/customer/account/csignin");
+			throw new UserException("로그아웃 상태입니다", "/customer/account/signin");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	@PostMapping("updatepw")
-	public ModelAndView updatePassword(@RequestParam Map<String, String> req, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		
-		String newpw = req.get("newpw");
-		// 비밀번호 검사
-		Seller signin = (Seller)session.getAttribute("inseller");
-		
-		try {
-			// 이전 비밀번호 비교 -> js로 처리
-			//String oldpw = req.get("oldpw");
-			sellerService.updatePassword(signin.getId(), newpw);
-			// 세션 갱신
-			session.setAttribute("inseller", signin);
-			System.out.println(signin.getId() + " 비밀번호 변경(" + req.get("oldpw") + " -> " + newpw + ")");
-		} catch (Exception e) {
-			System.out.println("Exception while DB selection: seller");
-			e.printStackTrace();
-		}
-		mav.setViewName("redirect:myinfo");
-		return mav;
-	}
+	
 	/* promotion */
 	@GetMapping("applyprom")
 	public ModelAndView applypromLoader(Integer rank, HttpSession session) {
@@ -150,8 +133,8 @@ public class SellerController {
 		
 		// 판매자 아이템 리스트를 받아와 모델에 넣기
 		try {
-			String id = ((Seller)session.getAttribute("signinSeller")).getId();
-			List<Item> itemlist =  sellerService.getItemList(id);
+			String signinId = ((Customer)session.getAttribute("signinUser")).getId();
+			List<Item> itemlist =  sellerService.getItemList(signinId);
 			mav.addObject("itemlist", itemlist);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -231,7 +214,7 @@ public class SellerController {
 		}
 		//아이디 검사. 세션에 있는 seller랑 item seller 비교
 			
-		// Seller signin = (Seller)session.getAttribute("signinSeller");
+		// Seller signin = (Customer)session.getAttribute("signinUser");
 		// hidden으로 받은 seller id
 		if(!item.getSellerid().equals("admin")) { //signin.getId()
 			throw new UpdateException("수정은 상품을 등록한 사업자만 가능합니다","saledetail");
@@ -260,7 +243,7 @@ public class SellerController {
 		}
 		//2. itemid의 주인과 session의 id랑 같은지
 		
-		//String signin = ((Seller)session.getAttribute("signinSeller"));
+		//String signin = ((Customer)session.getAttribute("signinUser"));
 		if (!dbitem.getSellerid().equals("admin")) { //signin.getId()
 			throw new UpdateException("게시글 삭제를 실패 했습니다.","registl?id=admin"); //우선 admin처리
 		}//3. 삭제

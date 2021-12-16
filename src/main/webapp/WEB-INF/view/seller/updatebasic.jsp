@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspheader.jsp" %>
 <!DOCTYPE html>
+<!-- 작성자: 정상준 -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -11,11 +12,11 @@
 <body>
 	<div id="basicform-container">
 		<%-- insel 로그인한 사업자 회원 --%>
-		<c:set var="insel" value="${ sessionScope.signinSeller }" />
+		<c:set var="signin" value="${ sessionScope.signinUser }" />
 		<form:form modelAttribute="seller" action="upbasic" name="basicForm">
-			<form:hidden path="id" value="${ insel.id }"/>
-			<form:hidden path="password" value="${ insel.password }"/>
-			<form:hidden path="type" value="${ insel.type }"/>
+			<form:hidden path="id" value="${ signin.id }"/>
+			<form:hidden path="password" value="${ signin.password }"/>
+			<form:hidden path="type" value="${ signin.type }"/>
 			<table class="infotable">
 				<caption>기본 정보</caption>
 				<colgroup>
@@ -36,7 +37,7 @@
 				<tbody>
 					<tr>
 						<th>ID</th>
-						<td>${ insel.id }</td>
+						<td>${ signin.id }</td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
@@ -44,15 +45,15 @@
 					</tr>
 					<tr>
 						<th>이름</th>
-						<td><form:input path="name" type="text" value="${ insel.name }"/></td>
+						<td><form:input path="name" type="text" value="${ signin.name }"/></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td><form:input path="phoneno" type="text" value="${ insel.phoneno }"/></td>
+						<td><form:input path="phoneno" type="text" value="${ signin.phoneno }"/></td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td><form:input path="email" type="text" value="${ insel.email}"/></td>
+						<td><form:input path="email" type="text" value="${ signin.email}"/></td>
 					</tr>
 				</tbody>
 				<tfoot>

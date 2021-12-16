@@ -23,13 +23,13 @@
 <body>
 	<div id="promform-container">
 		<form:form modelAttribute="adPost" action="applyprom" name="applyForm">
-			<spring:hasBindErrors name="user">
+			<spring:hasBindErrors name="adPost">
 			<span class="errmsg"><c:forEach items="${errors.globalErrors}" var="error">
 					<spring:message code="${error.code}" />
 				</c:forEach></span>
 			</spring:hasBindErrors>
 			<!-- hidden id -->
-			<form:hidden path="sellerid" value="${sessionScope.signinSeller.id }"/>
+			<form:hidden path="sellerid" value="${sessionScope.signinUser.id }"/>
 			<!-- promotion radio button -->
 			<h5>프로모션 선택</h5>
 			<form:radiobuttons id="rank" path="rank" items="${RANK}" value="${rank}" />

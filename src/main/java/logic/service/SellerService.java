@@ -9,8 +9,8 @@ import dao.AdpostDao;
 import dao.CustomerDao;
 import dao.ItemDao;
 import logic.dto.AdPost;
+import logic.dto.Customer;
 import logic.dto.Item;
-import logic.dto.Seller;
 
 @Service
 public class SellerService {
@@ -21,27 +21,12 @@ public class SellerService {
 	@Autowired
 	ItemDao itemDao;
 	
-	public void signup(Seller seller) {
-		customerDao.insertSeller(seller);
+	// 사업자 정보 갱신
+	public void updateBasic(Customer customer) {
+		customerDao.updateSellerBasic(customer);
 	}
-	// 사업자 1명 조회
-	public Seller select(String sellerid) {
-		return customerDao.selectOneSeller(sellerid);
-	}
-	// 비밀번호 변경
-	public void updatePassword(String sellerid, String newpw) {
-		customerDao.updatePassword(sellerid, newpw);		
-	}
-
-	public void updateBasic(Seller seller) {
-		customerDao.updateSellerBasic(seller);
-	}
-	public void updateCompany(Seller seller) {
-		customerDao.updateCompany(seller);
-	}
-
-	public String getPasswordById(String id) {
-		return customerDao.getPasswordById(id);
+	public void updateCompany(Customer customer) {
+		customerDao.updateCompany(customer);
 	}
 	public void apply(AdPost adpost) {
 		adpostDao.insert(adpost);

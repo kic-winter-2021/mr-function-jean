@@ -97,8 +97,8 @@ public class AdminController {
 			return mav;
 		}
 		try {
-			adminService.adbupdate(num);	
-			mav.setViewName("redirect:adbdetail?num="+num);
+			adminService.updateAdBoard(adBoard);	
+			mav.setViewName("redirect:adbdetail?num="+adBoard.getNum());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -137,7 +137,7 @@ public class AdminController {
 			return mav;
 		}
 		try {
-			customerService.update(customer);
+			customerService.updateAll(customer);
 			mav.setViewName("redirect:user");
 		} catch(Exception e) {
 			e.printStackTrace();

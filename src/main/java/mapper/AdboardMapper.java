@@ -1,5 +1,4 @@
 package mapper;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -23,8 +22,7 @@ public interface AdboardMapper {
 
 	@Select("select * from adboard where num=#{value}")
 	public AdBoard adbdetail(Integer num);
-
+	
 	@Update("update adboard set content=#{content} where num=#{num}")
-
-	public void adbupdate(AdBoard adBoard);
+	void update(AdBoard adboard);	
 }

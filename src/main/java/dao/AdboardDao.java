@@ -34,8 +34,8 @@ public class AdboardDao {
 		return mapper.adbdetail(num);
 	}
 
-	public void adbupdate(AdBoard adBoard) {
+	public void update(AdBoard adBoard) {
 		
-		mapper.adbupdate(adBoard);
+		mapper.update(adBoard);
 	}
 }

@@ -10,7 +10,7 @@
 <body>
 	<table class="tb__notice">
 		<caption>
-			상품문의<span>문의수: ${ questioncount }</span>
+			상품문의<span>문의수: ${ listcount }</span>
 		</caption>
 		<colgroup>
 			<col class="col__num" />
@@ -50,43 +50,50 @@
 		</thead>
 		<!-- Show question List -->
 		<tbody>
-			<c:if test="${ questioncount > 0 }">
-				<c:forEach var="listquestion" items="${ listquestion }">
+			<c:if test="${ listcount > 0 }">
+				<c:forEach var="iq" items="${ iqlist }">
 					<tr>
 						<!-- <td>${ num }</td>
 						<c:set var="num" value="${ num - 1 }" />  -->
-						<td><a href="detail?num=${ listquestion.num }">${ listquestion.title }</a></td>
-						<!-- <td>${ listquestion.writer }</td>
+						<td><a href="detail?num=${ iq.num }">${ iq.title }</a></td>
+						<!-- <td>${ iq.writer }</td>
 						<%--  <td>${ question.regdate }</td>--%>
-						<td><fmt:formatDate value="${ listquestion.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /> -->
+						<td><fmt:formatDate value="${ iq.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /> -->
 					</tr>
 				</c:forEach>
-				<!--  paging -->
-				<tr class="paging">
-					<td colspan="5"><c:if test="${ pageNum > 1 }">
-							<!--  <a href="list?pageNum=${ pageNum - 1 }">[이전]</a> -->
-							<a href="javascript:listpage(${ pageNum - 1 })">[이전]</a>
-						</c:if> <c:if test="${pageNum <= 1 }">[이전]</c:if> <c:forEach var="a"
-							begin="${ startpage }" end="${ endpage }">
-							<c:if test="${ a == pageNum }">[${ a }]</c:if>
-							<c:if test="${ a != pageNum }">
-								<!--  <a href="list?pageNum=${ a }">${ a }</a> -->
-								<a href="javascript:listpage(${ a })">${ a }</a>
-							</c:if>
-						</c:forEach> <c:if test="${ pageNum < maxpage }">
-							<!--  <a href="list?pageNum=${ pageNum +1 }">[다음]</a> -->
-							<a href="javascript:listpage(${ pageNum +1 })">[다음]</a>
-						</c:if> <c:if test="${ pageNum >= maxpage }">[다음]</c:if></td>
-				</tr>
 			</c:if>
 			<!-- end if (listcount > 0) // -->
 			<!-- 게시물 없음 -->
-			<c:if test="${ questioncount == 0 }">
+			<c:if test="${ listcount == 0 }">
 				<tr>
 					<td colspan="5">상품문의 글이 없습니다.</td>
 				</tr>
 			</c:if>
 		</tbody>		
 	</table>
+	<!-- Pagination -->
+	<div class="w3-center w3-padding-32">
+		<c:if test="${ listcount > 0 }">
+			<div class="w3-bar">
+				<!-- 이전 -->
+				<c:if test="${ pageNum > 1 }">
+					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum - 1 })">〈</a>
+				</c:if>
+				<c:forEach var="a" begin="${ startpage }" end="${ endpage }">
+					<!-- 현재 페이지 -->
+					<c:if test="${ a == pageNum }"><a class="w3-button w3-black" href="#">${ a }</a></c:if>
+					<!-- 다른 페이지 -->
+					<c:if test="${ a != pageNum }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ a })">${ a }</a></c:if>
+				</c:forEach>
+				<!-- 다음 -->
+				<c:if test="${ pageNum < maxpage }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum +1 })">〉</a></c:if>
+				<%-- <c:if test="${ pageNum >= maxpage }">≫</c:if>--%>
+				<%-- 
+					<a class="w3-button w3-black" href="#">1</a>
+					<a class="w3-button w3-hover-black" href="#">2</a>
+				--%>
+			</div>
+		</c:if>
+	</div>
 </body>
 </html>

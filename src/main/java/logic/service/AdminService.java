@@ -2,6 +2,8 @@ package logic.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +38,7 @@ public class AdminService {
 	public AdBoard adbdetail(Integer num) {
 		return adboardDao.adbdedail(num);
 	}
-
-	public void adbupdate(Integer num) {
-		adboardDao.adbupdate(num);
+	public void updateAdBoard(@Valid AdBoard adBoard) {
+		adboardDao.update(adBoard);
 	}
 }

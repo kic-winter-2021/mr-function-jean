@@ -2,10 +2,15 @@ package logic.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+
 // 광고게시판
 public class AdBoard {
+	@NotEmpty
 	private int num;
+	@NotEmpty
 	private String content;
+	@NotEmpty
 	private String itemid;
 	private Date regDate;
 	private Date expDate;
@@ -51,6 +56,4 @@ public class AdBoard {
 		return "AdBaord [num=" + num + ", content=" + content + ", itemid=" + itemid + ", regDate=" + regDate
 				+ ", expDate=" + expDate + ", views=" + views + "]";
 	}
-	
-	
 }
