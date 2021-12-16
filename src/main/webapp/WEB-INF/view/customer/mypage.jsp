@@ -37,7 +37,6 @@
     </div>
   </header>
   <!-- 왼쪽 메뉴바 -->
-  <div class="mypage-menubar"><%@ include file="menubar.jspf" %></div>
   <!-- 내용 -->
   <main><div></div></main>
   <!-- 광고 등 오른쪽 사이드바 -->

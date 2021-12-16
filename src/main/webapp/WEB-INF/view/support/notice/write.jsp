@@ -11,8 +11,13 @@
 <body>
 	<!-- 좌측 부분 레이아웃 -->
 	<div class="form_box">
-		<form:form modelAttribute="notice" action="w" name="noticeForm">
+		<form:form modelAttribute="notice" action="write" name="noticeForm">
 			<h3>공지사항</h3>
+			<spring:hasBindErrors name="notice">
+				<c:forEach var="error" items="${ errors.globalErrors }">
+					<span class="errmsg"><spring:message code="${ error.code }"/></span>
+				</c:forEach>
+			</spring:hasBindErrors>
 			제목 <input class="box" type="text" name="title" placeholder="제목을 입력해주세요"><br>
 			카테고리
 			<select class="box" name="category">

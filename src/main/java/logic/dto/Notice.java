@@ -2,18 +2,17 @@ package logic.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 public class Notice {
 	public static int TYPE = 2; // 공지사항 타입
 	private int num;
-	@NotNull // input type="hidden"으로 넣어주기
 	private int type;
 	private String category;
 	private String title;
-	@NotNull
+	@NotEmpty
 	private String writer;
-	@NotNull(message = "내용을 입력하세요")
+	@NotEmpty(message = "내용을 입력하세요")
 	private String content;
 	private Date regDate;
 	private Date update;

@@ -2,6 +2,7 @@ package logic.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class Question {
@@ -13,7 +14,7 @@ public class Question {
 	private String title;
 	@NotNull
 	private String writer;
-	@NotNull(message = "내용을 입력하세요")
+	@NotEmpty(message = "내용을 입력하세요")
 	private String content;
 	private int ref;
 	private int qa;

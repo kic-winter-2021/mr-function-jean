@@ -18,39 +18,11 @@ div{
 .green{
   color: #24855b;
 }
-
 .wrap {
-	width: 90%;
+	width: 100%;
 	display: grid;
 	background-color: #F8F8F8;
-	grid-template-columns: 300px 1000px;
-	grid-template-rows: 200px 800px 150px;
-	grid-template-areas:
-  	"menubar header header"
-  	"menubar main sidebar";
 }
-/* grid-area */
-.wrap header { grid-area: header; }
-.wrap .mypage-menubar { grid-area: menubar;}
-.wrap main { grid-area: main; }
-.wrap .sidebar { grid-area: sidebar; }
-
-.mypagemenu > li {
-	list-style: none;
-	padding: 5px;
-	cursor: pointer;
-}
-.mypagemenu span {
-	margin-left: 5px;
-	font-size: 18px;
-	padding: 4px;
-}
-.mypagemenu > li:hover {
-	background-color: #e8e8e8;
-}
-.mypagemenu img { width: 25x; height: 25px; }
-.rightarrow { float: right; color: #ccc; }
-
 /* ================== 주문/배송조회 박스 시작 ==================== */
 .shippingStatusContainer{
   padding: 21px 16px;

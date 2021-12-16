@@ -56,7 +56,7 @@ public interface BoardMapper {
 
 	@Insert("insert into board "
 			+ "(articletype, category, title, customerid, content)"
-			+ "values (#{type}, #{category}, #{title}, #{customerid}, #{content})")
+			+ "values (#{type}, #{category}, #{title}, #{writer}, #{content})")
 	public void writeFaq(Faq faq);
 
 	@Select({"<script>",

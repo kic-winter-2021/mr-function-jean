@@ -2,8 +2,20 @@
 <!-- /WEB-INF/decorators.xml -->
 <!-- 레이아웃 jsp, 꾸밀 페이지들, 제외할 페이지들 -->
 <decorators defaultdir="/layout">
-	<decorator name="main" page="/layout/main.jsp">
+	<decorator name="lmain" page="/layout/lmain.jsp">
 		<pattern>/</pattern>
+	</decorator>
+	<decorator name="ladmin" page="/layout/ladmin.jsp">
+		<pattern>/admin/*</pattern>
+	</decorator>
+	<decorator name="lmypage" page="/layout/lmypage.jsp">
+		<pattern>/customer/*</pattern>
+	</decorator>
+	<decorator name="lseller" page="/layout/lseller.jsp">
+		<pattern>/seller/*</pattern>
+	</decorator>
+	<decorator name="lsupport" page="/layout/lsupport.jsp">
+		<pattern>/support/*</pattern>
 	</decorator>
 	<excludes>
 		<pattern>/customer/account/*</pattern>

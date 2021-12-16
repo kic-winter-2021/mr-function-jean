@@ -14,7 +14,12 @@
 	<!-- 문의글 타이틀 -->
 	<div class="form_box">
 		<h1>문의글을 작성해주세요</h1>
-		<form:form modelAttribute="faq" action="w" name="faqForm">
+		<form:form modelAttribute="faq" action="write" name="faqForm">
+			<spring:hasBindErrors name="faq">
+				<c:forEach var="error" items="${ errors.globalErrors }">
+					<span class="errmsg"><spring:message code="${ error.code }"/></span>
+				</c:forEach>
+			</spring:hasBindErrors>
 		<input type="hidden" name="customerid" value="admin">
 		<input type="hidden" name="type" value="1">
 		<!-- 문의글 내용 -->

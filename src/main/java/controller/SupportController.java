@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,13 +50,13 @@ public class SupportController {
 		return mav;
 	}
 	// '공지하기' 열기
-	@RequestMapping("notice/write")
+	@GetMapping("notice/write")
 	public String writeNotice(HttpSession session) {
 		// TODO: 관리자 체크(AOP)
 		return "support/notice/write";
 	}
 	// 'notice form' action
-	@RequestMapping("notice/w")
+	@PostMapping("notice/write")
 	public ModelAndView writeNoticeForm(@Valid Notice notice, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -97,18 +99,17 @@ public class SupportController {
 		}		
 		return mav;
 	}
-	@RequestMapping("q/write")
+	@GetMapping("q/write")
 	public ModelAndView writeQuestion(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		// TODO: 회원 체크 AOP
+		mav.addObject("question", new Question());
 		return mav;
 	}
-	@RequestMapping("q/w")
+	@PostMapping("q/write")
 	public ModelAndView writeQuestionForm(@Valid Question question, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println(question);
 		if(bresult.hasErrors()) {
-			System.out.println("Binding error is occured in questionForm." + mav.getModel());
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}
@@ -136,13 +137,12 @@ public class SupportController {
 		
 		return mav;
 	}
-	@RequestMapping("faq/write")
+	@GetMapping("faq/write")
 	public String writeFaq(HttpSession session) {
-		// TODO: 관리자 체크(AOP)
 		return "support/faq/write";
 	}
 	// 'notice form' action
-	@RequestMapping("faq/w")
+	@PostMapping("faq/write")
 	public ModelAndView writeFaqForm(@Valid Faq faq, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		

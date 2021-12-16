@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<c:set var="signin" value="${sessionScope.signinUser}" />
+<div class="w3-bar w3-theme w3-top w3-left-align w3-large w3-black w3-hide-small">
+	<a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1"
+		href="javascript:void(0)" onclick="w3_open()">
+		<i class="fa fa-bars"></i></a>
+	<a href="/" class="w3-bar-item w3-button w3-theme-l1">Home</a>
+	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+	<a href="/support/faq/list" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Support</a>
+	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-search"></i></a>
+	<c:if test="${signin.type == 1 }">
+		<a href="/admin/main" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">ADMIN</a>
+	</c:if>
+	<!-- 장바구니 -->
+	<c:if test="${signin.type != 3 && signin.type != 4}">
+		<a href="/sale/cart"
+			class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">
+			<i class="fa fa-shopping-cart"></i></a>
+	</c:if>
+	<!-- 회원관련 -->
+	<a href="javascript:userpage();"
+		class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i
+		class="fa fa-user"></i></a>
+	<!-- 알림 -->
+	<a href="#"
+		class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">
+		<i class="fa fa-bell"></i></a>
+	<c:if test="${signin != null}">
+		<a href="/customer/logout"
+			class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">로그아웃</a>
+	</c:if>
+	<c:if test="${signin == null}">
+		<a href="/customer/account/signin"
+			class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">로그인</a>
+	</c:if>
+</div>
+<script>
+	const userpage = () => {
+		var user = '${signin}';
+		if (user == null || user == '') location.href = "/customer/account/signin"
+		else {
+			var type = '${signin.type}';
+			if (type == 1 ) location.href = "/admin/main";
+			else if (type==2) location.href = "/customer/mypage";
+			else location = "/seller/main";
+		}
+	}
+</script>
