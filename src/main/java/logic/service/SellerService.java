@@ -34,4 +34,10 @@ public class SellerService {
 	public List<Item> getItemList(String sellerid) {
 		return itemDao.listBySellerid(sellerid);
 	}
+	public List<AdPost> listAdPost(String sellerid) {
+		return adpostDao.list(sellerid);
+	}
+	public int countAdPost(String sellerid) {
+		return adpostDao.count(sellerid);
+	}
 }

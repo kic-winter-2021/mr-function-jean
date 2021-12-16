@@ -18,7 +18,13 @@ public class AdpostDao {
 		mapper = template.getMapper(AdpostMapper.class);
 	}
 	public int count() {
-		return mapper.count();
+		param.clear();
+		return mapper.count(param);
+	}
+	public int count(String sellerid) {
+		param.clear();
+		param.put("sellerid", sellerid);
+		return mapper.count(param);
 	}
 	// 관리자가 전체 페이지를 불러올 경우.
 	public List<AdPost> list() {
@@ -33,5 +39,10 @@ public class AdpostDao {
 	}
 	public void insert(AdPost adpost) {
 		mapper.insert(adpost);
+	}
+	public List<AdPost> list(String sellerid) {
+		param.clear();
+		param.put("sellerid", sellerid);
+		return mapper.select(param);
 	}	
 }

@@ -11,12 +11,15 @@ import logic.dto.AdPost;
 public interface AdpostMapper {
 
 	@Insert("insert into adpost"
-			+ " (sellerid, rank, status, itemid, contract)"
-			+ " values (#{sellerid}, #{rank}, #{status}, #{itemid}, #{contract})")
+			+ " (sellerid, adrank, status, itemid, contract)"
+			+ " values (#{sellerid}, #{adrank}, #{status}, #{itemid}, #{contract})")
 	void insert(AdPost adpost);
 	
-	@Select("select count(*) from adpost")
-	int count();
+	@Select({"<script>",
+			"select count(*) from adpost",
+			"<if test='sellerid != null'> where sellerid = #{sellerid} </if>",
+			"</script>"})
+	int count(Map<String, Object> param);
 	
 	@Select({"<script>",
 			"select * from adpost",

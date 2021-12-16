@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>광고등록페이지</title>
-<link rel="stylesheet" href="resources/css/box.css">
+<link rel="stylesheet" href="/resources/css/adbwrite.css">
 </head>
 <body>
 	<!-- 작성자 : 박이삭 -->

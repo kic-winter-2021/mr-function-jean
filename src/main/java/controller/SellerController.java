@@ -140,13 +140,28 @@ public class SellerController {
 		mav.setViewName("redirect:myinfo");
 		return mav;
 	}
+	@RequestMapping("promotion")
+	public ModelAndView promotion(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("RANK", AdPost.RANK);
+		try {
+			String signinId = ((Customer)session.getAttribute("signinUser")).getId();
+			mav.addObject("listcount", sellerService.countAdPost(signinId));
+			List<AdPost> list =  sellerService.listAdPost(signinId);
+			System.out.println(list);
+			mav.addObject("promotionlist", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
 	/* promotion */
 	@GetMapping("applyprom")
 	public ModelAndView applypromLoader(Integer rank, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 선택한 광고 상품이 있는 경우 해당 상품을 선택한 상태로 이동.
 		AdPost adPost = new AdPost();
-		adPost.setRank(rank);
+		if(rank != null) adPost.setAdrank(rank);
 		mav.addObject("adPost", adPost);
 		// rank map(static map) 라디오 버튼 생성
 		mav.addObject("RANK", AdPost.RANK);
@@ -164,7 +179,8 @@ public class SellerController {
 	@RequestMapping("applyprom")
 	public ModelAndView applyprom(@Valid AdPost adPost, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+		mav.addObject("RANK", AdPost.RANK);
+		System.out.println(adPost);
 		// 유효성 검사
 		if (bresult.hasErrors()) {
 			System.out.println("프로모션 신청 입력 오류");
@@ -215,8 +231,8 @@ public class SellerController {
 	@GetMapping({"saledetail","detailupdate"})
 	public ModelAndView saledetail(String itemid,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		Item dbitem = itemService.detail(itemid);
-		mav.addObject("item",dbitem);
+		Item dbItem = itemService.selectOne(itemid);
+		mav.addObject("item", dbItem);
 		return mav;
 	}
 	//등록 상품 내용 수정하기 21.12.13
@@ -257,14 +273,14 @@ public class SellerController {
 	public ModelAndView delete(String itemid,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		//1. itemid가 있는지 확인한다.
-		Item dbitem = itemService.detail(itemid);
-		if(dbitem == null) {
+		Item dbItem = itemService.selectOne(itemid);
+		if(dbItem == null) {
 			throw new ItemException("게시글 삭제를 실패했습니다.","registl?id=admin"); //우선 admin처리
 		}
 		//2. itemid의 주인과 session의 id랑 같은지
 		
 		//String signin = ((Customer)session.getAttribute("signinUser"));
-		if (!dbitem.getSellerid().equals("admin")) { //signin.getId()
+		if (!dbItem.getSellerid().equals("admin")) { //signin.getId()
 			throw new UpdateException("게시글 삭제를 실패 했습니다.","registl?id=admin"); //우선 admin처리
 		}//3. 삭제
 	try {

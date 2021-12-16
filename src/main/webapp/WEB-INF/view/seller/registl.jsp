@@ -11,22 +11,9 @@
 <!-- 수정일자 : 21.12.12 : 1차 폼 양식 변경 -->
 <!-- 수정일자 : 21.12.13 : 2차 폼 양식 변경  -->
 <!-- CSS파일 -->
-<link rel="stylesheet" href="/resources/css/regist.css">
+<link rel="stylesheet" href="/resources/css/qlist.css">
 </head>
-<body><%--  
-	<!-- 1행 이미지 -->
-	<div class="grid-image">
-		<img src="j2.jpg"> <img src="j3.jpg"> <img src="j4.jpg">
-	</div>
-	<!-- 2행 이미지 -->
-	<div class="grid-image">
-		<img src="j3.jpg"> <img src="j6.jpg"> <img src="j4.jpg">
-	</div>
-	<!-- 등록 버튼 -->
-	<button class="add">작성하기</button>
-
-	<!-- 추후 페이징 기능 추가 예정 -->
---%>
+<body>
 	<table class="tb__item">
 		<caption>
 			등록상품 리스트<span>상품 수 : ${ listcount }</span>

@@ -12,9 +12,11 @@ import logic.dto.Item;
 
 public interface ItemMapper {
 	
-	@Select({"select * from item",
-		"<if test='sellerid != null'> where sellerid=#{sellerid}</if>"
-		})
+	@Select({"<script>",
+		"select * from item",
+		"<if test='sellerid != null'> where sellerid=#{sellerid}</if>",
+		"<if test='itemid != null'> where itemid=#{itemid}</if>",
+		"</script>"})
 	List<Item> select(Map<String, Object> param); 
 	
 	@Insert("insert into item"
@@ -22,9 +24,6 @@ public interface ItemMapper {
 			+ " values (#{itemid}, #{sellerid}, #{title}, #{price}, #{brandcode}, #{color}, #{fit}, #{content})")
 	
 	void addItem(Item item);
-
-	@Select("select * from item where itemid=#{value}")
-	Item detail(String itemid);
 	
 	@Select("select count(*) from item where sellerid=#{sellerid}")
 	int countBySellerid(Map<String, Object> param);

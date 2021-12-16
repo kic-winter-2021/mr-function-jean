@@ -28,9 +28,10 @@ CREATE TABLE adboard
 (
 	num int unsigned NOT NULL COMMENT 'num',
 	content text NOT NULL COMMENT '내용',
-	itemid varchar(30) COMMENT '상품번호',
+	itemid varchar(20) COMMENT '상품번호',
 	views int unsigned DEFAULT 0 NOT NULL COMMENT '조회수',
-	created_at timestamp DEFAULT current_timestamp COMMENT '등록일시',
+	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT 'created_at',
+	updated_at timestamp DEFAULT current_timestamp ON UPDATE current_timestamp NOT NULL COMMENT 'updated_at',
 	PRIMARY KEY (num)
 ) COMMENT = '광고보드';
 
@@ -39,8 +40,8 @@ CREATE TABLE adpost
 (
 	num int unsigned NOT NULL AUTO_INCREMENT COMMENT 'num',
 	sellerid varchar(30) NOT NULL COMMENT '사업자명 : 아이디',
-	rank tinyint unsigned NOT NULL COMMENT '홍보등급',
-	itemid varchar(30) NOT NULL COMMENT 'itemid',
+	adrank tinyint unsigned NOT NULL COMMENT '홍보등급',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	contract text NOT NULL COMMENT '계약정보',
 	status tinyint unsigned DEFAULT 0 NOT NULL COMMENT 'status : 프로모션의 상태를 나타냄
 0: (default) 신청 상태
@@ -48,6 +49,8 @@ CREATE TABLE adpost
 2: prepared 대기 중
 3: running 적용 중
 4: expired 프로모션 종료',
+	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT 'created_at',
+	updated_at timestamp DEFAULT current_timestamp ON UPDATE current_timestamp NOT NULL COMMENT 'updated_at',
 	PRIMARY KEY (num),
 	UNIQUE (num)
 ) COMMENT = '광고등록';
@@ -63,14 +66,14 @@ CREATE TABLE board
 	category varchar(30) COMMENT '카테고리',
 	title varchar(100) NOT NULL COMMENT '제목',
 	customerid varchar(30) NOT NULL COMMENT '작성자 : 아이디',
-	itemId varchar(30) COMMENT 'itemId',
+	itemid varchar(20) COMMENT 'itemid',
 	content text NOT NULL COMMENT '내용',
 	ref int unsigned COMMENT '참조번호',
 	qa bit(1) COMMENT 'qa : question/answer
 0-기본글
 1-답글',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
-	updated_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '수정일시',
+	updated_at timestamp DEFAULT current_timestamp ON UPDATE current_timestamp NOT NULL COMMENT '수정일시',
 	views int unsigned DEFAULT 0 NOT NULL COMMENT '조회수',
 	PRIMARY KEY (num),
 	UNIQUE (num),
@@ -80,10 +83,11 @@ CREATE TABLE board
 
 CREATE TABLE brand
 (
-	brandcode varchar(20) NOT NULL COMMENT 'brandcode',
+	brandcode int unsigned NOT NULL AUTO_INCREMENT COMMENT 'brandcode',
 	brandname varchar(20) NOT NULL COMMENT '브랜드명',
 	link varchar(100) COMMENT '브랜드 정보',
 	PRIMARY KEY (brandcode),
+	UNIQUE (brandcode),
 	UNIQUE (brandname)
 ) COMMENT = '브랜드';
 
@@ -91,9 +95,9 @@ CREATE TABLE brand
 CREATE TABLE cart
 (
 	customerid varchar(30) NOT NULL COMMENT 'customerid : 아이디',
-	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	quantity int unsigned DEFAULT 1 NOT NULL COMMENT '개수',
-	PRIMARY KEY (customerid, itemId),
+	PRIMARY KEY (customerid, itemid),
 	UNIQUE (customerid)
 ) COMMENT = '장바구니';
 
@@ -108,7 +112,7 @@ CREATE TABLE customer
 5-일반유저(kakao)
 6-온라인판매자(kakao)
 7-오프라인판매자(kakao)',
-	password varchar(30) NOT NULL COMMENT '비밀번호',
+	password varchar(20) NOT NULL COMMENT '비밀번호',
 	auth varchar(50) COMMENT 'auth',
 	name varchar(40) NOT NULL COMMENT '이름',
 	nickname varchar(40) NOT NULL COMMENT '별명',
@@ -123,8 +127,8 @@ CREATE TABLE customer
 	personalfile varchar(200) COMMENT '주민등록',
 	companyfile varchar(200) COMMENT '사업자등록증',
 	location varchar(200) COMMENT '매장 위치 : 오프라인의 경우 매장 위치',
-	created_at timestamp DEFAULT current_timestamp COMMENT '가입일시',
-	updated_at timestamp DEFAULT current_timestamp COMMENT '수정일시',
+	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '가입일시',
+	updated_at timestamp DEFAULT current_timestamp ON UPDATE current_timestamp NOT NULL COMMENT '수정일시',
 	PRIMARY KEY (id),
 	UNIQUE (id),
 	UNIQUE (nickname),
@@ -146,21 +150,21 @@ CREATE TABLE destination
 CREATE TABLE img
 (
 	seq int unsigned NOT NULL AUTO_INCREMENT COMMENT 'seq',
-	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	img varchar(100) NOT NULL COMMENT 'img',
-	PRIMARY KEY (seq, itemId)
+	PRIMARY KEY (seq, itemid)
 ) COMMENT = '이미지';
 
 
 CREATE TABLE item
 (
-	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	sellerid varchar(30) NOT NULL COMMENT '판매자 : 아이디',
 	title varchar(100) NOT NULL COMMENT '상품명',
 	img varchar(100) COMMENT '대표이미지',
 	description text COMMENT '상품설명',
 	price int unsigned NOT NULL COMMENT '가격',
-	brandcode varchar(20) NOT NULL COMMENT 'brandcode',
+	brandcode int unsigned NOT NULL COMMENT 'brandcode',
 	content text COMMENT '상세내용',
 	color varchar(20) NOT NULL COMMENT '색상',
 	fit varchar(30) NOT NULL COMMENT '핏 : 스트레이트
@@ -170,30 +174,31 @@ CREATE TABLE item
 ...',
 	style varchar(20) COMMENT '스타일',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시 : 상품 등록 일자',
-	updated_at timestamp COMMENT '수정일시',
-	PRIMARY KEY (itemId)
+	updated_at timestamp DEFAULT current_timestamp ON UPDATE current_timestamp NOT NULL COMMENT '수정일시',
+	PRIMARY KEY (itemid),
+	UNIQUE (itemid)
 ) COMMENT = '아이템';
 
 
 CREATE TABLE itemlike
 (
-	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	customerid varchar(30) NOT NULL COMMENT 'customerid : 아이디',
-	PRIMARY KEY (itemId, customerid),
-	UNIQUE (itemId, customerid)
+	PRIMARY KEY (itemid, customerid),
+	UNIQUE (itemid, customerid)
 ) COMMENT = '좋아요';
 
 
 CREATE TABLE itemreview
 (
 	num int unsigned NOT NULL AUTO_INCREMENT COMMENT '글번호',
-	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	customerid varchar(30) NOT NULL COMMENT 'customerid : 아이디',
 	score tinyint NOT NULL COMMENT '평점 : 1~10',
 	content text COMMENT '내용',
 	img varchar(100) COMMENT 'img',
 	created_at timestamp DEFAULT current_timestamp NOT NULL COMMENT '등록일시',
-	updated_at timestamp DEFAULT current_timestamp COMMENT '수정일시',
+	updated_at timestamp DEFAULT current_timestamp ON UPDATE current_timestamp NOT NULL COMMENT '수정일시',
 	PRIMARY KEY (num)
 ) COMMENT = '리뷰';
 
@@ -222,16 +227,16 @@ CREATE TABLE sale
 
 CREATE TABLE size
 (
-	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	size float(3,1) unsigned NOT NULL COMMENT '치수',
 	measure float(3,1) unsigned NOT NULL COMMENT '실측치',
-	PRIMARY KEY (itemId, size)
+	PRIMARY KEY (itemid, size)
 ) COMMENT = '사이즈';
 
 
 CREATE TABLE survey
 (
-	num int unsigned NOT NULL COMMENT '글번호',
+	num int unsigned NOT NULL AUTO_INCREMENT COMMENT '글번호',
 	attribute varchar(20) NOT NULL COMMENT '설문항목',
 	value tinyint NOT NULL COMMENT '값',
 	PRIMARY KEY (num, attribute),
@@ -246,7 +251,7 @@ CREATE TABLE transaction
 1-입고
 2-출고',
 	saleid varchar(30) COMMENT 'saleid',
-	itemId varchar(30) NOT NULL COMMENT 'itemId',
+	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	datetime timestamp DEFAULT current_timestamp NOT NULL COMMENT '거래일',
 	quantity smallint unsigned NOT NULL COMMENT '거래량',
 	PRIMARY KEY (transaction_num),
@@ -355,63 +360,63 @@ ALTER TABLE adboard
 
 ALTER TABLE adpost
 	ADD FOREIGN KEY (itemid)
-	REFERENCES item (itemId)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE board
-	ADD FOREIGN KEY (itemId)
-	REFERENCES item (itemId)
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE cart
-	ADD FOREIGN KEY (itemId)
-	REFERENCES item (itemId)
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE img
-	ADD FOREIGN KEY (itemId)
-	REFERENCES item (itemId)
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE itemlike
-	ADD FOREIGN KEY (itemId)
-	REFERENCES item (itemId)
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE itemreview
-	ADD FOREIGN KEY (itemId)
-	REFERENCES item (itemId)
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE size
-	ADD FOREIGN KEY (itemId)
-	REFERENCES item (itemId)
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE transaction
-	ADD FOREIGN KEY (itemId)
-	REFERENCES item (itemId)
+	ADD FOREIGN KEY (itemid)
+	REFERENCES item (itemid)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
