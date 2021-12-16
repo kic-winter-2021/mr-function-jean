@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>faq 문의글</title>
+<title>FAQ</title>
 <link rel="stylesheet" href="/resources/css/box.css">
+<style> .errmsg{ color: red; }</style>
 </head>
 <body>
 	<!-- 작성자 : 오근영 -->
@@ -14,27 +15,27 @@
 	<!-- 문의글 타이틀 -->
 	<div class="form_box">
 		<h1>문의글을 작성해주세요</h1>
-		<form:form modelAttribute="faq" action="write" name="faqForm">
-			<spring:hasBindErrors name="faq">
+		<form:form modelAttribute="board" action="write" name="faqForm">
+			<spring:hasBindErrors name="board">
 				<c:forEach var="error" items="${ errors.globalErrors }">
 					<span class="errmsg"><spring:message code="${ error.code }"/></span>
 				</c:forEach>
 			</spring:hasBindErrors>
-		<input type="hidden" name="customerid" value="admin">
 		<input type="hidden" name="type" value="1">
+		<input type="hidden" name="customerid" value="admin">
 		<!-- 문의글 내용 -->
 		문의유형
-			<select name="category">
-				<option value="none" selected>선택</option>
-				<option value="sale">상품문의</option>
-				<option value="delivery">배송문의</option>
-				<option value="refund">환불문의</option>
-				<option value="exchange">교환문의</option>
-				<option value="etc">기타</option>
-			</select><br>
-		제목 : <input class="box" type="text" name="title" placeholder="제목을 입력해주세요"><br>
+			<form:select path="category">
+				<form:option value="none" label="선택"/>
+				<form:option value="sale" label="상품문의"/>
+				<form:option value="delivery" label="배송문의" />
+				<form:option value="refund" label="환불문의" />
+				<form:option value="exchange" label="교환문의"/>
+				<form:option value="etc" label="기타" />
+			</form:select><br>
+		제목 : <form:input class="box" type="text" path="title" placeholder="제목을 입력해주세요"/><br>
 		내용 : <br>
-		<textarea class="field" name="content" placeholder="내용을 입력해주세요" rows="15"></textarea>
+		<form:textarea class="field" path="content" placeholder="내용을 입력해주세요" rows="15"/>
 		<!-- 문의글 하단 버튼 -->
 		<input type="submit" class="write_button" value="작성"/>
 		<input type="reset" class="write_button" value="취소" />

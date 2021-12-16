@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>문의하기</title>
+<style>
+.tb__question caption > span {
+	float: right;
+}
+</style> 
 </head>
 <body>
 	<table class="tb__question">
@@ -25,8 +30,8 @@
 							<input type="hidden" name="pageNum" value="1" />
 							<select	name="searchtype" id="" style="width: 100px;">
 								<option value="">선택하세요</option>
-								<option value="subject">제목</option>
-								<option value="name">작성자</option>
+								<option value="title">제목</option>
+								<option value="customerid">작성자</option>
 								<option value="content">내용</option>
 							</select>
 							<script>
@@ -52,12 +57,12 @@
 			<c:if test="${ listcount > 0 }">
 				<c:forEach var="question" items="${ questionlist }">
 					<tr>
-						<td>${ num }</td>
-						<c:set var="num" value="${ num - 1 }" />
+						<td>${ boardno }</td>
+						<c:set var="boardno" value="${ boardno - 1 }" />
 						<td><a href="detail?num=${ question.num }">${ question.title }</a></td>
-						<td>${ question.writer }</td>
+						<td>${ question.customerid }</td>
 						<%--  <td>${ question.regdate }</td>--%>
-						<td><fmt:formatDate value="${ question.regDate }" pattern="yyyy-MM-dd HH:mm:ss" />
+						<td><fmt:formatDate value="${ question.created_at }" pattern="yyyy-MM-dd HH:mm:ss" />
 						<td>${ question.views }</td>
 					</tr>
 				</c:forEach>
@@ -81,7 +86,7 @@
 			<div class="w3-bar">
 				<!-- 이전 -->
 				<c:if test="${ pageNum > 1 }">
-					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum - 1 })">〈</a>
+					<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum })">〈</a>
 				</c:if>
 				<c:forEach var="a" begin="${ startpage }" end="${ endpage }">
 					<!-- 현재 페이지 -->
