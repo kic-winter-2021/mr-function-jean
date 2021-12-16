@@ -1,5 +1,6 @@
 package mapper;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -9,20 +10,19 @@ import logic.dto.AdBoard;
 
 public interface AdboardMapper {
 
-	@Select("select count(*) from adboard where num=1")
+	@Select("select count(*) from adboard")
 	public int count();
-
-	@Select("select * from adboard where num=1")
-	public List<AdBoard> adblist();
+	@Select({"<script>",
+		"select * from adboard",
+		"<if test='num != null'>where num = #{num}</if>",
+		"</script>"})
+	public List<AdBoard> select(Map<String, Object> param);
 
 	@Insert("insert into adboard"
 			+ " (num, content, itemid)"
 			+ " values (#{num}, #{content}, #{itemid})")
-	public void adbwrite(AdBoard adBoard);
+	public void insert(AdBoard adBoard);
 
-	@Select("select * from adboard where num=#{value}")
-	public AdBoard adbdetail(Integer num);
-	
 	@Update("update adboard set content=#{content} where num=#{num}")
-	void update(AdBoard adboard);	
+	public void update(AdBoard adboard);	
 }

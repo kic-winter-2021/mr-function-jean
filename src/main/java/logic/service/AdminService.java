@@ -19,26 +19,29 @@ public class AdminService {
 	@Autowired
 	AdboardDao adboardDao;
 	
-	public List<AdPost> list() {
-		return adpostDao.listAdPost();
+	/* AdPost */
+	public int countAdPost() {
+		return adpostDao.count();
 	}
-	public int count() {
+	public List<AdPost> listAdPost() {
+		return adpostDao.list();
+	}
+	
+	/* AdBoard */
+	public int countAdBoard() {
 		return adboardDao.count();
 	}
-
-	public List<AdBoard> adblist() {
-		return adboardDao.adblist();
+	public List<AdBoard> listAdBoard() {
+		return adboardDao.list();
 	}
-
-	public void adbwrite(AdBoard adBoard) {
-		adboardDao.adbwrite(adBoard);
+	public AdBoard selectAdBoardByNum(Integer num) {
+		return adboardDao.selectOneByNum(num);
+	}
+	public void insertAdBoard(AdBoard adBoard) {
+		adboardDao.insert(adBoard);
 		
 	}
-
-	public AdBoard adbdetail(Integer num) {
-		return adboardDao.adbdedail(num);
-	}
-	public void updateAdBoard(@Valid AdBoard adBoard) {
+	public void updateAdBoard(AdBoard adBoard) {
 		adboardDao.update(adBoard);
 	}
 }

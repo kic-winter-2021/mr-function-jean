@@ -43,12 +43,12 @@ main { display: flex; }
 		<header><h2>가입 유형 선택</h2></header>
 			<div id="pwrap" class="select" onclick="location.href='agree?t=p'">
 				<h3>자신만의 맞는 바지를 <br>찾아보세요!</h3>
-				<img src="/img/personal.png" class="signupimg">
+				<img src="/resources/img/personal.png" class="signupimg">
 				<div>일반</div>
 			</div>
 			<div id="swrap" class="select" onclick="location.href='agree?t=s'">
 				<h3>상품을 등록하고<br>이윤을 남겨보세요!</h3>
-				<img src="/img/company.png" class="signupimg">
+				<img src="/resources/img/company.png" class="signupimg">
 				<div>사업자</div>
 			</div>
 		<footer>Mr.Function</footer>

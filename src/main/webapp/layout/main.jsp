@@ -34,6 +34,9 @@ body {
 	    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
 	    <a href="/support/faq/list" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Support</a>
 	    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-search"></i></a>
+	    <c:if test="${sessionScope.signinUser.type == 1 }">
+	    	<a href="/admin/main" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">ADMIN</a>
+	    </c:if>
 	    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i class="fa fa-shopping-cart"></i></a>
 	    <a href="javascript:userpage();" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i class="fa fa-user"></i></a>
 	    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i class="fa fa-bell"></i></a>

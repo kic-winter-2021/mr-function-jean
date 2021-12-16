@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id="signup-container">
-		<header class="logoheader"><img src="/img/logo-1.png"></header>
+		<header class="logoheader"><img src="/resources/img/logo-1.png"></header>
 		<main>
 			<form:form modelAttribute="customer" action="psignup" method="post" name="signupForm" class="signupform">
 				<!-- error binding -->

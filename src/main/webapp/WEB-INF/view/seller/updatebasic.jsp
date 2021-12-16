@@ -13,10 +13,11 @@
 	<div id="basicform-container">
 		<%-- insel 로그인한 사업자 회원 --%>
 		<c:set var="signin" value="${ sessionScope.signinUser }" />
-		<form:form modelAttribute="seller" action="upbasic" name="basicForm">
+		<form:form modelAttribute="customer" action="upbasic" name="basicForm">
 			<form:hidden path="id" value="${ signin.id }"/>
 			<form:hidden path="password" value="${ signin.password }"/>
 			<form:hidden path="type" value="${ signin.type }"/>
+			<form:hidden path="nickname" value="${ signin.nickname }"/>
 			<table class="infotable">
 				<caption>기본 정보</caption>
 				<colgroup>

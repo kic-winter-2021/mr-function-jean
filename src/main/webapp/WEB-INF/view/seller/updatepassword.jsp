@@ -58,7 +58,7 @@
 		return true;
 	}
 	cont pwCheck = (f) => {
-		if(f.oldpw.value !== '${ sessionScope.inseller.password }') { // seller 해도 될까?
+		if(f.oldpw.value !== '${ sessionScope.signinUser.password }') { // seller 해도 될까?
 			alert("기존 비밀번호가 틀립니다.")
 			f.oldpw.value = "";
 			f.oldpw.focuse();

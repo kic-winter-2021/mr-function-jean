@@ -41,12 +41,12 @@
 		<div id="review-best">
 			<h4>평점 높은 리뷰</h4>
 			<ul class="img_list">
-				<li><img src="../resources/img/unnamed.jpg" alt=""></li>
+				<li><img src="/resources/img/unnamed.jpg" alt=""></li>
 			</ul>
 			<div class="rate">
 				<div class="star-rating3">
 					<div class="star-percent" style="width: 80%;">
-						<img src="../resources/img/5star_transparent.png" alt="">
+						<img src="/resources/img/5star_transparent.png" alt="">
 					</div>
 				</div>
 			</div>
@@ -56,12 +56,12 @@
 		<div id="review-worst">
 			<h4>평점 낮은 리뷰</h4>
 			<ul class="img_list">
-				<li><img src="../resources/img/unnamed.jpg" alt=""></li>
+				<li><img src="/resources/img/unnamed.jpg" alt=""></li>
 			</ul>
 			<div class="rate">
 				<div class="star-rating3">
 					<div class="star-percent" style="width: 10%;">
-						<img src="../resources/img/5star_transparent.png" alt="">
+						<img src="/resources/img/5star_transparent.png" alt="">
 					</div>
 				</div>
 			</div>
@@ -72,12 +72,12 @@
 			<!-- article을 추가하는 방식 -->
 			<article class="review">
 				<ul class="img_list">
-					<li><img src="../resources/img/unnamed.jpg" alt=""></li>
+					<li><img src="/resources/img/unnamed.jpg" alt=""></li>
 				</ul>
 				<div class="rate">
 					<div class="star-rating3">
 						<div class="star-percent" style="width: 10%;">
-							<img src="../resources/img/5star_transparent.png" alt="">
+							<img src="/resources/img/5star_transparent.png" alt="">
 						</div>
 					</div>
 				</div>
@@ -137,4 +137,4 @@
 		</div>
 	</form>
 </div>
-<script src="../resources/js/review.js"></script>
+<script src="/resources/js/review.js"></script>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspheader.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 <body>
 	<table class="tb__notice">
 		<caption>
-			Spring 게시판<span>글 수: ${ listcount }</span>
+			구매 요청<span>수: ${ listcount }</span>
 		</caption>
 		<colgroup>
 			<col class="col__num" />
