@@ -1,25 +1,27 @@
 package logic.dto;
 
-import java.util.Map;
+import java.util.List;
 
 public class Cart {
 	private String customerid;
 	// itemid, quantity
-	private Map<String, Integer> cartmap;
+	private List<ItemSet> items;
+	// private Map<String, Integer> cartmap;
+	
 	public String getCustomerid() {
 		return customerid;
 	}
 	public void setCustomerid(String customerid) {
 		this.customerid = customerid;
 	}
-	public Map<String, Integer> getCartmap() {
-		return cartmap;
+	public List<ItemSet> getItems() {
+		return items;
 	}
-	public void setCartmap(Map<String, Integer> cartmap) {
-		this.cartmap = cartmap;
+	public void setItems(List<ItemSet> items) {
+		this.items = items;
 	}
 	@Override
 	public String toString() {
-		return "Cart [customerid=" + customerid + ", cartmap=" + cartmap + "]";
+		return "Cart [customerid=" + customerid + ", items=" + items + "]";
 	}
 }

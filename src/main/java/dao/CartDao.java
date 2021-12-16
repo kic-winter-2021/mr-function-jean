@@ -1,11 +1,13 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import logic.dto.ItemSet;
 import mapper.CartMapper;
 
 @Repository
@@ -19,7 +21,7 @@ public class CartDao {
 	public int count(String customerid) {
 		return mapper.count(customerid);
 	}
-	public Map<String, Integer> select(String customerid) {
+	public List<ItemSet> select(String customerid) {
 		return mapper.select(customerid);
 	}
 }

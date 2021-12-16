@@ -22,8 +22,12 @@ public class ItemDao {
 		mapper.addItem(item);
 		
 	}
-	public Item detail(String itemid) {
-		return mapper.detail(itemid);
+	public Item selectOne(String itemid) {
+		param.clear();
+		param.put("itemid", itemid);
+		List<Item> list = mapper.select(param);
+		if(list.size() > 0) return list.get(0);
+		return null;
 	}
 
 	public int countBySellerid(String sellerid) {

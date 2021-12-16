@@ -15,6 +15,10 @@ public class ItemController {
 	@RequestMapping("detail")
 	public String detail() {
 		return null;
-	}	
+	}
+	@RequestMapping("movecart")
+	public String movecart() {
+		return "item/movecart";
+	}
 }
 

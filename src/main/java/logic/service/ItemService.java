@@ -19,8 +19,8 @@ public class ItemService {
 		itemDao.addItem(item);
 		
 	}
-	public Item detail(String itemid) {
-		return itemDao.detail(itemid);
+	public Item selectOne(String itemid) {
+		return itemDao.selectOne(itemid);
 	}
 
 	public int count(String sellerid) {

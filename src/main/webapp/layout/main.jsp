@@ -37,8 +37,13 @@ body {
 	    <c:if test="${sessionScope.signinUser.type == 1 }">
 	    	<a href="/admin/main" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">ADMIN</a>
 	    </c:if>
-	    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i class="fa fa-shopping-cart"></i></a>
+	    <!-- 장바구니 -->
+	    <c:if test="${sessionScope.signinUser.type != 3 && sessionScope.signinUser.type != 4}">
+	    	<a href="/sale/cart" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i class="fa fa-shopping-cart"></i></a>
+	    </c:if>
+	    <!-- 회원관련 -->
 	    <a href="javascript:userpage();" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i class="fa fa-user"></i></a>
+	    <!-- 알림 -->
 	    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white"><i class="fa fa-bell"></i></a>
 	    <c:if test="${sessionScope.signinUser != null}">
 	    	<a href="/customer/logout" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-right w3-hover-white">로그아웃</a>

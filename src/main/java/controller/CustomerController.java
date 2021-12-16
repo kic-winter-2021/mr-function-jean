@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.UserException;
 import logic.dto.Board;
+import logic.dto.Cart;
 import logic.dto.Customer;
 import logic.dto.Review;
 import logic.dto.Sale;
@@ -189,4 +190,5 @@ public class CustomerController {
 		mav.setViewName("redirect:myinfo");
 		return mav;
 	}
+
 }

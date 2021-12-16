@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import dao.BoardDao;
 import dao.CartDao;
 import dao.CustomerDao;
+import dao.ItemDao;
 import dao.ItemReviewDao;
 import dao.SaleDao;
 import logic.dto.Board;
+import logic.dto.Cart;
 import logic.dto.Customer;
+import logic.dto.ItemSet;
 import logic.dto.Review;
 
 /*
@@ -26,6 +29,8 @@ public class CustomerService {
 	CartDao cartDao;
 	@Autowired
 	SaleDao saleDao;
+	@Autowired
+	ItemDao itemDao;
 	@Autowired
 	ItemReviewDao itemReviewDao;
 	
@@ -81,5 +86,16 @@ public class CustomerService {
 	}
 	public void updateAll(Customer customer) {
 		customerDao.updateAll(customer);
+	}
+	// cart 읽기
+	public Cart getCart(String customerid) {
+		Cart cart = new Cart();
+		List<ItemSet> isetList = cartDao.select(customerid);
+		
+		for (ItemSet iset: isetList) {
+			iset.setItem(itemDao.selectOne(iset.getItemid()));
+		}
+		cart.setItems(isetList);
+		return cart;
 	}
 }

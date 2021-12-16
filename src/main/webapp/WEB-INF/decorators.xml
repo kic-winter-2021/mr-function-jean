@@ -7,5 +7,6 @@
 	</decorator>
 	<excludes>
 		<pattern>/customer/account/*</pattern>
+		<pattern>/item/movecart</pattern>
 	</excludes>
 </decorators>
