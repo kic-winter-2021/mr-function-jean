@@ -40,7 +40,7 @@ CREATE TABLE adpost
 (
 	num int unsigned NOT NULL AUTO_INCREMENT COMMENT 'num',
 	sellerid varchar(30) NOT NULL COMMENT '사업자명 : 아이디',
-	rank tinyint unsigned NOT NULL COMMENT '홍보등급',
+	adrank tinyint unsigned NOT NULL COMMENT '홍보등급',
 	itemid varchar(20) NOT NULL COMMENT 'itemid',
 	contract text NOT NULL COMMENT '계약정보',
 	status tinyint unsigned DEFAULT 0 NOT NULL COMMENT 'status : 프로모션의 상태를 나타냄

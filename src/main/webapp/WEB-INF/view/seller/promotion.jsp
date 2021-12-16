@@ -48,32 +48,36 @@
 		<thead>
 			<tr>
 				<th>번호</th>
-				<th>프로모션 종류</th>
-				<th>시작일</th>
-				<th>만료일</th>
-				<th>조회수</th>
+				<th>프로모션 종류&nbsp;<span id="about_promotion">?</span></th>
+				<th>상태&nbsp;<span id="about_status">?</span></th>
 			</tr>
 		</thead>
 		<!-- Show notice List -->
 		<tbody>
 			<c:if test="${ listcount > 0 }">
+				<c:set var="num" value="1"/>
 				<c:forEach var="promotion" items="${ promotionlist }">
 					<tr>
 						<td>${ num }</td>
-						<c:set var="num" value="${ num - 1 }" />
+						<c:set var="num" value="${ num + 1 }" />
 						<td>
 							<!--  프로모션 등급 -->
 							<c:choose>
-								<c:when test="${ promotion.rank == '1'}">브론즈</c:when>
-								<c:when test="${ promotion.rank == '2'}">실버</c:when>
-								<c:when test="${ promotion.rank == '3'}">골드</c:when>
-								<c:when test="${ promotion.rank == '4'}">플레티넘</c:when>
+								<c:when test="${ promotion.adrank == 1}">브론즈</c:when>
+								<c:when test="${ promotion.adrank == 2}">실버</c:when>
+								<c:when test="${ promotion.adrank == 3}">골드</c:when>
+								<c:when test="${ promotion.adrank == 4}">플레티넘</c:when>
 							</c:choose>
 						</td>
-						<%--  <td>${ notice.regdate }</td>--%>
-						<td><fmt:formatDate value="${ promotion.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td><fmt:formatDate value="${ promotion.expDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td>${ promotion.views }</td>
+						<td>
+							<c:choose>
+								<c:when test="${ promotion.status == 0}">신청</c:when>
+								<c:when test="${ promotion.status == 1}">준비 중</c:when>
+								<c:when test="${ promotion.status == 2}">대기 중</c:when>
+								<c:when test="${ promotion.status == 3}">진행 중</c:when>
+								<c:when test="${ promotion.status == 4}">만료</c:when>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -85,32 +89,9 @@
 				</tr>
 			</c:if>
 		</tbody>
-		<!-- 글쓰기 -->
-		<tr>
-			<td colspan="5" align="right"><a href="aboutprom">프로모션 상품 보러가기</a></td>
-		</tr>
 	</table>
-		<!-- Pagination -->
-		<div class="w3-center w3-padding-32">
-			<c:if test="${ listcount > 0 }">
-				<div class="w3-bar">
-					<!-- 이전 -->
-					<c:if test="${ pageNum > 1 }">
-						<a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum - 1 })">〈</a>
-					</c:if>
-					<c:forEach var="a" begin="${ startpage }" end="${ endpage }">
-						<!-- 현재 페이지 -->
-						<c:if test="${ a == pageNum }"><a class="w3-button w3-black" href="#">${ a }</a></c:if>
-						<!-- 다른 페이지 -->
-						<c:if test="${ a != pageNum }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ a })">${ a }</a></c:if>
-					</c:forEach>
-					<!-- 다음 -->
-					<c:if test="${ pageNum < maxpage }"><a class="w3-button w3-hover-black" href="javascript:listpage(${ pageNum +1 })">〉</a></c:if>
-				</div>
-			</c:if>
-		</div>
-		</section>
-		<!-- 프로모션 문의... -->
+	<a href="aboutprom" style="float: right">프로모션 상품 보러가기</a>
+	</section>
 	</div>
 </body>
 </html>
