@@ -1,7 +1,9 @@
 package mapper;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -59,8 +61,22 @@ public interface CustomerMapper {
 			+ " where id=#{id}")
 	void updateSellerBasic(Seller seller);
 	
+	@Select("select " 
+			+ "id, type, phoneno, email, birthday, gender, password, name, nickname, companyno"
+			+ " from customer")
+	public List<Customer> listUser();
+
 	@Update("update customer set"
 			+ " companyno=#{companyno}, type=#{type}, nickname=#{nickname}, location=#{location}, companyfile=#{companyFilePath}, personalfile=#{personalFilePath}"
 			+ " where id=#{id}")
 	void updateCompany(Seller seller);
+	@Update("update customer set"
+			+ " id=#{id}, password=#{password}, name=#{name}, nickname=#{nickname}, phoneno=#{phoneno}, email=#{email}, gender=#{gender}, birthday=#{birthday}, companyno=#{companyno}, type=#{type}"
+			+ " where id=#{id}")
+	public void userupdate();
+	@Delete("set foreign_key_checks = 0"
+			+ " delete from customer where id=#{value}"
+			+ " set foreign_key_checks = 1")
+	public void delete(String id);
+	
 }
