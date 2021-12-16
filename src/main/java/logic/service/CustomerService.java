@@ -1,12 +1,18 @@
 package logic.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dao.BoardDao;
 import dao.CartDao;
 import dao.CustomerDao;
+import dao.ItemReviewDao;
 import dao.SaleDao;
+import logic.dto.Board;
 import logic.dto.Customer;
+import logic.dto.Review;
 
 /*
  * 
@@ -16,28 +22,47 @@ public class CustomerService {
 	@Autowired
 	CustomerDao customerDao;
 	@Autowired
+	BoardDao boardDao;
+	@Autowired
 	CartDao cartDao;
 	@Autowired
 	SaleDao saleDao;
+	@Autowired
+	ItemReviewDao itemReviewDao;
 	
-	public Customer select(String id) {
-		return customerDao.select(id);
+	public Customer selectOne(String id) {
+		return customerDao.selectOne(id);
 	}
 
 	public void signup(Customer customer) {
 		customerDao.insert(customer);
 	}
-	public Object cartcount(String id) {
-		return cartDao.countCart(id);
+	public int countCart(String id) {
+		return cartDao.count(id);
 	}
-
-	public Object salecount(String id) {
-		return saleDao.countSale(id);
+	public int countSale(String id) {
+		return saleDao.countByCustomerId(id);
 	}
-	
 	public String getSearch(Customer customer, String url) {
 		// TODO: 아이디의 경우, 가리고 보여주기?
 		// TODO: 비밀번호의 경우, 임시비밀번호로 변경 후 이메일 발송? 재설정
 		return customerDao.search(customer, url);
+	}
+	public void update(Customer customer) {
+		customerDao.update(customer);
+	}
+	/* 상품 리뷰 itemReview */
+	public int countItemReview(String customerid) {
+		return itemReviewDao.countByCustomerId(customerid);
+	}
+	public List<Review> listItemReview(String customerid) {
+		return itemReviewDao.listByCustomerId(customerid);
+	}
+	/* 상품 문의 item question */
+	public int countItemQuestion(String customerid) {		
+		return boardDao.countItemQuestionByCustomerId(customerid);
+	}
+	public List<Board> listItemQuestion(String id) {
+		return boardDao.listItemQuestionByCustomerId(id);
 	}
 }

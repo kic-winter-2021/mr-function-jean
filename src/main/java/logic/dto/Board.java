@@ -2,24 +2,30 @@ package logic.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 public class Board {
 	private int num;
-	@NotNull // input type="hidden"으로 넣어주기
+	@NotEmpty // input type="hidden"으로 넣어주기
 	private int type;
 	private String category;
 	private String title;
-	@NotNull
+	@NotEmpty
 	private String writer;
 	private String itemid;
-	@NotNull(message = "내용을 입력하세요")
+	@NotEmpty(message = "내용을 입력하세요")
 	private String content;
 	private int ref;
 	private int qa;
 	private Date regDate;
 	private Date update;
 	private int views;	// 조회수
+	
+	public static final int FAQ = 1;
+	public static final int NOTICE = 2;
+	public static final int QUESTION = 3;
+	public static final int ITEM = 4;
+	
 	public int getNum() {
 		return num;
 	}

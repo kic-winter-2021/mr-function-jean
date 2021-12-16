@@ -122,7 +122,7 @@ public class SupportController {
 	}
 
 	@RequestMapping("faq/list")
-	public ModelAndView faqlist(HttpSession session) {
+	public ModelAndView listFaq(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		List<Faq> list;
 		try {
@@ -137,13 +137,13 @@ public class SupportController {
 		return mav;
 	}
 	@RequestMapping("faq/write")
-	public String faq(HttpSession session) {
+	public String writeFaq(HttpSession session) {
 		// TODO: 관리자 체크(AOP)
 		return "support/faq/write";
 	}
 	// 'notice form' action
 	@RequestMapping("faq/w")
-	public ModelAndView writefaq(@Valid Faq faq, BindingResult bresult, HttpSession session) {
+	public ModelAndView writeFaqForm(@Valid Faq faq, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		// 유효성 검사

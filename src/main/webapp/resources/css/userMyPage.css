@@ -47,7 +47,9 @@ div{
   /*margin-left: auto;*/
   float : right;
 }
-
+.item {
+  cursor: pointer;
+}
 
 /* 단골상점 , 상품후기 , 적립금 박스 */
 .summaryContainer{

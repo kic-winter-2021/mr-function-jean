@@ -3,7 +3,7 @@ package logic.dto;
 import java.util.Date;
 
 // 광고게시판
-public class AdBaord {
+public class AdBoard {
 	private int num;
 	private String content;
 	private String itemid;
@@ -51,5 +51,6 @@ public class AdBaord {
 		return "AdBaord [num=" + num + ", content=" + content + ", itemid=" + itemid + ", regDate=" + regDate
 				+ ", expDate=" + expDate + ", views=" + views + "]";
 	}
+	
 	
 }

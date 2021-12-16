@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import logic.dto.Notice;
 import logic.dto.Question;
+import logic.dto.Board;
 import logic.dto.Faq;
 import mapper.BoardMapper;
 
@@ -56,6 +57,17 @@ public class BoardDao {
 	public void writeFaq(Faq faq) {
 		mapper.writeFaq(faq);
 		
+	}
+
+	public int countItemQuestionByCustomerId(String customerid) {
+		param.clear();
+		param.put("customerid", customerid);
+		return mapper.countItemQuestion(param);
+	}
+	public List<Board> listItemQuestionByCustomerId(String customerid) {
+		param.clear();
+		param.put("customerid", customerid);
+		return mapper.listItemQuestion(param);
 	}
 
 }
