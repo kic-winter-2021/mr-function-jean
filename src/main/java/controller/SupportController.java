@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -97,13 +99,12 @@ public class SupportController {
 		}		
 		return mav;
 	}
-	@RequestMapping("q/write")
-	public ModelAndView writeQuestion(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
+	@GetMapping("q/write")
+	public String writeQuestion(HttpSession session) {
 		// TODO: 회원 체크 AOP
-		return mav;
+		return "support/q/write";
 	}
-	@RequestMapping("q/w")
+	@PostMapping("q/w")
 	public ModelAndView writeQuestionForm(@Valid Question question, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -136,13 +137,13 @@ public class SupportController {
 		
 		return mav;
 	}
-	@RequestMapping("faq/write")
+	@GetMapping("faq/write")
 	public String writeFaq(HttpSession session) {
 		// TODO: 관리자 체크(AOP)
 		return "support/faq/write";
 	}
 	// 'notice form' action
-	@RequestMapping("faq/w")
+	@PostMapping("faq/write")
 	public ModelAndView writeFaqForm(@Valid Faq faq, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
