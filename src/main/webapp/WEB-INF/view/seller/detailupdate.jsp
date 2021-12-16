@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>등록상품 수정하기</title>
-<link rel="stylesheet" href="../resources/css/detail.css">
+<link rel="stylesheet" href="/resources/css/detail.css">
 </head>
 <body>
 	<!-- 작성자 : 오근영 -->

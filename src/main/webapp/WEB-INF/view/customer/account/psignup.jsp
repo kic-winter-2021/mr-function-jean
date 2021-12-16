@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>개인용 회원가입 페이지</title>
 <!--   <link rel="stylesheet" href="/css/signup.css" >-->
-<link rel="stylesheet" href="/css/signup.css" />
+<link rel="stylesheet" href="/resources/css/signup.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>

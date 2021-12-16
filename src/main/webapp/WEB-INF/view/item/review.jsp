@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="../resources/css/review.css" />
+<link rel="stylesheet" href="/resources/css/review.css" />
 <div id="review-container">
 	<h3>상품평</h3>
 	<span><a href="javascript:openRule();">상품평 운영원칙</a></span>

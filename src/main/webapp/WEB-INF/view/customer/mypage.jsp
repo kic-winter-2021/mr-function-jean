@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/resources/css/mypage.css">
 <title>회원마이페이지</title>
 </head>
 <body>

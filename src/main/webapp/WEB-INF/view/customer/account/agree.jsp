@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이용약관 동의</title>
-<link href="/css/agree.css" rel="stylesheet">
+<link href="/resources/css/agree.css" rel="stylesheet">
 </head>
 <body>
 	<div id="agreement">

@@ -6,7 +6,7 @@
     
 	Included to detail.jsp
 --%>
-<link rel="stylesheet" href="../resources/css/item-question.css" />
+<link rel="stylesheet" href="/resources/css/item-question.css" />
 <div id="item-question-container">
 	<h2>상품 문의</h2>
 	<button id="qform__open">문의하기</button>

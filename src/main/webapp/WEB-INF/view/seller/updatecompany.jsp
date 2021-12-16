@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사업자 정보 변경</title>
-<link rel="stylesheet" href="/css/seller.css" />
+<link rel="stylesheet" href="/resources/css/seller.css" />
 </head>
 <body>
 	<div id="basicform-container">
