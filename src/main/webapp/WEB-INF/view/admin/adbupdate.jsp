@@ -10,26 +10,25 @@
 <head>
 <meta charset="UTF-8">
 <title>등록상품 수정하기</title>
-<link rel="stylesheet" href="resources/css/detail.css">
+<link rel="stylesheet" href="/resources/css/adbdetail.css">
 </head>
 <body>
 	
 	<div  class="form_box">
-	<table>
-		<caption> 등록내용 수정 </caption>
+	 <h1>등록내용 수정</h1>
 		<!-- 본문 -->
 		<form:form modelAttribute="adBoard" action="adbupdate" method="post">
-		<tr><td class="box">넘버 : ${adBoard.num}</td></tr><br>
+		<div><div class="box">넘버 : ${adBoard.num}</div></div>
 		<form:input type="hidden" value="${adBoard.num}" path="num" />
-		<tr><td class="box"> 상품 : ${adBoard.itemid}</td></tr><br>	
+		<div><div class="box"> 상품 : ${adBoard.itemid}</div></div>
 		<form:input type="hidden" value="${adBoard.itemid}" path="itemid" />	
-		<tr><td class="field"> 내용 : <form:input type="text" value= "${ adBoard.content }" path="content"/></td></tr><br>
+		<div><div> <form:input type="text" class="field" value= "${ adBoard.content }" path="content"/></div></div>
 		
 		<!-- 버튼 -->
-		<tr><td><input class="write_button" type="submit" value="확인">
-		<a href="adbdetail?num=${adBoard.num}" class="write_button">취소</a></td></tr> 
+		<input class="write_button" type="submit" value="확인">
+		<a href="adbdetail?num=${adBoard.num}" class="write_button">취소</a> 
 		</form:form>
-	</table>
+	
 	</div>
 </body>
 </html>

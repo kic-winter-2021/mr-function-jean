@@ -1,0 +1,40 @@
+@charset "UTF-8";
+/* adblist - 광고등록된리스트*/
+
+.tb_adblist{
+  border-collapse: separate;
+  border-spacing: 1px;
+  text-align: center;
+  line-height: 1.5;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.tb_adblist th{
+	padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #369;
+  border-bottom: 3px solid #036;
+}
+
+ .tb_adblist td {
+	width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  background: #f3f6f7;
+ }
+
+ .btn {
+ 	 background-color: #475d9f;
+    border: 1px solid #323f6b;
+    color: #000000;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 18px;
+ }
+ 
+
+ 
