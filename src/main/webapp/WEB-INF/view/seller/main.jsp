@@ -8,8 +8,6 @@
 <title>판매자 페이지</title>
 </head>
 <body>
-
-	<%-- insel 로그인한 사업자 회원 --%>
 	<c:set var="signin" value="${ sessionScope.signinUser }" />
 	<!-- 판매자 좌측 탭 -->
 	<div id="seller-tab-container">

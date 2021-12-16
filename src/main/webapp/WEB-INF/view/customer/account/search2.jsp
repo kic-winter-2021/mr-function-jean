@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${title}찾기</title>
-<link rel="stylesheet" href="/css/account.css" />
+<link rel="stylesheet" href="/resources/css/account.css" />
 <script>
 function hidestr(s, n) {
 	if (n<0) return s.slice(0, n) + '*'.repeat(-n);

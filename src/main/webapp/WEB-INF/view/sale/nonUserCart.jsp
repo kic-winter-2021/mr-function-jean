@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>장바구니</title>
-    <script src="../resources/js/nonUserCart.js"></script>
-    <link rel="stylesheet" href="../resources/css/nonUserCart.css">
+    <script src="/resources/js/nonUserCart.js"></script>
+    <link rel="stylesheet" href="/resources/css/nonUserCart.css">
 </head>
 
 <body>

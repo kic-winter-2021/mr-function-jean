@@ -19,7 +19,7 @@
 </head>
 <body>
 	<header class="w3-display-container w3-wide" id="home">
-		<img class="w3-image" src="../resources/w3images/jeans.jpg"
+		<img class="w3-image" src="/resources/w3images/jeans.jpg"
 			alt="Fashion Blog" width="1600" height="1060">
 		<div class="w3-display-left w3-padding-large">
 			<h1 class="w3-text-white">Jean Shop</h1>
@@ -40,38 +40,16 @@
 				<li>
 					<ul class="ul_vertical">
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
-							</div></li>
-						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
-							</div></li>
-						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
-							</div></li>
-						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
-							</div></li>
-					</ul>
-				</li>
-				<li><i class="fas fa-chevron-right"></i></li>
-			</ul>
-		</div>
-		<div class="main__items" id="item1">
-			<ul class="ul_vertical">
-				<li><i class="fas fa-chevron-left"></i></li>
-				<li>
-					<ul class="ul_vertical">
-						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
 								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 					</ul>
 				</li>
@@ -84,16 +62,38 @@
 				<li>
 					<ul class="ul_vertical">
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 						<li><div class="item_wrapper">
-								<img src="img/unnamed.jpg" alt="">
+								<img src="/resources/img/unnamed.jpg" alt="">
+							</div></li>
+					</ul>
+				</li>
+				<li><i class="fas fa-chevron-right"></i></li>
+			</ul>
+		</div>
+		<div class="main__items" id="item1">
+			<ul class="ul_vertical">
+				<li><i class="fas fa-chevron-left"></i></li>
+				<li>
+					<ul class="ul_vertical">
+						<li><div class="item_wrapper">
+								<img src="/resources/img/unnamed.jpg" alt="">
+							</div></li>
+						<li><div class="item_wrapper">
+								<img src="/resources/img/unnamed.jpg" alt="">
+							</div></li>
+						<li><div class="item_wrapper">
+								<img src="/resources/img/unnamed.jpg" alt="">
+							</div></li>
+						<li><div class="item_wrapper">
+								<img src="/resources/img/unnamed.jpg" alt="">
 							</div></li>
 					</ul>
 				</li>

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 변경</title>
-<link rel="stylesheet" href="/css/seller.css" />
+<link rel="stylesheet" href="/resources/css/seller.css" />
 </head>
 <body>
 	<div class="" id="updatepw">
