@@ -1,0 +1,25 @@
+error.signin.password=비밀번호를 확인하세요
+error.input.customer=회원가입 입력항목을 확인하세요
+typeMismatch.birthday=생년월일은 YYYY-MM-DD형식으로 입력해주세요
+error.duplicate.user=중복된 아이디입니다
+error.input.signin=로그인 입력항목을 확인하세요
+error.signin.id=해당 아아디가 없습니다
+error.signin.password=비밀번호가 틀립니다
+
+error.userid.search=아이디를 찾을 수 없습니다
+error.required.email=EMAIL을 입력하세요
+error.required.phoneno=전화번호를 입력하세요
+error.required.id=아이디를 입력하세요
+error.password.search=입력한 정보가 틀립니다
+
+error.input.item=상품등록 입력항목을 확인하세요
+error.required.itemname=상품명을 입력하세요
+error.required.price=상품가격을 입력하세요
+error.required.description=상품설명을 입력하세요
+
+error.signin.seller=사업자는 사업자 로그인을 이용해주세요
+error.required.seller=사업자 회원 전용 페이지입니다
+error.required.admin=관리자 권한이 필요합니다
+
+error.access.abnormal=비정상적인 접근입니다
+error.access.forbidden=허가되지 않은 접근입니다
