@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,5 +30,8 @@ public class AdpostDao {
 	public void select() {
 		param.clear();
 		mapper.select(param);
+	}
+	public List<AdPost> listAdPost() {
+		return mapper.listAdPost();
 	}
 }

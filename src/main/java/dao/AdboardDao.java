@@ -38,7 +38,4 @@ public class AdboardDao {
 		
 		mapper.adbupdate(adBoard);
 	}
-
-	
-
 }

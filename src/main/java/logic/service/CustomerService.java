@@ -48,6 +48,10 @@ public class CustomerService {
 		// TODO: 비밀번호의 경우, 임시비밀번호로 변경 후 이메일 발송? 재설정
 		return customerDao.search(customer, url);
 	}
+
+	public List<Customer> list() {
+		return customerDao.listUser();
+	}
 	public void update(Customer customer) {
 		customerDao.update(customer);
 	}
@@ -65,4 +69,10 @@ public class CustomerService {
 	public List<Board> listItemQuestion(String id) {
 		return boardDao.listItemQuestionByCustomerId(id);
 	}
+
+	public void delete(String id) {
+		customerDao.delete(id);
+		
+	}
+
 }

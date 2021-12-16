@@ -20,4 +20,7 @@ public interface AdpostMapper {
 			"<if test='sellerid != null'> where sellerid = #{sellerid} </if>",
 			"</script>"})
 	List<AdPost> select(Map<String, Object> param);
+
+	@Select("select * from AdPost")
+	List<AdPost> listAdPost();
 }
