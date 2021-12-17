@@ -173,7 +173,45 @@ public class SupportController {
 		mav.setViewName("redirect:list");
 		return mav;
 	}
-
+	@GetMapping({"notice/detail","notice/update"})
+	public ModelAndView noticedetail(Integer num,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Board dbboard = boardService.detail(num);
+		mav.addObject("board", dbboard);
+		return mav;
+	}
+	@PostMapping("notice/update")
+	public ModelAndView noticeupdate(@Valid Board board,BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		if(!board.getCustomerid().equals("admin")) { //signin.getId()
+			throw new UpdateException("수정은 관리자만 가능합니다","list");
+		}
+		
+		try {
+			boardService.updatefaq(board);
+			System.out.println(board);
+			mav.setViewName("redirect:list");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	@RequestMapping("notice/delete")
+	public ModelAndView deletenotice(Integer num,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			boardService.delete(num);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:list");
+		return mav;
+	}
 	/* 문의하기 */
 	/**
 	 * listQuestion 문의 목록 불러오기
@@ -236,6 +274,45 @@ public class SupportController {
 		try {
 			boardService.insert(board);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:list");
+		return mav;
+	}
+	@GetMapping({"q/detail","q/update"})
+	public ModelAndView qdetail(Integer num,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Board dbboard = boardService.detail(num);
+		mav.addObject("board", dbboard);
+		return mav;
+}
+	@PostMapping("q/update")
+	public ModelAndView qupdate(@Valid Board board,BindingResult bresult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		if(!board.getCustomerid().equals("admin")) { //signin.getId()
+			throw new UpdateException("수정은 관리자만 가능합니다","list");
+		}
+		
+		try {
+			boardService.updatefaq(board);
+			System.out.println(board);
+			mav.setViewName("redirect:list");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	@RequestMapping("q/delete")
+	public ModelAndView deleteq(Integer num,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			boardService.delete(num);
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		mav.setViewName("redirect:list");

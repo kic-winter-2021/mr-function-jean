@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 작성하기</title>
+<title>공지사항 수정하기</title>
 <link rel="stylesheet" href="/resources/css/box.css">
 <style> .errmsg{ color: red; }</style>
 </head>
 <body>
 	<!-- 좌측 부분 레이아웃 -->
 	<div class="form_box">
-		<form:form modelAttribute="board" action="write" name="noticeForm">
+		<form:form modelAttribute="board" action="update" name="updateForm">
 			<h3>공지사항</h3>
 			<spring:hasBindErrors name="board">
 				<c:forEach var="error" items="${ errors.globalErrors }">
@@ -21,20 +21,20 @@
 			</spring:hasBindErrors>
 			<input type="hidden" name="customerid" value="${sessionScope.signinUser.id }">
 			<input type="hidden" name="type" value="2"><!-- 공지사항 -->
-			제목 <form:input class="box" type="text" path="title" placeholder="제목을 입력해주세요"/><br>
-			카테고리
+			<input type="hidden" name="num" value="${board.num }">
+			제목 : <form:input class="box" type="text" path="title" value="${board.title }" name="title"/><br>
+			카테고리 : 
 			<form:select class="box" path="category">
-				<form:option value="none" label="선택해주세요"/>
+				<form:option value="${board.category }" label="${board.category }"/>
 				<form:option value="사이트 운영" label="사이트 운영" />
 				<form:option value="정책" label="정책" />
 				<form:option value="이벤트" label="이벤트" />
 			</form:select> <br>
 			내용 <br>
-			<form:textarea class="box" path="content" rows="15" placeholder="내용을 입력해주세요"/><br>
+			<form:textarea class="box" path="content" rows="15" value="${board.content}" name="content"/><br>
 			<!-- 하단 버튼 -->
-			<input class="write_button" type="submit" value="등록">
-			<input class="write_button" type="reset" value="취소">
-			<a href="list" class="write_button">목록</a>
+			<input type="submit" class="write_button" value="수정"/>
+			<a href="detail?num=${board.num}" class="write_button">취소</a>
 		</form:form>
 	</div>
 
