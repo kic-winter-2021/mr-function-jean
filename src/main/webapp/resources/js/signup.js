@@ -32,23 +32,35 @@ const duplCheck = () => {
 	})
 }
 const companyCheck = () => {
-	const obj = {};
-	obj.b_no = [];
-	
-	obj.b_no[0] = $("#company-input").val();	
+	const companyval = $("#company-input").val();
+	if (companyval.length < 10 ) {
+		$("#companyvalid").addClass("errmsg");
+		$("#companyvalid").html("사업자번호 10자를 정확히 입력해주세요");
+		$("#company-input").val('');
+		$("#company-input").focus();
+		return;
+	}
+	const bnojson = '{"b_no": ["' + companyval + '"]}';
+	console.log(bnojson);
+	bno = JSON.parse(bnojson);
+	console.log(bno.b_no);
 	$.ajax({
-		url: "http://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey="
-			+ "SVpCy0bvZ5pGxpQdz6HmdUFgFl5L6vUbmK9tzQAPslFjjRHSBsKGTvYAkRC84aHoeUct2mtsiD8YfWyEzOQMIQ%3D%3D",
+		url: "http://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=SVpCy0bvZ5pGxpQdz6HmdUFgFl5L6vUbmK9tzQAPslFjjRHSBsKGTvYAkRC84aHoeUct2mtsiD8YfWyEzOQMIQ%3D%3D",
 		type: "POST",
-		data: JSON.stringify({b_no: [$("#company-input").val()]}),
+		contentType: "application/json",
+		data: bnojson,
 		success: result => {
-			console.log(url);
-			console.log(obj);
-			console.log(result);
+			//console.log(result.data[0]);
+			const seller = result.data[0];
+			if (seller.b_stt == null || seller.b_stt == "") {
+				$("#companyvalid").addClass("errmsg");
+				$("#companyvalid").html(seller.tax_type);
+			} else {
+				$("#companyvalid").addClass("greenmsg");
+				$("#companyvalid").html("존재하는 사업자입니다");
+			}
 		},
 		error: e => {
-			console.log(e);
-			console.log(obj);
 			alert("Request failed: " + e.status);	
 		}
 	});

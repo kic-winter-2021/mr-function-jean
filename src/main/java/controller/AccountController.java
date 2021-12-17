@@ -92,9 +92,6 @@ public class AccountController {
 		ModelAndView mav = new ModelAndView();
 		// 유효성 검사
 		if (bresult.hasErrors()) {
-			for (ObjectError e : bresult.getGlobalErrors()) {
-				System.out.println(e);
-			}
 			System.out.println("회원가입 실패" + bresult.getModel());
 			bresult.reject("error.input.customer");
 			mav.getModel().putAll(bresult.getModel());
@@ -114,7 +111,6 @@ public class AccountController {
 		mav.setViewName("redirect:signin?t=p");
 		return mav;
 	}
-	// TODO: 동일한 아이디 있는지 검사 -> 다른 데에서 처리...아이디 중복 검사
 	@GetMapping("ssignup")
 	public ModelAndView getSeller(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -129,7 +125,6 @@ public class AccountController {
 		mav.addObject("sellertypes", Customer.SELLERTYPE);
 		// 유효성 검사
 		if (bresult.hasErrors()) {
-			System.out.println("회원 로그인 실패" + bresult.getModel());
 			mav.getModel().putAll(bresult.getModel());
 			return mav; 
 		}

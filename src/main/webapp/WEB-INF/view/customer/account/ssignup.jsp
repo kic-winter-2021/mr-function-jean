@@ -52,8 +52,7 @@
 				<th>사업자 번호</th>
 				<td><form:input type="text" path="companyno" maxlength="10" placeholder="'-' 업이 10자 입력" id="company-input"/>
 					<button id="company-check" type="button" onclick="companyCheck();">번호 확인</button><br>&nbsp;
-					<span class="errmsg"><form:errors path="companyno" /></span>
-					<span id="companyvalid"></span>
+					<span class="errmsg"><form:errors path="companyno" /></span><span id="companyvalid"></span>
 				</td>
 			</tr>
 			<tr>

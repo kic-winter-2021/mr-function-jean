@@ -7,6 +7,6 @@
 		alert("${exception.message}\n올바른 접근을 위해 로그아웃합니다.")
 	}
 	else alert("올바른 접근을 위해 로그아웃합니다.");
-	sessionStorage.clear(); // 모든 데이터 삭제
+	// sessionStorage.clear(); // 모든 데이터 삭제
 	location.href="${exception.url}";
 </script>
