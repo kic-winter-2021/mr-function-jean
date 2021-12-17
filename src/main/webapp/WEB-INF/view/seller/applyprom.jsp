@@ -32,8 +32,8 @@
 			<form:input type="hidden" path="status" value="0" />
 			<!-- promotion radio button -->
 			<h5>프로모션 선택</h5>
-			<form:radiobuttons id="rank" path="rank" items="${RANK}" value="${adrank}" />
-			<span class="errmsg"><form:errors path="rank" /></span>
+			<form:radiobuttons id="adrank" path="adrank" items="${RANK}" value="${adrank}" />
+			<span class="errmsg"><form:errors path="adrank" /></span>
 			<h5>상품 선택</h5><%-- 판매자 아이디로 등록된 상품을 조회하여 보여주기(ajax) --%>
 			<form:input type="text" path="itemid" />	
 			<form:textarea path="contract" class="field" placeholder="내용을 입력해주세요" rows="15" />

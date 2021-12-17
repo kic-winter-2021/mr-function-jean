@@ -1,8 +1,9 @@
 @charset "UTF-8";
-	.errmsg { color: red; }
-	body {
-		background-color: #f3f3f3;
-	}
+.errmsg { color: red; }
+.greenmsg { color: #64dd17; }
+body {
+	background-color: #f3f3f3;
+}
 #signup-container {
 	width: 600px;
 	margin: 0 auto;

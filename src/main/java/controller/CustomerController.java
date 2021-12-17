@@ -190,5 +190,4 @@ public class CustomerController {
 		mav.setViewName("redirect:myinfo");
 		return mav;
 	}
-
 }

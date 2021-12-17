@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>등록상품 상세보기.</title>
-<link rel="stylesheet" href="../resources/css/detail.css">
+<link rel="stylesheet" href="/resources/css/detail.css">
 <script>
 function del() {
 		

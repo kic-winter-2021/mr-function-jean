@@ -7,10 +7,12 @@
 <meta charset="UTF-8">
 <title>사업자용 회원가입 페이지</title>
 <link rel="stylesheet" href="/resources/css/signup.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/resources/js/signup.js"></script>
 </head>
 <body>
 <div id="signup-container">
-	<header class="logoheader"><img src="/resources/img/logo-1.png"></header>
+	<header class="logoheader"><a href="/main.jsp"><img src="/resources/img/logo-1.png"></a></header>
 	<!-- 회원가입 타이틀 부분 -->
 	<form:form modelAttribute="customer" action="ssignup" method="post" name="signupForm" class="signupform">
 		<!-- error binding -->
@@ -23,9 +25,9 @@
 			<tr>
 				<th>아이디</th>
 				<td>
-					<form:input type="text" path="id" maxlength="30" placeholder="아이디 입력" />
-					<button id="dupl-check" class="a-btn" onclick="duplCheck();">중복확인</button><br>&nbsp;
-					<span class="errmsg"><form:errors path="id" /></span>
+					<form:input type="text" path="id" maxlength="30" placeholder="아이디 입력" id="id-input"/>
+					<button id="dupl-check" type="button" onclick="duplCheck();">중복확인</button><br>&nbsp;
+					<span class="errmsg"><form:errors path="id" /></span><span id="idvalid"></span>
 				</td>
 			</tr>
 			<tr>
@@ -48,9 +50,10 @@
 			<tr><th colspan="2">사업자 정보</th></tr>
 			<tr>
 				<th>사업자 번호</th>
-				<td><form:input type="text" path="companyno" maxlength="20" placeholder="사업자 번호 입력"/>
-					<button id="company-check" class="a-btn" onclick="companyCheck();">번호 확인</button><br>&nbsp;
+				<td><form:input type="text" path="companyno" maxlength="10" placeholder="'-' 업이 10자 입력" id="company-input"/>
+					<button id="company-check" type="button" onclick="companyCheck();">번호 확인</button><br>&nbsp;
 					<span class="errmsg"><form:errors path="companyno" /></span>
+					<span id="companyvalid"></span>
 				</td>
 			</tr>
 			<tr>
@@ -112,19 +115,5 @@
 		<div class="coper" style="text-align:center">© Mr.function.</div>
 	</footer>
 </body>
-<script>
-	const duplCheck = () => {
-		let id = $("#id").val();
-		$.ajax("idduplcheck", {
-			type: "POST",
-			data: id;
-			success: data => {
-				if (data)
-			},
-			error: e => {
-				
-			}
-		})
-	}
-</script>
+
 </html>
