@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Customer {
 	@Size(min = 4, max = 30, message = "4~30자의 아이디를 입력해주세요")
 	private String id;
-	@Min(value=1)
+	@Min(value=1, message = "사업 유형을 선택하셔야 합니다")
 	private int type;
 	@Size(min = 4, max = 20, message = "비밀번호는 4 ~ 20자로 입력하여야 합니다")
 	private String password;

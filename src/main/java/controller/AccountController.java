@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.UserException;
@@ -84,7 +85,6 @@ public class AccountController {
 		ModelAndView mav = new ModelAndView();
 		// 세션은 로그인 여부만 확인
 		mav.addObject("customer", new Customer());
-		
 		return mav;
 	}
 	@PostMapping("psignup")
@@ -115,7 +115,6 @@ public class AccountController {
 		return mav;
 	}
 	// TODO: 동일한 아이디 있는지 검사 -> 다른 데에서 처리...아이디 중복 검사
-	// TODO: 비밀번호 확인은 -> 페이지에서 JS로 확인.
 	@GetMapping("ssignup")
 	public ModelAndView getSeller(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -127,6 +126,7 @@ public class AccountController {
 	@PostMapping("ssignup")
 	public ModelAndView ssignup(@Valid Customer customer, BindingResult bresult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("sellertypes", Customer.SELLERTYPE);
 		// 유효성 검사
 		if (bresult.hasErrors()) {
 			System.out.println("회원 로그인 실패" + bresult.getModel());
@@ -149,18 +149,28 @@ public class AccountController {
 	}
 	// TODO: 가입이 성공적으로 처리되었습니다.
 	
-	
-	
+	// 아이디 중복검사
+	@ResponseBody
+	@RequestMapping(value = "idavailable", produces = "application/String; charset=utf-8")
+	public String idAvailable(String id) {
+		System.out.print("중복 검사 - ");
+		if (customerService.selectOne(id) == null) {
+			System.out.println(id + "사용가능");
+			return "Y";
+		}
+		System.out.println(id + "중복!");
+		return "N";
+	}
 
 	@GetMapping("search")
-	public ModelAndView searchLoader(String u) {
+	public ModelAndView searchLoader(String u, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("customer", new Customer());
 		mav.addObject("url", u);
 		return mav;
 	}
 	@PostMapping("{url}search")
-	public ModelAndView search(Customer customer, BindingResult bresult, @PathVariable String url) {
+	public ModelAndView search(Customer customer, BindingResult bresult, @PathVariable String url, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String code = "";
 		String title = "";

@@ -1,23 +1,89 @@
 @charset "UTF-8";
+a { text-decoration: none;}
+.board-container {
+	width: 80%;
+	margin: 0 auto;
+}
+.board-header {
+	padding: 3em 1em;
+}
+.board-header>span {
+	float: right;
+}
 table {
-	margin : auto;
-	text-align : center;
-	width : 100% ;
-	
+	margin: auto;
+	text-align: center;
+	width: 100%;
+	border-collapse: collapse;
 }
-th, caption{
-	padding : 1px;
+thead {
+	background-color: #212121;
+	color: white;
 }
-th, td {
-	padding: 10px;
+thead th {
+	border: 1px solid #212121;
+	padding: 0.5em;
+}
+tbody td {
+	padding: 0.5em;
 	border-top: 1px solid #444444;
-	border-collapse : collapse;
-	text-align : center;
+	text-align: center;
+}
+tfoot td {
+	padding: 0.5em;
 }
 .form_box {
 	background-color: #ffffff;
 	margin: 10px;
 	border-radius: 4px;
-    border: 1px solid #ddd;
-    padding: 10px;
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+
+.col__num { width: 5em; }
+.col__title { width: auto; }
+.col__writer { width: 7em; }
+.col__regDate { width: 10em; }
+
+.btn-write {
+	float: right;
+	color: white;
+	background-color: #212121;
+	font-weight: 400;
+	padding: 0.3em 0.5em;
+	border-radius: 1px;
+}
+
+.btn-write:hover {
+	background-color: #ccc;
+	color: #212121;
+}
+
+details {
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	padding: .5em;
+}
+
+summary {
+	font-weight: bold;
+	margin: -.5em -.5em 0;
+	padding: .5em 3em;
+}
+
+details[open] {
+	padding: .5em;
+}
+
+details[open] summary {
+	border-bottom: 1px solid #aaa;
+	margin-bottom: .5em;
+}
+
+details>p {
+	margin: 1em 3em;
+}
+
+.faq_category {
+	color: #ffc107;
 }
