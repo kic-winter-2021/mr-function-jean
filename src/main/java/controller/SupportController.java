@@ -14,17 +14,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.UpdateException;
 import logic.dto.Board;
+import logic.dto.Customer;
 import logic.service.BoardService;
+import logic.service.CustomerService;
 
 @Controller
 @RequestMapping("support")
 public class SupportController {
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	CustomerService customerService;
 	
 	@RequestMapping("faq/list")
 	public ModelAndView listFaq(String category) {
@@ -62,6 +66,47 @@ public class SupportController {
 		try {
 			boardService.insert(board);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:list");
+		return mav;
+	}
+	@GetMapping({"faq/detail","faq/update"})
+	public ModelAndView faqdetail(Integer num ,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Board dbboard = boardService.detail(num);
+		mav.addObject("board", dbboard);
+		return mav;
+		
+	}
+	@PostMapping("faq/update")
+	public ModelAndView faqdetail(@Valid Board board,BindingResult bresult,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		if(!board.getCustomerid().equals("admin")) { //signin.getId()
+			throw new UpdateException("수정은 관리자만 가능합니다","list");
+		}
+		
+		try {
+			boardService.updatefaq(board);
+			System.out.println(board);
+			mav.setViewName("redirect:list");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	@RequestMapping("faq/delete")
+	public ModelAndView delete(Integer num,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			boardService.delete(num);
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		mav.setViewName("redirect:list");

@@ -12,10 +12,20 @@ import logic.dto.Board;
 
 public interface BoardMapper {
 	
+	//FAQ
 	@Insert("insert into board "
 			+ "(articletype, category, title, customerid, content)"
 			+ "values (#{type}, #{category}, #{title}, #{customerid}, #{content})")
 	public void insert(Board board);
+	@Select("select * from board where num = #{value}")
+	public Board detail(Integer num);
+	@Update("update board set articletype=#{type}, category=#{category}, title=#{title}, customerid=#{customerid}, content=#{content}"
+			+ " where num=#{num}")
+	public void update(Board board);
+	@Update("update board set articletype=#{type}, category=#{category}, title=#{title}, customerid=#{customerid}, content=#{content}"
+			+ " where num=#{num}")
+	public void updatefaq(Board board);
+	
 	
 	@Select("select * from board where num = #{value}")
 	public Board selectOne(int boardnum);
@@ -50,15 +60,12 @@ public interface BoardMapper {
 			"</if>",
 			"</script>"})
 	List<Board> list(Map<String, Object> param);
-	
-	@Update("update board set ")
-	public void update(Board board);
-	
+
 	@Update("update board set views = views + 1 where num = #{value}")
 	public void raiseViews(int boardnum);
 	
-	@Delete("delete from board where num = #{value}")
-	public void delete(int boardnum);
+	@Delete("delete from board where num = #{num}")
+	public void delete(int num);
 	
 	/* item Question & Answer */
 	@Select({"<script>",
@@ -76,6 +83,6 @@ public interface BoardMapper {
 			+ "(articletype, category, title, customerid, itemid, content)"
 			+ "values (#{type}, #{category}, #{title}, #{customerid}, #{content})")
 	public void insertItemQuestion(Board board);
-
 	
+
 }

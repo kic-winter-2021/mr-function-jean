@@ -2,6 +2,8 @@ package logic.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +47,15 @@ public class BoardService {
 	public void update(Board board) {
 		boardDao.update(board);
 	}
-	public void delete(int boardnum) {
-		boardDao.delete(boardnum);
+	public void delete(int num) {
+		boardDao.delete(num);
 	}
+	public Board detail(Integer num) {
+		return boardDao.detail(num);
+	}
+	public void updatefaq(Board board) {
+		 boardDao.updatefaq(board);
+		
+	}
+
 }

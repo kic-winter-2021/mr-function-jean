@@ -27,10 +27,10 @@
 		문의유형
 			<form:select path="category">
 				<form:option value="none" label="선택"/>
-				<form:option value="sale" label="상품문의"/>
-				<form:option value="delivery" label="배송문의" />
-				<form:option value="refund" label="환불문의" />
-				<form:option value="exchange" label="교환문의"/>
+				<form:option value="상품문의" label="상품문의"/>
+				<form:option value="배송문의" label="배송문의" />
+				<form:option value="환불문의" label="환불문의" />
+				<form:option value="교환문의" label="교환문의"/>
 				<form:option value="etc" label="기타" />
 			</form:select><br>
 		제목 : <form:input class="box" type="text" path="title" placeholder="제목을 입력해주세요"/><br>

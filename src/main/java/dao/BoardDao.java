@@ -41,6 +41,7 @@ public class BoardDao {
 		return mapper.list(param);
 	}
 	// FAQ
+
 	public List<Board> list(int articletype, String category) {
 		param.clear();
 		param.put("articletype", articletype);
@@ -65,8 +66,8 @@ public class BoardDao {
 	public void update(Board board) {
 		mapper.update(board);
 	}
-	public void delete(int boardnum) {
-		mapper.delete(boardnum);
+	public void delete(int num) {
+		mapper.delete(num);
 	}
 	public int countItemQuestionByCustomerId(String customerid) {
 		param.clear();
@@ -77,6 +78,12 @@ public class BoardDao {
 		param.clear();
 		param.put("customerid", customerid);
 		return mapper.listItemQuestion(param);
+	}
+	public Board detail(Integer num) {
+		return mapper.detail(num);
+	}
+	public void updatefaq(Board board) {
+		 mapper.updatefaq(board);
 	}
 
 }
