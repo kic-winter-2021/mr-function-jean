@@ -31,7 +31,7 @@ public class CustomerAspect {
 	public Object outCheck(ProceedingJoinPoint joinPoint, HttpSession session) throws Throwable {
 		Customer signin = (Customer) session.getAttribute("signinUser");
 		if (signin != null) {
-			//session.invalidate();
+			session.invalidate();
 			throw new LogoutException("페이지 접근을 위해서는 로그아웃이 필요합니다.");
 		}
 		return joinPoint.proceed();
